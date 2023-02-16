@@ -35,6 +35,9 @@
             this.radTenDG = new System.Windows.Forms.RadioButton();
             this.radMaDG = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.lblNhapGioiTinh = new System.Windows.Forms.Label();
             this.lblNhapDiaChi = new System.Windows.Forms.Label();
             this.lblNhapTenDG = new System.Windows.Forms.Label();
@@ -49,9 +52,6 @@
             this.tdMaTheLoai = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tdTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tdGhiChu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -141,6 +141,30 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin Nhà Cung Cấp";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(118, 76);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(0, 13);
+            this.label3.TabIndex = 9;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(120, 69);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(169, 20);
+            this.textBox1.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(19, 72);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Tên NCC";
             // 
             // lblNhapGioiTinh
             // 
@@ -261,38 +285,16 @@
             this.tdGhiChu.Name = "tdGhiChu";
             this.tdGhiChu.Width = 300;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(118, 76);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(0, 13);
-            this.label3.TabIndex = 9;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(120, 69);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(169, 20);
-            this.textBox1.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 72);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Tên NCC";
-            // 
             // frmNCC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(800, 678);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmNCC";
             this.Text = "frmNCC";
             this.groupBox3.ResumeLayout(false);

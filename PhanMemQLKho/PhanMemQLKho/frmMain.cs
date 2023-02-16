@@ -16,5 +16,27 @@ namespace PhanMemQLKho
         {
             InitializeComponent();
         }
+
+        private void ribNguoiDung_Click(object sender, EventArgs e)
+        {
+            resetForm();
+           
+            var form = new frmNCC();
+            form.TopLevel = false;
+            form.Parent = this;
+            this.panel1.Controls.Add(form);
+            form.Show();
+        }
+        public void resetForm()
+        {
+            var controls = this.Controls;
+            if (controls != null && controls.Count > 1)
+            {
+                for (int i = 1; i <= controls.Count; i++)
+                {
+                    this.Controls.RemoveAt(i);
+                }
+            }
+        }
     }
 }
