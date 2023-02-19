@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PhanMemQLKho
 {
-    public partial class frmNCC : Form
+    public partial class frmQuanTriHeThong_NguoiDung : Form
     {
-        public frmNCC()
+        public frmQuanTriHeThong_NguoiDung()
         {
             InitializeComponent();
         }
