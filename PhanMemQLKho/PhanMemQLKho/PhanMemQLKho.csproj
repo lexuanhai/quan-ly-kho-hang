@@ -83,6 +83,7 @@
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\common.cs" />
+    <Compile Include="Model\NguoiDung.cs" />
     <Compile Include="Model\Quyen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -77,27 +77,17 @@ namespace PhanMemQLKho
                 SetControlValue(false);
             }
         }
-        //public void SetControl(bool edit)
-        //{
-        //    btnThem.Enabled = !edit;
-        //    btnSua.Enabled = edit;
-        //    btnLuu.Enabled = edit;
-        //    btnXoa.Enabled = edit;
-        //    btnHuy.Enabled = edit;
-        //}
 
         private void frmQuanTriHeThong_Quyen_Load(object sender, EventArgs e)
         {
             txtMaQuyen.Enabled = false;
             LoadData();
             SetControl("load");
-            //NewControl(false);
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
             SetControl("add");
-            //NewControl(true);
             xuly = 1;
         }
         public void SetControlValue(bool edit)
@@ -252,6 +242,35 @@ namespace PhanMemQLKho
             txtTenQuyen.Text = dataGRV.CurrentRow.Cells[1].Value.ToString();
             txtGhiChu.Text = dataGRV.CurrentRow.Cells[2].Value.ToString();
             SetControl("table-click");
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+        public void search()
+        {
+           
+            if (radMaDG.Checked)
+            {
+                string timkiem = "select * from tblTheLoai where MaTheLoai like '%" + txtNDTimKiem.Text + "%'";
+                LoadData(timkiem);
+            }
+            else if (radTenDG.Checked)
+            {
+                string timkiem = "select * from tblTheLoai where TenTheLoai like N'%" + txtNDTimKiem.Text + "%'";
+                LoadData(timkiem);
+            }
         }
     }
 }

@@ -118,25 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnThoat.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAd0SU1FB+UG
-        GA07FlAOY3sAAAL9SURBVFhH7dbNS1RRGMfxmTvT1OSUQRupLEwMo4jADHpVsTLaRNQqWrQIepWwti1a
-        BBVEb2YRLdrUok0vRJJgQWqaZGaKmVH0r/T9Xc4Zzlzv3JmJMSJ84MPce85zznnm3JeZ2FzMRakRj8cj
-        zWoEFkujEQ2Yb9p8sxLuAliFe5jGOC5jGYJ5M5QcIZO04C3GPM87i3MY4vwJNnPs5npGtq2kcAdCW34a
-        X1mkG83pdDrGp2IPXqKP/sMmV5/aJelABmbmIkLJjpXQRD9Z5DZq1G6Dc6nDHYzQdxNDHP/ANHS8FmZE
-        RGjigCa8wTgTnECFad+A67iCek2OxWjHMLRTn6FL1Yf1MKvkCTOxpW08iUkGvkaLSdM1PYhh/KJ9is9u
-        tKkzkUjEaWvDC3yBLWAd/LlDQx2OanRBW96J1aa9EhfwnbYp6BuKdkc3Yjv8a835Gmis+gexBdk1smEb
-        HDvQC016Cv6EqMcj6FtPwC5u6ZuO0X8LNRyriEroSXmPp7TvzGQyOeu5JwtwHJPoYUCrklOplPr2oR/a
-        ES0UXNw1Qd5zNCWTSV0Smry9eIVB2o9Ca+UUUIVOaIEu1Jp2ffvz0HZ/Q9iCYbR7A4w7Bt1L2g3dqHcx
-        yvklLFW7LeAAPtJ5BougNj1qD5Bvywvxd4rxV7GCYxWxBB3Qi6xZbbYAXas6tithzrUDPdDihba8EF0S
-        3TvLOVYR86B3RoXObQHq8Jnz3RzrBRI24Z/Qe6ER2XWsGWEK2EVn1LZrV/SM61qLjsPyRLl6E26CWSUi
-        iihAE+qxeoyHxjN8Qr78shWgyfqxH7pZFxpVuIhgvh1TtgK03feRQs61ZMxGPvXG04LumLIXcAN6u7j5
-        ol87LfR3C1A4BXzA/1FAK8nlLqABZkREmMn03n6H4POtokotQEXrh6gaZkREaDKCXO8IeqHfCGsU15Cv
-        gAGMwB2jX9ZD0B8VMyIizGRCvv/O3ubYDi2UM5nJz9CmPx1u/lbUws+XosIWYQflY6PU/H8oYrHfChcd
-        rk0ljPMAAAAASUVORK5CYII=
-</value>
-  </data>
   <data name="btnHuy.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGeYUxB9wAAACBjSFJNAAB6
@@ -193,13 +174,31 @@
         Duqobykw0NleaKK//aDZoE3pRtz4aVqqHpy+u6niP/tDSshvFaxpPrI0q0cAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="tdMaQuyen.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="tdMa.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="tdTenQuyen.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="tdTen.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="tdGhiChu.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <metadata name="tdTenDangNhap.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdLoaiQuyen.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdGioiTinh.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdNgaySinh.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdEmail.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdSoDienThoai.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdDiaChi.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="errGT.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -414,5 +413,32 @@
   </metadata>
   <metadata name="errEmail.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>522, 155</value>
+  </metadata>
+  <metadata name="tdMa.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdTen.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdTenDangNhap.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdLoaiQuyen.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdGioiTinh.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdNgaySinh.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdEmail.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdSoDienThoai.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="tdDiaChi.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
   </metadata>
 </root>

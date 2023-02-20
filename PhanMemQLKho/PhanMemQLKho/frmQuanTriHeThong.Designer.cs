@@ -30,7 +30,7 @@
         {
             this.menuStripHeThong = new System.Windows.Forms.MenuStrip();
             this.sub_quyen = new System.Windows.Forms.ToolStripMenuItem();
-            this.quảnLýNgườiDùngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quanlynguoidung_sub = new System.Windows.Forms.ToolStripMenuItem();
             this.thayĐổiMậtKhẩuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quảnLýĐăngNhậpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelShowFormChild = new System.Windows.Forms.Panel();
@@ -41,7 +41,7 @@
             // 
             this.menuStripHeThong.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sub_quyen,
-            this.quảnLýNgườiDùngToolStripMenuItem,
+            this.quanlynguoidung_sub,
             this.thayĐổiMậtKhẩuToolStripMenuItem,
             this.quảnLýĐăngNhậpToolStripMenuItem});
             this.menuStripHeThong.Location = new System.Drawing.Point(0, 0);
@@ -57,11 +57,12 @@
             this.sub_quyen.Text = "Quản Lý Quyền";
             this.sub_quyen.Click += new System.EventHandler(this.sub_quyen_Click);
             // 
-            // quảnLýNgườiDùngToolStripMenuItem
+            // quanlynguoidung_sub
             // 
-            this.quảnLýNgườiDùngToolStripMenuItem.Name = "quảnLýNgườiDùngToolStripMenuItem";
-            this.quảnLýNgườiDùngToolStripMenuItem.Size = new System.Drawing.Size(130, 20);
-            this.quảnLýNgườiDùngToolStripMenuItem.Text = "Quản Lý Người Dùng";
+            this.quanlynguoidung_sub.Name = "quanlynguoidung_sub";
+            this.quanlynguoidung_sub.Size = new System.Drawing.Size(130, 20);
+            this.quanlynguoidung_sub.Text = "Quản Lý Người Dùng";
+            this.quanlynguoidung_sub.Click += new System.EventHandler(this.quanlynguoidung_sub_Click);
             // 
             // thayĐổiMậtKhẩuToolStripMenuItem
             // 
@@ -106,7 +107,7 @@
 
         private System.Windows.Forms.MenuStrip menuStripHeThong;
         private System.Windows.Forms.ToolStripMenuItem sub_quyen;
-        private System.Windows.Forms.ToolStripMenuItem quảnLýNgườiDùngToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quanlynguoidung_sub;
         private System.Windows.Forms.ToolStripMenuItem thayĐổiMậtKhẩuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem quảnLýĐăngNhậpToolStripMenuItem;
         private System.Windows.Forms.Panel panelShowFormChild;

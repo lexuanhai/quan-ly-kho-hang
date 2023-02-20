@@ -118,6 +118,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(332, 20);
             this.txtSearch.TabIndex = 1;
+            this.txtSearch.Click += new System.EventHandler(this.txtSearch_Click);
             // 
             // txtNDTimKiem
             // 
@@ -259,6 +260,7 @@
             this.btnXoa.Text = "Xóa";
             this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoa.UseVisualStyleBackColor = true;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // errTenNhaSanXuat
             // 
@@ -390,6 +392,7 @@
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin ";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // lblNhapGioiTinh
             // 

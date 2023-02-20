@@ -65,7 +65,7 @@ namespace PhanMemQLKho.Model
         }
         public static string tangMaTuDong(string table, string ma)
         {
-            string cauTruyVan = "select * from " + table;
+            string cauTruyVan = "select * from [" + table+"]";
             DataTable dt = docdulieu(cauTruyVan);
             string maTuDong = ma;
             if (dt != null && dt.Rows.Count > 0)
@@ -111,7 +111,7 @@ namespace PhanMemQLKho.Model
         }
         public static void LoadData(string query,DataGridView datagrv)
         {
-            DataTable dt;
+            DataTable dt = new DataTable();
             if (!string.IsNullOrEmpty(query))
             {
                 dt = common.docdulieu(query);               

@@ -22,5 +22,10 @@ namespace PhanMemQLKho
         {
             common.OpenChildForm(new frmQuanTriHeThong_Quyen(), new frmQuanTriHeThong_Quyen(),panelShowFormChild);
         }
+
+        private void quanlynguoidung_sub_Click(object sender, EventArgs e)
+        {
+            common.OpenChildForm(new frmQuanTriHeThong_NguoiDung(), new frmQuanTriHeThong_Quyen(), panelShowFormChild);
+        }
     }
 }
