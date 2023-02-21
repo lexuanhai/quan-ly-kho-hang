@@ -206,5 +206,15 @@ namespace PhanMemQLKho
         {
             OpenChildForm(new frmQuanTriHeThong());
         }
+
+        private void btnQuanLyKhachHang_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmKhachHang());
+        }
+
+        private void btnQuanLyNhaCungCap_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmNCC());
+        }
     }
 }

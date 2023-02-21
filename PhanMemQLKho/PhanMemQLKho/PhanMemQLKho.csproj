@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmNCC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNCC.Designer.cs">
+      <DependentUpon>frmNCC.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmQuanLySanPham.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +69,12 @@
     </Compile>
     <Compile Include="frmQuanTriHeThong.Designer.cs">
       <DependentUpon>frmQuanTriHeThong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKhachHang.Designer.cs">
+      <DependentUpon>frmKhachHang.cs</DependentUpon>
     </Compile>
     <Compile Include="frmQuanTriHeThong_NguoiDung.cs">
       <SubType>Form</SubType>
@@ -83,15 +95,23 @@
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\common.cs" />
+    <Compile Include="Model\NhaCungCap.cs" />
+    <Compile Include="Model\KhachHang.cs" />
     <Compile Include="Model\NguoiDung.cs" />
     <Compile Include="Model\Quyen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmNCC.resx">
+      <DependentUpon>frmNCC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmQuanLySanPham.resx">
       <DependentUpon>frmQuanLySanPham.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuanTriHeThong.resx">
       <DependentUpon>frmQuanTriHeThong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmKhachHang.resx">
+      <DependentUpon>frmKhachHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuanTriHeThong_NguoiDung.resx">
       <DependentUpon>frmQuanTriHeThong_NguoiDung.cs</DependentUpon>

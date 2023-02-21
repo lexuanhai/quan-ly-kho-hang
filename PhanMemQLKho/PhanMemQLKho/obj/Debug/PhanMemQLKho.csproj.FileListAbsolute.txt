@@ -14,3 +14,5 @@ F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanM
 F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanTriHeThong_Quyen.resources
 F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham.resources
 F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanTriHeThong_NguoiDung.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmKhachHang.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmNCC.resources

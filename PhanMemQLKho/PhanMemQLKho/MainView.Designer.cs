@@ -30,6 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnBaoCaoThongKe = new System.Windows.Forms.Button();
+            this.btnQuanLyNhaCungCap = new System.Windows.Forms.Button();
+            this.btnQuanLyKhachHang = new System.Windows.Forms.Button();
+            this.btnQuanLyXuat = new System.Windows.Forms.Button();
+            this.btnQuanLyNhap = new System.Windows.Forms.Button();
+            this.btnQuanLySanPham = new System.Windows.Forms.Button();
+            this.btnQuanTriHeThong = new System.Windows.Forms.Button();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.btnHome = new System.Windows.Forms.PictureBox();
             this.panelSideBar = new System.Windows.Forms.Panel();
@@ -42,13 +49,6 @@
             this.lblReleaseDate = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
             this.pictureLogoHome = new System.Windows.Forms.PictureBox();
-            this.btnQuanTriHeThong = new System.Windows.Forms.Button();
-            this.btnQuanLySanPham = new System.Windows.Forms.Button();
-            this.btnQuanLyNhap = new System.Windows.Forms.Button();
-            this.btnQuanLyXuat = new System.Windows.Forms.Button();
-            this.btnQuanLyKhachHang = new System.Windows.Forms.Button();
-            this.btnQuanLyNhaCungCap = new System.Windows.Forms.Button();
-            this.btnBaoCaoThongKe = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
@@ -74,6 +74,79 @@
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(183, 698);
             this.panelMenu.TabIndex = 0;
+            // 
+            // btnBaoCaoThongKe
+            // 
+            this.btnBaoCaoThongKe.FlatAppearance.BorderSize = 0;
+            this.btnBaoCaoThongKe.Location = new System.Drawing.Point(2, 382);
+            this.btnBaoCaoThongKe.Name = "btnBaoCaoThongKe";
+            this.btnBaoCaoThongKe.Size = new System.Drawing.Size(175, 38);
+            this.btnBaoCaoThongKe.TabIndex = 7;
+            this.btnBaoCaoThongKe.Text = "Báo cáo thống kê";
+            this.btnBaoCaoThongKe.UseVisualStyleBackColor = true;
+            // 
+            // btnQuanLyNhaCungCap
+            // 
+            this.btnQuanLyNhaCungCap.FlatAppearance.BorderSize = 0;
+            this.btnQuanLyNhaCungCap.Location = new System.Drawing.Point(3, 339);
+            this.btnQuanLyNhaCungCap.Name = "btnQuanLyNhaCungCap";
+            this.btnQuanLyNhaCungCap.Size = new System.Drawing.Size(175, 38);
+            this.btnQuanLyNhaCungCap.TabIndex = 6;
+            this.btnQuanLyNhaCungCap.Text = "Quản lý nhà cung cấp";
+            this.btnQuanLyNhaCungCap.UseVisualStyleBackColor = true;
+            this.btnQuanLyNhaCungCap.Click += new System.EventHandler(this.btnQuanLyNhaCungCap_Click);
+            // 
+            // btnQuanLyKhachHang
+            // 
+            this.btnQuanLyKhachHang.FlatAppearance.BorderSize = 0;
+            this.btnQuanLyKhachHang.Location = new System.Drawing.Point(3, 295);
+            this.btnQuanLyKhachHang.Name = "btnQuanLyKhachHang";
+            this.btnQuanLyKhachHang.Size = new System.Drawing.Size(175, 38);
+            this.btnQuanLyKhachHang.TabIndex = 5;
+            this.btnQuanLyKhachHang.Text = "Quản lý khách hàng";
+            this.btnQuanLyKhachHang.UseVisualStyleBackColor = true;
+            this.btnQuanLyKhachHang.Click += new System.EventHandler(this.btnQuanLyKhachHang_Click);
+            // 
+            // btnQuanLyXuat
+            // 
+            this.btnQuanLyXuat.FlatAppearance.BorderSize = 0;
+            this.btnQuanLyXuat.Location = new System.Drawing.Point(3, 251);
+            this.btnQuanLyXuat.Name = "btnQuanLyXuat";
+            this.btnQuanLyXuat.Size = new System.Drawing.Size(175, 38);
+            this.btnQuanLyXuat.TabIndex = 4;
+            this.btnQuanLyXuat.Text = "Quản lý xuất";
+            this.btnQuanLyXuat.UseVisualStyleBackColor = true;
+            // 
+            // btnQuanLyNhap
+            // 
+            this.btnQuanLyNhap.FlatAppearance.BorderSize = 0;
+            this.btnQuanLyNhap.Location = new System.Drawing.Point(3, 207);
+            this.btnQuanLyNhap.Name = "btnQuanLyNhap";
+            this.btnQuanLyNhap.Size = new System.Drawing.Size(175, 38);
+            this.btnQuanLyNhap.TabIndex = 3;
+            this.btnQuanLyNhap.Text = "Quản lý Nhập";
+            this.btnQuanLyNhap.UseVisualStyleBackColor = true;
+            // 
+            // btnQuanLySanPham
+            // 
+            this.btnQuanLySanPham.FlatAppearance.BorderSize = 0;
+            this.btnQuanLySanPham.Location = new System.Drawing.Point(3, 163);
+            this.btnQuanLySanPham.Name = "btnQuanLySanPham";
+            this.btnQuanLySanPham.Size = new System.Drawing.Size(175, 38);
+            this.btnQuanLySanPham.TabIndex = 2;
+            this.btnQuanLySanPham.Text = "Quản lý sản phẩm";
+            this.btnQuanLySanPham.UseVisualStyleBackColor = true;
+            // 
+            // btnQuanTriHeThong
+            // 
+            this.btnQuanTriHeThong.FlatAppearance.BorderSize = 0;
+            this.btnQuanTriHeThong.Location = new System.Drawing.Point(3, 119);
+            this.btnQuanTriHeThong.Name = "btnQuanTriHeThong";
+            this.btnQuanTriHeThong.Size = new System.Drawing.Size(175, 38);
+            this.btnQuanTriHeThong.TabIndex = 1;
+            this.btnQuanTriHeThong.Text = "Quản trị hệ thống";
+            this.btnQuanTriHeThong.UseVisualStyleBackColor = true;
+            this.btnQuanTriHeThong.Click += new System.EventHandler(this.btnQuanTriHeThong_Click);
             // 
             // panelLogo
             // 
@@ -208,77 +281,6 @@
             this.pictureLogoHome.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureLogoHome.TabIndex = 1;
             this.pictureLogoHome.TabStop = false;
-            // 
-            // btnQuanTriHeThong
-            // 
-            this.btnQuanTriHeThong.FlatAppearance.BorderSize = 0;
-            this.btnQuanTriHeThong.Location = new System.Drawing.Point(3, 119);
-            this.btnQuanTriHeThong.Name = "btnQuanTriHeThong";
-            this.btnQuanTriHeThong.Size = new System.Drawing.Size(175, 38);
-            this.btnQuanTriHeThong.TabIndex = 1;
-            this.btnQuanTriHeThong.Text = "Quản trị hệ thống";
-            this.btnQuanTriHeThong.UseVisualStyleBackColor = true;
-            this.btnQuanTriHeThong.Click += new System.EventHandler(this.btnQuanTriHeThong_Click);
-            // 
-            // btnQuanLySanPham
-            // 
-            this.btnQuanLySanPham.FlatAppearance.BorderSize = 0;
-            this.btnQuanLySanPham.Location = new System.Drawing.Point(3, 163);
-            this.btnQuanLySanPham.Name = "btnQuanLySanPham";
-            this.btnQuanLySanPham.Size = new System.Drawing.Size(175, 38);
-            this.btnQuanLySanPham.TabIndex = 2;
-            this.btnQuanLySanPham.Text = "Quản lý sản phẩm";
-            this.btnQuanLySanPham.UseVisualStyleBackColor = true;
-            // 
-            // btnQuanLyNhap
-            // 
-            this.btnQuanLyNhap.FlatAppearance.BorderSize = 0;
-            this.btnQuanLyNhap.Location = new System.Drawing.Point(3, 207);
-            this.btnQuanLyNhap.Name = "btnQuanLyNhap";
-            this.btnQuanLyNhap.Size = new System.Drawing.Size(175, 38);
-            this.btnQuanLyNhap.TabIndex = 3;
-            this.btnQuanLyNhap.Text = "Quản lý Nhập";
-            this.btnQuanLyNhap.UseVisualStyleBackColor = true;
-            // 
-            // btnQuanLyXuat
-            // 
-            this.btnQuanLyXuat.FlatAppearance.BorderSize = 0;
-            this.btnQuanLyXuat.Location = new System.Drawing.Point(3, 251);
-            this.btnQuanLyXuat.Name = "btnQuanLyXuat";
-            this.btnQuanLyXuat.Size = new System.Drawing.Size(175, 38);
-            this.btnQuanLyXuat.TabIndex = 4;
-            this.btnQuanLyXuat.Text = "Quản lý xuất";
-            this.btnQuanLyXuat.UseVisualStyleBackColor = true;
-            // 
-            // btnQuanLyKhachHang
-            // 
-            this.btnQuanLyKhachHang.FlatAppearance.BorderSize = 0;
-            this.btnQuanLyKhachHang.Location = new System.Drawing.Point(3, 295);
-            this.btnQuanLyKhachHang.Name = "btnQuanLyKhachHang";
-            this.btnQuanLyKhachHang.Size = new System.Drawing.Size(175, 38);
-            this.btnQuanLyKhachHang.TabIndex = 5;
-            this.btnQuanLyKhachHang.Text = "Quản lý khách hàng";
-            this.btnQuanLyKhachHang.UseVisualStyleBackColor = true;
-            // 
-            // btnQuanLyNhaCungCap
-            // 
-            this.btnQuanLyNhaCungCap.FlatAppearance.BorderSize = 0;
-            this.btnQuanLyNhaCungCap.Location = new System.Drawing.Point(3, 339);
-            this.btnQuanLyNhaCungCap.Name = "btnQuanLyNhaCungCap";
-            this.btnQuanLyNhaCungCap.Size = new System.Drawing.Size(175, 38);
-            this.btnQuanLyNhaCungCap.TabIndex = 6;
-            this.btnQuanLyNhaCungCap.Text = "Quản lý nhà cung cấp";
-            this.btnQuanLyNhaCungCap.UseVisualStyleBackColor = true;
-            // 
-            // btnBaoCaoThongKe
-            // 
-            this.btnBaoCaoThongKe.FlatAppearance.BorderSize = 0;
-            this.btnBaoCaoThongKe.Location = new System.Drawing.Point(2, 382);
-            this.btnBaoCaoThongKe.Name = "btnBaoCaoThongKe";
-            this.btnBaoCaoThongKe.Size = new System.Drawing.Size(175, 38);
-            this.btnBaoCaoThongKe.TabIndex = 7;
-            this.btnBaoCaoThongKe.Text = "Báo cáo thống kê";
-            this.btnBaoCaoThongKe.UseVisualStyleBackColor = true;
             // 
             // MainView
             // 
