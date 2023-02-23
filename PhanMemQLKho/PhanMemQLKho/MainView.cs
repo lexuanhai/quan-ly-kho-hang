@@ -216,5 +216,16 @@ namespace PhanMemQLKho
         {
             OpenChildForm(new frmNCC());
         }
+
+        private void btnQuanLySanPham_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmQuanLySanPham());
+        }
+
+        private void btnQuanLyNhaSanXuat_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmNSX());
+            
+        }
     }
 }

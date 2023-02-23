@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmNSX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNSX.Designer.cs">
+      <DependentUpon>frmNSX.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmNCC.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +69,18 @@
     </Compile>
     <Compile Include="frmQuanLySanPham.Designer.cs">
       <DependentUpon>frmQuanLySanPham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuanLySanPham_PhuTung.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuanLySanPham_PhuTung.Designer.cs">
+      <DependentUpon>frmQuanLySanPham_PhuTung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuanLySanPham_ThuongHieu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuanLySanPham_ThuongHieu.Designer.cs">
+      <DependentUpon>frmQuanLySanPham_ThuongHieu.cs</DependentUpon>
     </Compile>
     <Compile Include="frmQuanTriHeThong.cs">
       <SubType>Form</SubType>
@@ -82,6 +100,12 @@
     <Compile Include="frmQuanTriHeThong_NguoiDung.Designer.cs">
       <DependentUpon>frmQuanTriHeThong_NguoiDung.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmQuanLySanPham_DanhMuc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuanLySanPham_DanhMuc.Designer.cs">
+      <DependentUpon>frmQuanLySanPham_DanhMuc.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmQuanTriHeThong_Quyen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,17 +119,29 @@
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\common.cs" />
+    <Compile Include="Model\ThuongHieu.cs" />
+    <Compile Include="Model\NhaSanXuat.cs" />
     <Compile Include="Model\NhaCungCap.cs" />
     <Compile Include="Model\KhachHang.cs" />
     <Compile Include="Model\NguoiDung.cs" />
+    <Compile Include="Model\DanhMuc.cs" />
     <Compile Include="Model\Quyen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmNSX.resx">
+      <DependentUpon>frmNSX.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmNCC.resx">
       <DependentUpon>frmNCC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuanLySanPham.resx">
       <DependentUpon>frmQuanLySanPham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanLySanPham_PhuTung.resx">
+      <DependentUpon>frmQuanLySanPham_PhuTung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanLySanPham_ThuongHieu.resx">
+      <DependentUpon>frmQuanLySanPham_ThuongHieu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuanTriHeThong.resx">
       <DependentUpon>frmQuanTriHeThong.cs</DependentUpon>
@@ -115,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuanTriHeThong_NguoiDung.resx">
       <DependentUpon>frmQuanTriHeThong_NguoiDung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanLySanPham_DanhMuc.resx">
+      <DependentUpon>frmQuanLySanPham_DanhMuc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmQuanTriHeThong_Quyen.resx">
       <DependentUpon>frmQuanTriHeThong_Quyen.cs</DependentUpon>

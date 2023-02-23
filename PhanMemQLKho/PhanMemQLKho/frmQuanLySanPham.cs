@@ -17,10 +17,19 @@ namespace PhanMemQLKho
         {
             InitializeComponent();
         }
-        //public common _common;
-        private void sub_quyen_Click(object sender, EventArgs e)
+        private void sub_san_pham_Click(object sender, EventArgs e)
         {
-            common.OpenChildForm(new frmQuanTriHeThong_Quyen(), new frmQuanTriHeThong_Quyen(),panelShowFormChild);
+            
+        }
+
+        private void sub_danh_muc_Click(object sender, EventArgs e)
+        {
+            common.OpenChildForm(new frmQuanLySanPham_DanhMuc(), new frmQuanLySanPham(), panelShowFormChild);
+        }
+
+        private void sub_nhan_hieu_Click(object sender, EventArgs e)
+        {
+            common.OpenChildForm(new frmQuanLySanPham_ThuongHieu(), new frmQuanLySanPham(), panelShowFormChild);
         }
     }
 }
