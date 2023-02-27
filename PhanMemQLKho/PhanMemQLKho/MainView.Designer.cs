@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnQuanLyNhaSanXuat = new System.Windows.Forms.Button();
             this.btnBaoCaoThongKe = new System.Windows.Forms.Button();
             this.btnQuanLyNhaCungCap = new System.Windows.Forms.Button();
             this.btnQuanLyKhachHang = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@
             this.lblReleaseDate = new System.Windows.Forms.Label();
             this.lblVersion = new System.Windows.Forms.Label();
             this.pictureLogoHome = new System.Windows.Forms.PictureBox();
-            this.btnQuanLyNhaSanXuat = new System.Windows.Forms.Button();
             this.panelMenu.SuspendLayout();
             this.panelLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnHome)).BeginInit();
@@ -76,6 +76,17 @@
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(183, 698);
             this.panelMenu.TabIndex = 0;
+            // 
+            // btnQuanLyNhaSanXuat
+            // 
+            this.btnQuanLyNhaSanXuat.FlatAppearance.BorderSize = 0;
+            this.btnQuanLyNhaSanXuat.Location = new System.Drawing.Point(3, 382);
+            this.btnQuanLyNhaSanXuat.Name = "btnQuanLyNhaSanXuat";
+            this.btnQuanLyNhaSanXuat.Size = new System.Drawing.Size(175, 38);
+            this.btnQuanLyNhaSanXuat.TabIndex = 8;
+            this.btnQuanLyNhaSanXuat.Text = "Quản lý nhà sản xuất";
+            this.btnQuanLyNhaSanXuat.UseVisualStyleBackColor = true;
+            this.btnQuanLyNhaSanXuat.Click += new System.EventHandler(this.btnQuanLyNhaSanXuat_Click);
             // 
             // btnBaoCaoThongKe
             // 
@@ -217,7 +228,6 @@
             // 
             // panelDesktop
             // 
-            this.panelDesktop.AutoScroll = true;
             this.panelDesktop.Controls.Add(this.lblReleaseDateData);
             this.panelDesktop.Controls.Add(this.lblVersionData);
             this.panelDesktop.Controls.Add(this.lblReleaseDate);
@@ -284,17 +294,6 @@
             this.pictureLogoHome.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureLogoHome.TabIndex = 1;
             this.pictureLogoHome.TabStop = false;
-            // 
-            // btnQuanLyNhaSanXuat
-            // 
-            this.btnQuanLyNhaSanXuat.FlatAppearance.BorderSize = 0;
-            this.btnQuanLyNhaSanXuat.Location = new System.Drawing.Point(3, 382);
-            this.btnQuanLyNhaSanXuat.Name = "btnQuanLyNhaSanXuat";
-            this.btnQuanLyNhaSanXuat.Size = new System.Drawing.Size(175, 38);
-            this.btnQuanLyNhaSanXuat.TabIndex = 8;
-            this.btnQuanLyNhaSanXuat.Text = "Quản lý nhà sản xuất";
-            this.btnQuanLyNhaSanXuat.UseVisualStyleBackColor = true;
-            this.btnQuanLyNhaSanXuat.Click += new System.EventHandler(this.btnQuanLyNhaSanXuat_Click);
             // 
             // MainView
             // 

@@ -76,9 +76,11 @@
             this.sub_phu_tung.Name = "sub_phu_tung";
             this.sub_phu_tung.Size = new System.Drawing.Size(70, 20);
             this.sub_phu_tung.Text = "Phụ Tùng";
+            this.sub_phu_tung.Click += new System.EventHandler(this.sub_phu_tung_Click);
             // 
             // panelShowFormChild
             // 
+            this.panelShowFormChild.AutoScroll = true;
             this.panelShowFormChild.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelShowFormChild.Location = new System.Drawing.Point(0, 24);
             this.panelShowFormChild.Name = "panelShowFormChild";

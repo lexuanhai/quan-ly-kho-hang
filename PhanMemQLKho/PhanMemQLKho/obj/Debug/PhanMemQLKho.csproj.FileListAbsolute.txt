@@ -19,3 +19,5 @@ F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanM
 F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_DanhMuc.resources
 F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmNSX.resources
 F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_ThuongHieu.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_PhuTung.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmSanPham.resources

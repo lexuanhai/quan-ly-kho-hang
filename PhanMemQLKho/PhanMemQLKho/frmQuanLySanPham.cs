@@ -19,7 +19,7 @@ namespace PhanMemQLKho
         }
         private void sub_san_pham_Click(object sender, EventArgs e)
         {
-            
+            common.OpenChildForm(new frmSanPham(), new frmQuanLySanPham(), panelShowFormChild);
         }
 
         private void sub_danh_muc_Click(object sender, EventArgs e)
@@ -30,6 +30,11 @@ namespace PhanMemQLKho
         private void sub_nhan_hieu_Click(object sender, EventArgs e)
         {
             common.OpenChildForm(new frmQuanLySanPham_ThuongHieu(), new frmQuanLySanPham(), panelShowFormChild);
+        }
+
+        private void sub_phu_tung_Click(object sender, EventArgs e)
+        {
+            common.OpenChildForm(new frmQuanLySanPham_PhuTung(), new frmQuanLySanPham(), panelShowFormChild);
         }
     }
 }

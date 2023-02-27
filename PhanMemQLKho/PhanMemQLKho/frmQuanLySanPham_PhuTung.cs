@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace PhanMemQLKho
 {
@@ -19,27 +20,107 @@ namespace PhanMemQLKho
             InitializeComponent();
         }
         int xuly = 0; //1 là thêm mới, 2 là sửa
-        public void LoadData(string query ="")
+        // Load thương hiệu
+        public void CmbThuongHieu()
         {
-            if (string.IsNullOrEmpty(query))
-            {
-                query = "select * from ThuongHieu";
-            }
-            common.LoadData(query,dataGRV);
+            DataTable dt;
+            string query = "SELECT * FROM ThuongHieu ";
+            dt = common.docdulieu(query);
+            cmbThuongHieu.DisplayMember = "TenThuongHieu";
+            cmbThuongHieu.ValueMember = "MaThuongHieu";
+            cmbThuongHieu.DataSource = dt;
         }
-        public ThuongHieu GetValue()
+        // Load Loại Phụ Tùng
+        public void CmbLoaiPhuTung()
         {
-            var model = new ThuongHieu();
-            model.MaThuongHieu = txtMaThuongHieu.Text;
-            model.TenThuongHieu = txtTenThuongHieu.Text;
-            model.MoTa = txtMoTa.Text;
+            var data = common.GetLoaiPhuTung();
+            if (data != null && data.Count > 0)
+            {
+                cmbLoaiPhuTung.DataSource = data;
+                cmbLoaiPhuTung.DisplayMember = "TenLoaiPhuTung";
+                cmbLoaiPhuTung.ValueMember = "MaLoaiPhuTung";
+            }           
+        }
+        public void SetNull()
+        {
+            foreach (Control C in this.Controls)
+            {
+                if (C is TextBox)
+                {
+                    C.Text = "";
+                }
+            }
+        }
+        public void LoadCmb()
+        {
+            CmbThuongHieu();
+            CmbLoaiPhuTung();
+        }
+        public void LoadData(string qry = "")
+        {
+            DataTable dt;
+            string query = "SELECT TH.TenThuongHieu ,* FROM [PhuTung] PT INNER JOIN [ThuongHieu] TH ON PT.MaThuongHieu = TH.MaThuongHieu";
+            if (!string.IsNullOrEmpty(qry))
+            {
+                query += qry;
+            }
+
+            dt = common.docdulieu(query);
+
+            dataGRV.Rows.Clear();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    int n = dataGRV.Rows.Add();
+                    dataGRV.Rows[n].Cells[0].Value = dr["MaPhuTung"].ToString();
+                    dataGRV.Rows[n].Cells[1].Value = dr["TenPhuTung"].ToString();
+                    if (dr["LoaiPhuTung"].ToString() != null)
+                    {
+                        var data = common.GetLoaiPhuTung();
+                        if (data != null && data.Count > 0)
+                        {
+                            string tenLoaiPhuTung = data.FirstOrDefault(p => p.MaLoaiPhuTung == Convert.ToInt32(dr["LoaiPhuTung"].ToString())).TenLoaiPhuTung;
+                            dataGRV.Rows[n].Cells[2].Value = tenLoaiPhuTung;
+                        }
+                    }
+                    
+                    dataGRV.Rows[n].Cells[3].Value = dr["TenThuongHieu"].ToString();
+                    dataGRV.Rows[n].Cells[4].Value = dr["SoLuong"].ToString();
+                    dataGRV.Rows[n].Cells[5].Value = dr["Gia"].ToString();
+                    int soluong = Convert.ToInt32(dr["SoLuong"].ToString());
+                    if (soluong > 0)
+                    {
+                        dataGRV.Rows[n].Cells[6].Value = "Còn Hàng";
+                    }
+                    else
+                    {
+                        dataGRV.Rows[n].Cells[6].Value = "Hết Hàng";
+                    }
+                }
+            }
+        }
+        public PhuTung GetValue()
+        {
+            var model = new PhuTung();
+            model.MaPhuTung = txtMaPhuTung.Text;
+            model.TenPhuTung = txtTenPhuTung.Text;
+            model.MaLoaiPhuTung = Convert.ToInt32(cmbLoaiPhuTung.SelectedValue.ToString());
+            model.MaThuongHieu = cmbThuongHieu.SelectedValue.ToString();
+            model.SoLuong = Convert.ToInt32(txtSoLuong.Text);
+            model.Gia = Convert.ToDecimal(txtGiaBan.Text);
+            //model.MoTa = txtMoTa.Text;
             return model;
         }
-        public void SetValue(ThuongHieu model)
+        public void SetValue(PhuTung model)
         {
-            txtMaThuongHieu.Text = model.MaThuongHieu;
-            txtTenThuongHieu.Text = model.TenThuongHieu;
-            txtMoTa.Text = model.MoTa;
+            txtMaPhuTung.Text = model.MaPhuTung;
+            txtTenPhuTung.Text = model.TenPhuTung;
+            cmbLoaiPhuTung.SelectedValue = model.MaLoaiPhuTung;
+            cmbThuongHieu.SelectedValue = model.MaThuongHieu;
+            txtGiaBan.Text = model.Gia != null ? model.Gia.ToString() : "";
+            txtSoLuong.Text = model.SoLuong != null ? model.SoLuong.ToString() : "";
+            //txtMoTa.Text = model.MoTa;
         }
         public void SetControl(string edit)
         {
@@ -57,8 +138,8 @@ namespace PhanMemQLKho
                 btnSua.Enabled = true;
                 btnLuu.Enabled = false;
                 btnXoa.Enabled = true;
-                txtTenThuongHieu.Enabled = false;
-                txtMoTa.Enabled = false;
+                txtTenPhuTung.Enabled = false;
+                //txtMoTa.Enabled = false;
             }
             if (edit == "edit")
             {
@@ -89,29 +170,29 @@ namespace PhanMemQLKho
         {
             if (edit)
             {
-                txtTenThuongHieu.Enabled = true;
-                txtMoTa.Enabled = true;
+                txtTenPhuTung.Enabled = true;
+                //txtMoTa.Enabled = true;
             }
             else
             {
-                txtTenThuongHieu.Enabled = false;
-                txtMoTa.Enabled = false;
-                txtTenThuongHieu.Text = "";
-                txtMoTa.Text = "";
+                txtTenPhuTung.Enabled = false;
+                //txtMoTa.Enabled = false;
+                txtTenPhuTung.Text = "";
+                //txtMoTa.Text = "";
             }
           
         }
         public void NewControl(bool edit)
         {
-            txtTenThuongHieu.Enabled = edit;
-            txtMoTa.Enabled = edit;
+            txtTenPhuTung.Enabled = edit;
+            //txtMoTa.Enabled = edit;
             if (
                 (!edit && xuly == 0) // trường hợp khi click nút hủy
                 || (!edit && xuly == 1) // trường hợp khi click nut thêm mới
                 )
             {
-                txtTenThuongHieu.Text = "";
-                txtMoTa.Text = "";
+                txtTenPhuTung.Text = "";
+                //txtMoTa.Text = "";
             }
         }
 
@@ -125,13 +206,15 @@ namespace PhanMemQLKho
         private void btnHuy_Click(object sender, EventArgs e)
         {
             xuly = 0;
+            txtMaPhuTung.Text = "";
             SetControl("load");
             SetControlValue(false);
+                 
             //NewControl(false);           
         }
         private void Xoa()
         {
-            if (!string.IsNullOrEmpty(txtMaThuongHieu.Text))
+            if (!string.IsNullOrEmpty(txtMaPhuTung.Text))
             {
                 DialogResult dlr;
                 dlr = MessageBox.Show("Bạn chắc chắn muốn xóa.", "Thông Báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -139,7 +222,7 @@ namespace PhanMemQLKho
                 {
                     try
                     {
-                        string query = "DELETE FROM ThuongHieu WHERE MaThuongHieu='" + txtMaThuongHieu.Text + "'";
+                        string query = "DELETE FROM PhuTung WHERE MaPhuTung='" + txtMaPhuTung.Text + "'";
                         var status = common.thucthidulieu(query);
                         if (status)
                         {
@@ -168,10 +251,13 @@ namespace PhanMemQLKho
         public void UpdataDatabase()
         {
             var model = GetValue();
-            string qry = "Update ThuongHieu set " +
-                "TenThuongHieu =N'" + model.TenThuongHieu + "', " +
-                "MoTa =N'" + model.MoTa + "' " +
-                " Where MaThuongHieu='" + model.MaThuongHieu + "'";
+            string qry = "Update PhuTung set " +
+                "TenPhuTung =N'" + model.TenPhuTung + "', " +
+                "LoaiPhuTung =" + model.MaLoaiPhuTung + ", " +
+                "MaThuongHieu ='" + model.MaThuongHieu + "', " +
+                "SoLuong =" + model.SoLuong + ", " +
+                "Gia =" + model.Gia + "" +
+                " Where MaPhuTung='" + model.MaPhuTung + "'";
             var status = common.thucthidulieu(qry);
             if (status)
             {
@@ -188,13 +274,16 @@ namespace PhanMemQLKho
             try
             {
                 var model = GetValue();
-                string ma = common.tangMaTuDong("ThuongHieu", "TH");
+                string ma = common.tangMaTuDong("PhuTung", "PT");
                 if (model != null && !string.IsNullOrEmpty(ma))
                 {
 
-                    var qry = "Insert into ThuongHieu(MaThuongHieu, " +
-                    "TenThuongHieu, " +
-                    "MoTa ) values('" + ma + "',N'" + model.TenThuongHieu + "',N'" + model.MoTa + "')";
+                    var qry = "Insert into PhuTung(MaPhuTung, " +
+                    "TenPhuTung, " +
+                    "LoaiPhuTung, " +
+                    "MaThuongHieu, " +
+                    "SoLuong, " +
+                    "Gia ) values('" + ma + "',N'" + model.TenPhuTung + "'," + model.MaLoaiPhuTung + ",'"+model.MaThuongHieu+"',"+model.SoLuong+","+model.Gia+")";
                     var status = common.thucthidulieu(qry);
                     if (status)
                     {
@@ -204,10 +293,6 @@ namespace PhanMemQLKho
                     {
                         MessageBox.Show("Thêm mới không thành công.");
                     }
-                    //LoadData();
-                    //SetControl("");
-                    //xuly = 0;
-                    //NewControl(false);
                 }
             }
             catch (Exception)
@@ -234,9 +319,9 @@ namespace PhanMemQLKho
 
         private void dataGRV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtMaThuongHieu.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();
-            txtTenThuongHieu.Text = dataGRV.CurrentRow.Cells[1].Value.ToString();
-            txtMoTa.Text = dataGRV.CurrentRow.Cells[2].Value.ToString();
+            txtMaPhuTung.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();
+            txtTenPhuTung.Text = dataGRV.CurrentRow.Cells[1].Value.ToString();
+            //txtMoTa.Text = dataGRV.CurrentRow.Cells[2].Value.ToString();
             SetControl("table-click");
         }
 
@@ -251,18 +336,18 @@ namespace PhanMemQLKho
         {           
             if (radioMaPhuTung.Checked)
             {
-                string timkiem = "select * from ThuongHieu where MaThuongHieu like '%" + txtSearch.Text + "%'";
+                string timkiem = "select * from PhuTung where MaPhuTung like '%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
             else if (radioTenPhuTung.Checked)
             {
-                string timkiem = "select * from ThuongHieu where TenThuongHieu like N'%" + txtSearch.Text + "%'";
+                string timkiem = "select * from PhuTung where TenPhuTung like N'%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
         }
         private void frmQuanLySanPham_DanhMuc_Load(object sender, EventArgs e)
         {
-            txtMaThuongHieu.Enabled = false;
+            txtMaPhuTung.Enabled = false;
             LoadData();
             SetControl("load");
         }
@@ -271,5 +356,13 @@ namespace PhanMemQLKho
         {
             search();
         }
+
+        private void frmQuanLySanPham_PhuTung_Load(object sender, EventArgs e)
+        {
+            txtMaPhuTung.Enabled = false;
+            LoadData();
+            LoadCmb();
+        }
+        
     }
 }

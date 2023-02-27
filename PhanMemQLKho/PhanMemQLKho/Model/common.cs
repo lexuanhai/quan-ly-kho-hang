@@ -130,5 +130,28 @@ namespace PhanMemQLKho.Model
                 }
             }
         }
+        public static List<LoaiPhuTung> GetLoaiPhuTung()
+        {
+            var lstData = new List<LoaiPhuTung>()
+            {
+                new LoaiPhuTung() {
+                    MaLoaiPhuTung = 1,
+                    TenLoaiPhuTung = "Động Cơ"
+                },
+                new LoaiPhuTung() {
+                    MaLoaiPhuTung = 2,
+                    TenLoaiPhuTung = "Gầm"
+                },
+                new LoaiPhuTung() {
+                    MaLoaiPhuTung = 3,
+                    TenLoaiPhuTung = "Điện - Điều Hòa"
+                },
+                new LoaiPhuTung() {
+                    MaLoaiPhuTung = 4,
+                    TenLoaiPhuTung = "Thân - Vỏ"
+                },
+            };
+            return lstData;
+        }
     }
 }
