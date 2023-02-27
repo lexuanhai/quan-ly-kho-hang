@@ -72,6 +72,29 @@ namespace PhanMemQLKho
             cmbThuongHieu.ValueMember = "MaThuongHieu";
             cmbThuongHieu.DataSource = dt;
         }
+        public SelectItemCustom GetCmbValue(string ma)
+        {
+            DataTable dt;
+            string query = "SELECT SP.MaDanhMuc,SP.MaNCC,SP.MaNSX,SP.MaThuongHieu,* FROM [SanPham] SP " +
+                    " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
+                    " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
+                    " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
+                    " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu" +
+                    " WHERE SP.MaSanPham = '"+ma+"'";
+            dt = common.docdulieu(query);
+            var model = new SelectItemCustom();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {                    
+                    model.MaThuongHieu = dr["MaThuongHieu"].ToString();
+                    model.MaDanhMuc = dr["MaDanhMuc"].ToString();
+                    model.MaNCC = dr["MaNCC"].ToString();
+                    model.MaNSX = dr["MaNSX"].ToString();
+                }
+            }
+            return model;
+        }
         // Load NCC
         public void CmbNCC()
         {
@@ -217,7 +240,7 @@ namespace PhanMemQLKho
                 {
                     try
                     {
-                        string query = "DELETE FROM [NhaSanXuat] WHERE [MaSX]='" + txtMa.Text + "'";
+                        string query = "DELETE FROM [SanPham] WHERE [MaSanPham]='" + txtMa.Text + "'";
                         var status = common.thucthidulieu(query);
                         if (status)
                         {
@@ -403,7 +426,31 @@ namespace PhanMemQLKho
 
         private void dataGRV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtMa.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();            
+            txtMa.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();
+            txtTenXe.Text = dataGRV.CurrentRow.Cells[1].Value.ToString();
+            if (!string.IsNullOrEmpty(txtMa.Text))
+            {
+              var cmb = GetCmbValue(txtMa.Text);
+                cmbDanhMuc.SelectedValue = cmb.MaDanhMuc;
+                cmbThuongHieu.SelectedValue = cmb.MaThuongHieu;
+                cmbNSX.SelectedValue = cmb.MaNSX;
+                cmbNCC.SelectedValue = cmb.MaNCC;
+            }
+
+
+            txtXuatXu.Text = dataGRV.CurrentRow.Cells[6].Value.ToString();
+
+            txtNamSX.Text = dataGRV.CurrentRow.Cells[7].Value.ToString();
+            txtHopSo.Text = dataGRV.CurrentRow.Cells[8].Value.ToString();
+            txtMauSon.Text = dataGRV.CurrentRow.Cells[9].Value.ToString();
+            txtKieuDang.Text = dataGRV.CurrentRow.Cells[10].Value.ToString();
+            txtNhienLieu.Text = dataGRV.CurrentRow.Cells[11].Value.ToString();
+            txtSoCho.Text = dataGRV.CurrentRow.Cells[12].Value.ToString();
+            txtGiaNhap.Text = dataGRV.CurrentRow.Cells[13].Value.ToString();
+            txtGiaBan.Text = dataGRV.CurrentRow.Cells[14].Value.ToString();
+            txtSoLuong.Text = dataGRV.CurrentRow.Cells[15].Value.ToString();
+            txtGiaGiam.Text = dataGRV.CurrentRow.Cells[16].Value.ToString();
+            cmbTinhTrang.SelectedItem = dataGRV.CurrentRow.Cells[17].Value.ToString();
             SetControl("table-click");
         }
 

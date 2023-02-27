@@ -154,4 +154,11 @@ namespace PhanMemQLKho.Model
             return lstData;
         }
     }
+    public class SelectItemCustom
+    {
+        public string MaDanhMuc { get; set; }
+        public string MaNCC { get; set; }
+        public string MaNSX { get; set; }
+        public string MaThuongHieu { get; set; }
+    }
 }

@@ -139,6 +139,7 @@
             this.btnQuanLyNhap.TabIndex = 3;
             this.btnQuanLyNhap.Text = "Quản lý Nhập";
             this.btnQuanLyNhap.UseVisualStyleBackColor = true;
+            this.btnQuanLyNhap.Click += new System.EventHandler(this.btnQuanLyNhap_Click);
             // 
             // btnQuanLySanPham
             // 

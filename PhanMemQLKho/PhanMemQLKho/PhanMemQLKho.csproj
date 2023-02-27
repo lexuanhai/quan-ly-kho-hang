@@ -52,6 +52,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmQuanLyNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuanLyNhap.Designer.cs">
+      <DependentUpon>frmQuanLyNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuanLySanPham_ChiTietPhieuNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuanLySanPham_ChiTietPhieuNhap.Designer.cs">
+      <DependentUpon>frmQuanLySanPham_ChiTietPhieuNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmQuanLySanPham_PhieuNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQuanLySanPham_PhieuNhap.Designer.cs">
+      <DependentUpon>frmQuanLySanPham_PhieuNhap.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSanPham.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -125,6 +143,8 @@
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\common.cs" />
+    <Compile Include="Model\ChiTietPhieuNhap.cs" />
+    <Compile Include="Model\PhieuNhap.cs" />
     <Compile Include="Model\SanPham.cs" />
     <Compile Include="Model\PhuTung.cs" />
     <Compile Include="Model\LoaiPhuTung.cs" />
@@ -137,6 +157,15 @@
     <Compile Include="Model\Quyen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmQuanLyNhap.resx">
+      <DependentUpon>frmQuanLyNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanLySanPham_ChiTietPhieuNhap.resx">
+      <DependentUpon>frmQuanLySanPham_ChiTietPhieuNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQuanLySanPham_PhieuNhap.resx">
+      <DependentUpon>frmQuanLySanPham_PhieuNhap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmSanPham.resx">
       <DependentUpon>frmSanPham.cs</DependentUpon>
     </EmbeddedResource>
