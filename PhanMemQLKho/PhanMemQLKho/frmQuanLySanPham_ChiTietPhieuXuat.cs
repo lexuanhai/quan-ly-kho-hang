@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace PhanMemQLKho
 {
-    public partial class frmQuanLySanPham_ChiTietPhieuNhap : Form
+    public partial class frmQuanLySanPham_ChiTietPhieuXuat : Form
     {
-        public frmQuanLySanPham_ChiTietPhieuNhap()
+        public frmQuanLySanPham_ChiTietPhieuXuat()
         {
             InitializeComponent();
         }

@@ -127,8 +127,9 @@
             this.btnQuanLyXuat.Name = "btnQuanLyXuat";
             this.btnQuanLyXuat.Size = new System.Drawing.Size(175, 38);
             this.btnQuanLyXuat.TabIndex = 4;
-            this.btnQuanLyXuat.Text = "Quản lý xuất";
+            this.btnQuanLyXuat.Text = "Quản lý Xuất";
             this.btnQuanLyXuat.UseVisualStyleBackColor = true;
+            this.btnQuanLyXuat.Click += new System.EventHandler(this.btnQuanLyXuat_Click);
             // 
             // btnQuanLyNhap
             // 

@@ -1,6 +1,6 @@
 ﻿namespace PhanMemQLKho
 {
-    partial class frmQuanLySanPham_ChiTietPhieuNhap
+    partial class frmQuanLySanPham_ChiTietPhieuXuat
     {
         /// <summary>
         /// Required designer variable.

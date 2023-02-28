@@ -24,3 +24,6 @@ F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanM
 F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLyNhap.resources
 F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_ChiTietPhieuNhap.resources
 F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_PhieuNhap.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLyXuat.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_PhieuXuat.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_ChiTietPhieuXuat.resources
