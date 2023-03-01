@@ -27,3 +27,32 @@ F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanM
 F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLyXuat.resources
 F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_PhieuXuat.resources
 F:\Hoc Tap\C#\Winform\quan-ly-kho-hang\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_ChiTietPhieuXuat.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\bin\Debug\PhanMemQLKho.exe.config
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\bin\Debug\PhanMemQLKho.exe
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\bin\Debug\PhanMemQLKho.pdb
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\bin\Debug\System.Windows.Forms.Ribbon.dll
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.csproj.AssemblyReference.cache
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_ChiTietPhieuXuat.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLyXuat.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLyNhap.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_ChiTietPhieuNhap.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_PhieuXuat.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_PhieuNhap.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmSanPham.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmNSX.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmNCC.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_PhuTung.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_ThuongHieu.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanTriHeThong.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmKhachHang.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanTriHeThong_NguoiDung.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_DanhMuc.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanTriHeThong_Quyen.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.MainView.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.Properties.Resources.resources
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.csproj.GenerateResource.cache
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.csproj.CoreCompileInputs.cache
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.csproj.CopyComplete
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.exe
+C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.pdb

@@ -37,26 +37,27 @@
             // 
             // menuStripHeThong
             // 
+            this.menuStripHeThong.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStripHeThong.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sub_phieu_nhap,
             this.sub_chi_tiet_phieu_nhap});
             this.menuStripHeThong.Location = new System.Drawing.Point(0, 0);
             this.menuStripHeThong.Name = "menuStripHeThong";
-            this.menuStripHeThong.Size = new System.Drawing.Size(800, 24);
+            this.menuStripHeThong.Size = new System.Drawing.Size(1334, 38);
             this.menuStripHeThong.TabIndex = 0;
             this.menuStripHeThong.Text = "menuStrip1";
             // 
             // sub_phieu_nhap
             // 
             this.sub_phieu_nhap.Name = "sub_phieu_nhap";
-            this.sub_phieu_nhap.Size = new System.Drawing.Size(76, 20);
+            this.sub_phieu_nhap.Size = new System.Drawing.Size(93, 34);
             this.sub_phieu_nhap.Text = "Phiếu Xuất";
             this.sub_phieu_nhap.Click += new System.EventHandler(this.sub_phieu_nhap_Click);
             // 
             // sub_chi_tiet_phieu_nhap
             // 
             this.sub_chi_tiet_phieu_nhap.Name = "sub_chi_tiet_phieu_nhap";
-            this.sub_chi_tiet_phieu_nhap.Size = new System.Drawing.Size(119, 20);
+            this.sub_chi_tiet_phieu_nhap.Size = new System.Drawing.Size(147, 34);
             this.sub_chi_tiet_phieu_nhap.Text = "Chi Tiết Phiếu Xuất";
             this.sub_chi_tiet_phieu_nhap.Click += new System.EventHandler(this.sub_chi_tiet_phieu_nhap_Click);
             // 
@@ -64,19 +65,21 @@
             // 
             this.panelShowFormChild.AutoScroll = true;
             this.panelShowFormChild.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelShowFormChild.Location = new System.Drawing.Point(0, 24);
+            this.panelShowFormChild.Location = new System.Drawing.Point(0, 48);
+            this.panelShowFormChild.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelShowFormChild.Name = "panelShowFormChild";
-            this.panelShowFormChild.Size = new System.Drawing.Size(800, 426);
+            this.panelShowFormChild.Size = new System.Drawing.Size(1334, 645);
             this.panelShowFormChild.TabIndex = 1;
             // 
             // frmQuanLyXuat
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.panelShowFormChild);
             this.Controls.Add(this.menuStripHeThong);
             this.MainMenuStrip = this.menuStripHeThong;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frmQuanLyXuat";
             this.Text = "Quản Lý Xuất";
             this.menuStripHeThong.ResumeLayout(false);

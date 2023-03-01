@@ -27,5 +27,10 @@ namespace PhanMemQLKho
         {
             common.OpenChildForm(new frmQuanTriHeThong_NguoiDung(), new frmQuanTriHeThong_Quyen(), panelShowFormChild);
         }
+
+        private void panelShowFormChild_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

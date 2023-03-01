@@ -23,9 +23,9 @@ namespace PhanMemQLKho
         {           
             if (string.IsNullOrEmpty(query))
             {
-                query = "SELECT [MaPhieuXuat] ,[MaNhanVien] ,U.TenUser ,PX.[MaKH] ,KH.TenKhachHang ,convert(varchar, [NgayXuat], 111) ,[TinhTrang] ,[GhiChu] FROM [PhieuXuat] PX " +
-                    "left join KhachHang KH on KH.MaKH = PX.MaKH " +
-                    "left join [User] U on U.MaUser = PX.MaNhanVien";
+                query = "SELECT [MaPhieuXuat] ,KH.[MaKH] ,KH.TenKhachHang ,[MaNhanVien] ,U.TenUser ,[NgayXuat] ,[TinhTrang] ,[GhiChu] FROM [PhieuXuat] PX " +
+                    "left join [User] U on PX.MaNhanVien = u.MaUser " +
+                    "left join [KhachHang] KH on PX.MaKH = KH.MaKH";
             }            
             common.LoadData(query, dgvPhieuNhap);
         }
@@ -49,20 +49,22 @@ namespace PhanMemQLKho
             cmbKhachHang.ValueMember = "MaKH";
             cmbKhachHang.DataSource = dt;
         }
-        public PhieuNhap GetValue()
+        public PhieuXuat GetValue()
         {
-            var model = new PhieuNhap();
-            model.MaPhieuNhap = txtMa.Text;
+            var model = new PhieuXuat();
+            model.MaPhieuXuat = txtMa.Text;
+            model.MaKH = cmbKhachHang.SelectedValue.ToString();
             model.MaNhanVien = cmbNhanVien.SelectedValue.ToString();
             model.GhiChu = txtGhiChu.Text;
             model.TinhTrang = cmbTinhTrang.SelectedItem.ToString();
             model.NgayNhap = dateTimeNgayNhap.Value;
             return model;
         }
-        public void SetValue(PhieuNhap model)
+        public void SetValue(PhieuXuat model)
         {
-            txtMa.Text = model.MaPhieuNhap;
+            txtMa.Text = model.MaPhieuXuat;
             cmbNhanVien.SelectedValue = model.MaNhanVien;
+            cmbKhachHang.SelectedValue = model.MaKH;
             txtGhiChu.Text = model.GhiChu;
             cmbTinhTrang.SelectedItem = model.TinhTrang;
             dateTimeNgayNhap.Value = model.NgayNhap;
@@ -140,7 +142,7 @@ namespace PhanMemQLKho
                 {
                     try
                     {
-                        string query = "DELETE FROM [PhieuNhap] WHERE MaPhieuNhap='" + txtMa.Text + "'";
+                        string query = "DELETE FROM [PhieuXuat] WHERE [MaPhieuXuat]='" + txtMa.Text + "'";
                         var status = common.thucthidulieu(query);
                         if (status)
                         {
@@ -186,12 +188,13 @@ namespace PhanMemQLKho
         public void UpdataDatabase()
         {
             var model = GetValue();
-            string qry = "Update [PhieuNhap] set " +
+            string qry = "Update [PhieuXuat] set " +
                 "MaNhanVien ='" + model.MaNhanVien.Trim() + "', " +
-                "NgayNhap ='" + model.NgayNhap.ToString("yyyy-MM-dd") + "', " +
+                "MaKH ='" + model.MaKH.Trim() + "', " +
+                "NgayXuat ='" + model.NgayNhap.ToString("yyyy-MM-dd") + "', " +
                 "GhiChu =N'" + model.GhiChu + "', " +
                 "TinhTrang =N'" + model.TinhTrang + "' " +
-                " Where MaPhieuNhap='" + model.MaPhieuNhap + "'";
+                " Where MaPhieuXuat='" + model.MaPhieuXuat + "'";
             var status = common.thucthidulieu(qry);
             if (status)
             {
@@ -208,21 +211,24 @@ namespace PhanMemQLKho
             try
             {
                 var model = GetValue();
-                string ma = common.tangMaTuDong("PhieuNhap", "PN");
+                string ma = common.tangMaTuDong("PhieuXuat", "PX");
                 if (model != null && !string.IsNullOrEmpty(ma))
                 {
 
-                    var qry = "Insert into [PhieuNhap](" +
-                    "MaPhieuNhap, " +
+                    var qry = "Insert into [PhieuXuat](" +
+                    "MaPhieuXuat, " +
                     "MaNhanVien, " +
-                    "NgayNhap, " +
-                    "GhiChu, " +
-                    "TinhTrang " +
+                    "MaKH, " +
+                    "NgayXuat, " +
+                     "TinhTrang, " +
+                    "GhiChu " +                   
                     " ) values('" + ma.Trim() + "'," +
                     "'" + model.MaNhanVien.Trim()  +"'"+
+                    ",'" + model.MaKH.Trim() + "'" +
                     ",'" + model.NgayNhap.ToString("yyyy-MM-dd") + "'" +
+                    ",N'" + model.TinhTrang.Trim() + "' " +
                     ",N'" + model.GhiChu.Trim() + "'" +
-                    ",N'" + model.TinhTrang.Trim() + "' " +                    
+                            
                     ")";
                     var status = common.thucthidulieu(qry);
                     if (status)
@@ -281,21 +287,19 @@ namespace PhanMemQLKho
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             search();
-        }    
+        }
 
-        //private void dataGRV_CellClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    txtMa.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();
-        //    txtTenUser.Text = dataGRV.CurrentRow.Cells[1].Value.ToString();
-        //    txtTenDangNhap.Text = dataGRV.CurrentRow.Cells[2].Value.ToString();
-        //    cmbLoaiQuyen.SelectedItem = dataGRV.CurrentRow.Cells[3].Value.ToString().Trim();
-        //    cmbGioiTinh.SelectedItem = dataGRV.CurrentRow.Cells[4].Value.ToString().Trim();
-        //    dateTimeNgaySinh.Value = Convert.ToDateTime(dataGRV.CurrentRow.Cells[5].Value.ToString());
-        //    txtEmail.Text = dataGRV.CurrentRow.Cells[6].Value.ToString();
-        //    txtSoDienThoai.Text = dataGRV.CurrentRow.Cells[7].Value.ToString();
-        //    txtDiaChi.Text = dataGRV.CurrentRow.Cells[8].Value.ToString();
-        //    SetControl("table-click");
-        //}
+        private void dataGRV_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txtMa.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();
+            cmbKhachHang.SelectedValue = dataGRV.CurrentRow.Cells[1].Value.ToString();
+            cmbNhanVien.SelectedValue= dataGRV.CurrentRow.Cells[3].Value.ToString();
+         
+            dateTimeNgayNhap.Value = Convert.ToDateTime(dataGRV.CurrentRow.Cells[5].Value.ToString());
+            cmbTinhTrang.SelectedItem = dataGRV.CurrentRow.Cells[6].Value.ToString().Trim();
+            txtGhiChu.Text = dataGRV.CurrentRow.Cells[7].Value.ToString();         
+            SetControl("table-click");
+        }
 
         private void btnLoadDS_Click(object sender, EventArgs e)
         {
@@ -305,13 +309,13 @@ namespace PhanMemQLKho
 
         private void dgvPhieuNhap_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtMa.Text = dgvPhieuNhap.CurrentRow.Cells[0].Value.ToString();
-            cmbNhanVien.SelectedValue = dgvPhieuNhap.CurrentRow.Cells[1].Value.ToString();
-            dateTimeNgayNhap.Value = Convert.ToDateTime(dgvPhieuNhap.CurrentRow.Cells[3].Value.ToString());
-            cmbTinhTrang.SelectedItem = dgvPhieuNhap.CurrentRow.Cells[4].Value.ToString().Trim();
-            txtGhiChu.Text = dgvPhieuNhap.CurrentRow.Cells[5].Value.ToString().Trim();
-           
-           
+            txtMa.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();
+            cmbKhachHang.SelectedValue = dataGRV.CurrentRow.Cells[1].Value.ToString();
+            cmbNhanVien.SelectedValue = dataGRV.CurrentRow.Cells[4].Value.ToString();
+
+            dateTimeNgayNhap.Value = Convert.ToDateTime(dataGRV.CurrentRow.Cells[5].Value.ToString());
+            cmbTinhTrang.SelectedItem = dataGRV.CurrentRow.Cells[6].Value.ToString().Trim();
+            txtGhiChu.Text = dataGRV.CurrentRow.Cells[7].Value.ToString();
             SetControl("table-click");
         }
 
