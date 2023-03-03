@@ -28,6 +28,12 @@ namespace PhanMemQLKho
                     " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
                     " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
                     " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu";
+            //string query = "SELECT  *,PN.SoLuong AS 'SOLUONGNHAP', PN.GiaNhap AS 'DONGIANHAP' FROM [SanPham] SP " +
+            //       " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
+            //       " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
+            //       " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
+            //       " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu" +
+            //       " LEFT JOIN ChiTietPhieuNhap PN ON PN.MaSanPham = SP.MaSanPham";
             if (!string.IsNullOrEmpty(qry))
             {
                 query += qry;
@@ -153,7 +159,11 @@ namespace PhanMemQLKho
             model.GiaBan = Convert.ToDecimal(txtGiaBan.Text.ToString());
             model.GiaNhap = Convert.ToDecimal(txtGiaNhap.Text.ToString());
             model.PhanTramGiam = Convert.ToInt32(txtGiaGiam.Text.ToString());
-            model.TinhTrang = cmbTinhTrang.SelectedItem.ToString();
+            if (cmbTinhTrang.SelectedItem != null && !string.IsNullOrEmpty(cmbTinhTrang.SelectedItem.ToString()))
+            {
+                model.TinhTrang = cmbTinhTrang.SelectedItem.ToString();
+            }
+           
             return model;
         }
         public void SetValue(SanPham model)
@@ -295,18 +305,18 @@ namespace PhanMemQLKho
                 "MaThuongHieu ='" + model.MaThuongHieu.Trim() + "', " +
                 "NamSX =" + model.NamSX + ", " +
                 "SoCho =" + model.SoCho + ", " +
-                "HopSo ='" + model.HopSo.Trim() + "', " +
-                "MauSon ='" + model.MauSon.Trim() + "', " +
-                "KieuDang ='" + model.KieuDang.Trim() + "', " +
-                "NhienLieu ='" + model.NhienLieu.Trim() + "', " +
-                "XuatXu ='" + model.XuatXu.Trim() + "', " +
+                "HopSo =N'" + model.HopSo.Trim() + "', " +
+                "MauSon =N'" + model.MauSon.Trim() + "', " +
+                "KieuDang =N'" + model.KieuDang.Trim() + "', " +
+                "NhienLieu =N'" + model.NhienLieu.Trim() + "', " +
+                "XuatXu =N'" + (!string.IsNullOrEmpty(model.XuatXu)? model.XuatXu.Trim():"") + "', " +
                 "SoLuong =" + model.SoLuong + ", " +
                 "GiaBan =" + model.GiaBan + ", " +
                 "GiaNhap =" + model.GiaNhap + ", " +
                 "BienSo ='" + model.BienSo + "', " +
                 "PhanTramGiam =" + model.PhanTramGiam + ", " +
-                "TinhTrang ='" + model.TinhTrang.Trim() + "' " +
-                " Where MaSanPham='" + model.MaSanPham + "'";
+                "TinhTrang =N'" + (!string.IsNullOrEmpty(model.TinhTrang)? model.TinhTrang.Trim():"") + "' " +
+                " Where MaSanPham='" + model.MaSanPham.Trim() + "'";
             var status = common.thucthidulieu(qry);
             if (status)
             {
@@ -410,12 +420,20 @@ namespace PhanMemQLKho
 
             if (radioMa.Checked)
             {
-                string timkiem = "SELECT [MaSX] ,[TenNSX] ,[SoDienThoai] ,[Email] ,[DiaChi]  FROM [NhaSanXuat] where MaSX like '%" + txtSearch.Text + "%'";
+                string timkiem = "SELECT * FROM [SanPham] SP " +
+                    " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
+                    " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
+                    " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
+                    " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where MaSanPham like N'%"+txtSearch.Text+"%'";
                 LoadData(timkiem);
             }
             else if (radioTen.Checked)
             {
-                string timkiem = "SELECT [MaSX] ,[TenNSX] ,[SoDienThoai] ,[Email] ,[DiaChi]  FROM [NhaSanXuat] where TenNSX like N'%" + txtSearch.Text + "%'";
+                string timkiem = "SELECT * FROM [SanPham] SP " +
+                    " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
+                    " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
+                    " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
+                    " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where TenSanPham like N'%" + txtSearch.Text + "%'";               
                 LoadData(timkiem);
             }
         }

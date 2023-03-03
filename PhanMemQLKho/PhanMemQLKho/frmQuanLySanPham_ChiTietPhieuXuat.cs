@@ -51,6 +51,22 @@ namespace PhanMemQLKho
             cmbMaPhieuNhap.ValueMember = "MaPhieuNhap";
             cmbMaPhieuNhap.DataSource = dt;
         }
+        public SanPham GetSanPhamId(string ma)
+        {
+            DataTable dt;
+            string query = "SELECT * FROM [SanPham] where MaSanPham ='"+ ma + "'";
+            dt = common.docdulieu(query);
+            var model = new SanPham();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    model.GiaBan = dr["GiaBan"] != null ? Convert.ToDecimal(dr["GiaBan"]): 0;
+                    model.SoLuong = dr["SoLuong"] != null ? Convert.ToInt32(dr["SoLuong"]) : 0;
+                }
+            }
+            return model;
+        }
         public NguoiDung GetPhieuNhapId(string ma)
         {
             DataTable dt;
@@ -142,7 +158,7 @@ namespace PhanMemQLKho
             else
             {
                 txtMa.Text = "";
-                txtDonGia.Text = "";
+                //txtDonGia.Text = "";
                 //txtTenUser.Text = "";
                 //txtSoDienThoai.Text = "";
                 //txtEmail.Text = "";
@@ -233,10 +249,32 @@ namespace PhanMemQLKho
             try
             {
                 var model = GetValue();
+
+                if (!string.IsNullOrEmpty(model.MaSanPham))
+                {
+                    int soluongmua = !string.IsNullOrEmpty(txtSoLuong.Text) ? Convert.ToInt32(txtSoLuong.Text) : 0;
+                    if (soluongmua > 0)
+                    {
+                        var sanPham = GetSanPhamId(model.MaSanPham);
+                        int soluongton = sanPham.SoLuong - soluongmua;
+                        if (soluongton <= 0)
+                        {
+                            MessageBox.Show(" Vui lòng chọn lại số lượng.");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(" vui lòng chọn số lượng lớn hơn 0.");
+                        return;
+                    }
+                   
+                    
+                }
+
                 string ma = common.tangMaTuDong("ChiTietPhieuNhap", "CTPN");
                 if (model != null && !string.IsNullOrEmpty(ma))
                 {
-
                     var qry = "Insert into [ChiTietPhieuNhap](" +
                     "MaChiTietPhieuNhap, " +
                     "MaPhieuNhap, " +
@@ -295,12 +333,16 @@ namespace PhanMemQLKho
 
             if (radioMa.Checked)
             {
-                string timkiem = "select [MaUser] ,[TenUser] ,[TenDangNhap],[LoaiQuyen],[GioiTinh] ,[NgaySinh] ,[Email]  ,[SoDienThoai] ,[DiaChi] from [User] where MaUser like '%" + txtSearch.Text + "%'";
+                string timkiem = "select CTPN.MaChiTietPhieuNhap, PN.MaPhieuNhap,convert(varchar, PN.NgayNhap, 111) ,SP.MaSanPham, SP.TenSanPham, CTPN.GiaNhap, CTPN.SoLuong,(CTPN.SoLuong*CTPN.GiaNhap) from [ChiTietPhieuNhap] CTPN" +
+                    " left join [PhieuNhap] PN on CTPN.MaPhieuNhap = PN.MaPhieuNhap" +
+                    " left join [SanPham] SP on SP.MaSanPham = CTPN.MaSanPham where CTPN.MaChiTietPhieuNhap like '%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
             else if (radioTen.Checked)
             {
-                string timkiem = "select [MaUser] ,[TenUser] ,[TenDangNhap],[LoaiQuyen],[GioiTinh] ,[NgaySinh] ,[Email]  ,[SoDienThoai] ,[DiaChi] from [User] where TenUser like N'%" + txtSearch.Text + "%'";
+                string timkiem = "select CTPN.MaChiTietPhieuNhap, PN.MaPhieuNhap,convert(varchar, PN.NgayNhap, 111) ,SP.MaSanPham, SP.TenSanPham, CTPN.GiaNhap, CTPN.SoLuong,(CTPN.SoLuong*CTPN.GiaNhap) from [ChiTietPhieuNhap] CTPN " +
+                    "left join [PhieuNhap] PN on CTPN.MaPhieuNhap = PN.MaPhieuNhap " +
+                    "left join [SanPham] SP on SP.MaSanPham = CTPN.MaSanPham where PN.MaPhieuNhap like N'%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
         }
@@ -328,7 +370,9 @@ namespace PhanMemQLKho
         {
             LoadCmb();
             txtMa.Enabled = false;
+            txtSoLuongCon.Enabled = false;
             txtNhanVien.Enabled = false;
+            //txtTinhTrang.Enabled = false;
             LoadData();
             SetControl("load");
         }
@@ -341,6 +385,17 @@ namespace PhanMemQLKho
                 var nhanVien = GetPhieuNhapId(maPhieu);
 
                 txtNhanVien.Text = nhanVien.TenUser;
+            }
+        }
+
+        private void cmbSanPham_SelectedValueChanged(object sender, EventArgs e)
+        {
+            string maPhieu = cmbSanPham.SelectedValue != null ? cmbSanPham.SelectedValue.ToString() : "";
+            if (!string.IsNullOrEmpty(maPhieu))
+            {
+                var sanpham = GetSanPhamId(maPhieu);
+                txtDonGia.Text = sanpham.GiaBan.ToString();
+                txtSoLuongCon.Text = sanpham.SoLuong.ToString();
             }
         }
     }

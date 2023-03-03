@@ -18,6 +18,6 @@ namespace PhanMemQLKho.Model
         public string MatKhau { get; set; }
         public string LoaiQuyen { get; set; }
         public string DiaChi { get; set; }
-        
+
     }
 }

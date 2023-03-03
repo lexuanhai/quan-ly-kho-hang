@@ -51,18 +51,19 @@ namespace PhanMemQLKho
             cmbMaPhieuNhap.ValueMember = "MaPhieuNhap";
             cmbMaPhieuNhap.DataSource = dt;
         }
-        public NguoiDung GetPhieuNhapId(string ma)
+        public PhieuNhap GetPhieuNhapId(string ma)
         {
             DataTable dt;
             string query = "SELECT [MaPhieuNhap] ,[TenUser],u.TenUser ,[NgayNhap]  ,[TinhTrang] ,[GhiChu] FROM [PhieuNhap] PN" +
                     " left join [User] U on PN.MaNhanVien = u.MaUser WHERE PN.MaPhieuNhap ='"+ ma + "'";
             dt = common.docdulieu(query);
-            var model = new NguoiDung();
+            var model = new PhieuNhap();
             if (dt != null && dt.Rows.Count > 0)
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    model.TenUser= dr["TenUser"].ToString();                    
+                    model.TenNhanVien= dr["TenUser"].ToString();
+                    model.TinhTrang = dr["TinhTrang"].ToString();
                 }
             }
             return model;
@@ -295,12 +296,12 @@ namespace PhanMemQLKho
 
             if (radioMa.Checked)
             {
-                string timkiem = "select [MaUser] ,[TenUser] ,[TenDangNhap],[LoaiQuyen],[GioiTinh] ,[NgaySinh] ,[Email]  ,[SoDienThoai] ,[DiaChi] from [User] where MaUser like '%" + txtSearch.Text + "%'";
+                string timkiem = "select CTPN.MaChiTietPhieuNhap, PN.MaPhieuNhap,convert(varchar, PN.NgayNhap, 111) ,SP.MaSanPham, SP.TenSanPham, CTPN.GiaNhap, CTPN.SoLuong,(CTPN.SoLuong*CTPN.GiaNhap) from [ChiTietPhieuNhap] CTPN left join [PhieuNhap] PN on CTPN.MaPhieuNhap = PN.MaPhieuNhap left join [SanPham] SP on SP.MaSanPham = CTPN.MaSanPham where CTPN.MaChiTietPhieuNhap like '%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
             else if (radioTen.Checked)
             {
-                string timkiem = "select [MaUser] ,[TenUser] ,[TenDangNhap],[LoaiQuyen],[GioiTinh] ,[NgaySinh] ,[Email]  ,[SoDienThoai] ,[DiaChi] from [User] where TenUser like N'%" + txtSearch.Text + "%'";
+                string timkiem = "select CTPN.MaChiTietPhieuNhap, PN.MaPhieuNhap,convert(varchar, PN.NgayNhap, 111) ,SP.MaSanPham, SP.TenSanPham, CTPN.GiaNhap, CTPN.SoLuong,(CTPN.SoLuong*CTPN.GiaNhap) from [ChiTietPhieuNhap] CTPN left join [PhieuNhap] PN on CTPN.MaPhieuNhap = PN.MaPhieuNhap left join [SanPham] SP on SP.MaSanPham = CTPN.MaSanPham where  PN.MaPhieuNhap like N'%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
         }
@@ -313,6 +314,12 @@ namespace PhanMemQLKho
         {
             txtMa.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();
             cmbMaPhieuNhap.SelectedValue = dataGRV.CurrentRow.Cells[1].Value.ToString().Trim();
+            string maPhieu = cmbMaPhieuNhap.SelectedValue != null ? cmbMaPhieuNhap.SelectedValue.ToString() : "";
+            var nhanVien = GetPhieuNhapId(maPhieu);
+
+            txtNhanVien.Text = nhanVien.TenNhanVien;
+            txtTinhTrang.Text = nhanVien.TinhTrang;
+
             cmbSanPham.SelectedValue = dataGRV.CurrentRow.Cells[3].Value.ToString().Trim();
             txtDonGia.Text = dataGRV.CurrentRow.Cells[5].Value.ToString().Trim();
             txtSoLuong.Text = dataGRV.CurrentRow.Cells[6].Value.ToString().Trim();
@@ -329,18 +336,32 @@ namespace PhanMemQLKho
             LoadCmb();
             txtMa.Enabled = false;
             txtNhanVien.Enabled = false;
+            txtTinhTrang.Enabled = false;
             LoadData();
             SetControl("load");
         }
 
-        private void cmbPhieuNhap_SelectedValueChanged(object sender, EventArgs e)
+        //private void cmbPhieuNhap_SelectedValueChanged(object sender, EventArgs e)
+        //{
+        //    string maPhieu = cmbMaPhieuNhap.SelectedValue != null ? cmbMaPhieuNhap.SelectedValue.ToString() : "";
+        //    if (!string.IsNullOrEmpty(maPhieu))
+        //    {
+        //        var phieu = GetPhieuNhapId(maPhieu);
+
+        //        txtNhanVien.Text = phieu.TenNhanVien;
+        //        txtTinhTrang.Text = phieu.TinhTrang;
+        //    }
+        //}
+
+        private void cmbMaPhieuNhap_SelectedValueChanged(object sender, EventArgs e)
         {
             string maPhieu = cmbMaPhieuNhap.SelectedValue != null ? cmbMaPhieuNhap.SelectedValue.ToString() : "";
             if (!string.IsNullOrEmpty(maPhieu))
             {
-                var nhanVien = GetPhieuNhapId(maPhieu);
+                var phieu = GetPhieuNhapId(maPhieu);
 
-                txtNhanVien.Text = nhanVien.TenUser;
+                txtNhanVien.Text = phieu.TenNhanVien;
+                txtTinhTrang.Text = phieu.TinhTrang;
             }
         }
     }

@@ -237,5 +237,10 @@ namespace PhanMemQLKho
         {
             OpenChildForm(new frmQuanLyXuat());
         }
+
+        private void btnBaoCaoThongKe_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new frmBaoCaoThongKe());
+        }
     }
 }

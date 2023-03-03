@@ -260,12 +260,13 @@ namespace PhanMemQLKho
 
             if (radioMa.Checked)
             {
-                string timkiem = "select [MaUser] ,[TenUser] ,[TenDangNhap],[LoaiQuyen],[GioiTinh] ,[NgaySinh] ,[Email]  ,[SoDienThoai] ,[DiaChi] from [User] where MaUser like '%" + txtSearch.Text + "%'";
+                
+                string timkiem = "SELECT[MaPhieuNhap] ,[MaNhanVien] ,u.TenUser ,[NgayNhap] ,[TinhTrang] ,[GhiChu] FROM[PhieuNhap] PN left join [User] U on PN.MaNhanVien = u.MaUser where MaPhieuNhap like '%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
             else if (radioTen.Checked)
             {
-                string timkiem = "select [MaUser] ,[TenUser] ,[TenDangNhap],[LoaiQuyen],[GioiTinh] ,[NgaySinh] ,[Email]  ,[SoDienThoai] ,[DiaChi] from [User] where TenUser like N'%" + txtSearch.Text + "%'";
+                string timkiem = "SELECT[MaPhieuNhap] ,[MaNhanVien] ,u.TenUser ,[NgayNhap] ,[TinhTrang] ,[GhiChu] FROM[PhieuNhap] PN left join [User] U on PN.MaNhanVien = u.MaUser where TenUser like N'%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
         }
