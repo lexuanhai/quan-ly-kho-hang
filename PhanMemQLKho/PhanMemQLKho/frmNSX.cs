@@ -79,26 +79,23 @@ namespace PhanMemQLKho
                 btnLuu.Enabled = false;
                 btnXoa.Enabled = false;
                 SetControlValue(false);
+                SetAllNull();
             }
         }
         public void SetControlValue(bool edit)
         {
-            if (edit)
-            {                              
-                txtTenUser.Enabled = true;
-                txtSoDienThoai.Enabled = true;
-                txtEmail.Enabled = true;
-                txtDiaChi.Enabled = true;
-            }
-            else
-            {
-                txtMa.Text = "";
-                txtTenUser.Text = "";
-                txtSoDienThoai.Text = "";
-                txtEmail.Text = "";
-                txtDiaChi.Text = "";
-            }
-
+            txtTenUser.Enabled = edit;
+            txtSoDienThoai.Enabled = edit;
+            txtEmail.Enabled = edit;
+            txtDiaChi.Enabled = edit;           
+        }
+        public void SetAllNull()
+        {
+            txtMa.Text = "";
+            txtTenUser.Text = "";
+            txtSoDienThoai.Text = "";
+            txtEmail.Text = "";
+            txtDiaChi.Text = "";
         }
         private void Xoa()
         {

@@ -58,3 +58,41 @@ C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\Phan
 C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.pdb
 C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmBaoCaoThongKe.resources
 C:\hoc-tap\winform\quan-ly-kho-hang-1-3\PhanMemQLKho\PhanMemQLKho\bin\Debug\FontAwesome.Sharp.dll
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\bin\Debug\PhanMemQLKho.exe.config
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\bin\Debug\PhanMemQLKho.exe
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\bin\Debug\PhanMemQLKho.pdb
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\bin\Debug\FontAwesome.Sharp.dll
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\bin\Debug\System.Windows.Forms.Ribbon.dll
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.csproj.AssemblyReference.cache
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmBaoCaoThongKe.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_ChiTietPhieuXuat.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLyXuat.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLyNhap.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_ChiTietPhieuNhap.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_PhieuXuat.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_PhieuNhap.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmSanPham.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmNSX.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmNCC.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_PhuTung.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_ThuongHieu.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanTriHeThong.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmKhachHang.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanTriHeThong_NguoiDung.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanLySanPham_DanhMuc.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmQuanTriHeThong_Quyen.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.MainView.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.Properties.Resources.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.csproj.GenerateResource.cache
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.csproj.CoreCompileInputs.cache
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.csproj.CopyComplete
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.exe
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.pdb
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmDangNhap.resources
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\bin\Debug\SqlServerTypes\x64\msvcr120.dll
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\bin\Debug\SqlServerTypes\x64\SqlServerSpatial140.dll
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\bin\Debug\SqlServerTypes\x86\msvcr120.dll
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\bin\Debug\SqlServerTypes\x86\SqlServerSpatial140.dll
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\bin\Debug\Microsoft.SqlServer.Types.dll
+F:\Hoc Tap\C#\Winform\quan-ly-kho-hang-laster\PhanMemQLKho\PhanMemQLKho\obj\Debug\PhanMemQLKho.frmDoiMatKhau.resources

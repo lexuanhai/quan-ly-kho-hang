@@ -98,6 +98,7 @@ namespace PhanMemQLKho
                 txtMoTa.Enabled = false;
                 txtTenThuongHieu.Text = "";
                 txtMoTa.Text = "";
+                txtMaThuongHieu.Text = "";
             }
           
         }
@@ -127,6 +128,7 @@ namespace PhanMemQLKho
             xuly = 0;
             SetControl("load");
             SetControlValue(false);
+           
             //NewControl(false);           
         }
         private void Xoa()

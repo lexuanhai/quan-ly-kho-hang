@@ -62,7 +62,7 @@ namespace PhanMemQLKho
             string query = "SELECT TH.TenThuongHieu ,* FROM [PhuTung] PT INNER JOIN [ThuongHieu] TH ON PT.MaThuongHieu = TH.MaThuongHieu";
             if (!string.IsNullOrEmpty(qry))
             {
-                query += qry;
+                query = qry;
             }
 
             dt = common.docdulieu(query);
@@ -87,15 +87,16 @@ namespace PhanMemQLKho
                     
                     dataGRV.Rows[n].Cells[3].Value = dr["TenThuongHieu"].ToString();
                     dataGRV.Rows[n].Cells[4].Value = dr["SoLuong"].ToString();
-                    dataGRV.Rows[n].Cells[5].Value = dr["Gia"].ToString();
-                    int soluong = Convert.ToInt32(dr["SoLuong"].ToString());
+                    dataGRV.Rows[n].Cells[5].Value = dr["GiaNhap"].ToString();
+                    dataGRV.Rows[n].Cells[6].Value = dr["GiaBan"].ToString();
+                    int soluong = dr["SoLuong"] != null && !string.IsNullOrEmpty(dr["SoLuong"].ToString()) ? Convert.ToInt32(dr["SoLuong"]):0;                    
                     if (soluong > 0)
                     {
-                        dataGRV.Rows[n].Cells[6].Value = "Còn Hàng";
+                        dataGRV.Rows[n].Cells[7].Value = "Còn Hàng";
                     }
                     else
                     {
-                        dataGRV.Rows[n].Cells[6].Value = "Hết Hàng";
+                        dataGRV.Rows[n].Cells[7].Value = "Hết Hàng";
                     }
                 }
             }
@@ -107,8 +108,9 @@ namespace PhanMemQLKho
             model.TenPhuTung = txtTenPhuTung.Text;
             model.MaLoaiPhuTung = Convert.ToInt32(cmbLoaiPhuTung.SelectedValue.ToString());
             model.MaThuongHieu = cmbThuongHieu.SelectedValue.ToString();
-            model.SoLuong = Convert.ToInt32(txtSoLuong.Text);
-            model.Gia = Convert.ToDecimal(txtGiaBan.Text);
+            //model.SoLuong = Convert.ToInt32(txtSoLuong.Text);
+            //model.Gia = Convert.ToDecimal(txtGiaNhap.Text);
+            model.GiaBan = Convert.ToDecimal(txtGiaBan.Text);
             //model.MoTa = txtMoTa.Text;
             return model;
         }
@@ -118,7 +120,8 @@ namespace PhanMemQLKho
             txtTenPhuTung.Text = model.TenPhuTung;
             cmbLoaiPhuTung.SelectedValue = model.MaLoaiPhuTung;
             cmbThuongHieu.SelectedValue = model.MaThuongHieu;
-            txtGiaBan.Text = model.Gia != null ? model.Gia.ToString() : "";
+            //txtGia.Text = model.Gia != null ? model.Gia.ToString() : "";
+            txtGiaBan.Text = model.GiaBan != null ? model.GiaBan.ToString() : "";
             txtSoLuong.Text = model.SoLuong != null ? model.SoLuong.ToString() : "";
             //txtMoTa.Text = model.MoTa;
         }
@@ -156,6 +159,7 @@ namespace PhanMemQLKho
                 btnLuu.Enabled = false;
                 btnXoa.Enabled = false;
                 SetControlValue(false);
+                SetAllNull();
             }
         }
 
@@ -168,34 +172,33 @@ namespace PhanMemQLKho
         }
         public void SetControlValue(bool edit)
         {
-            if (edit)
-            {
-                txtTenPhuTung.Enabled = true;
-                //txtMoTa.Enabled = true;
-            }
-            else
-            {
-                txtTenPhuTung.Enabled = false;
-                //txtMoTa.Enabled = false;
-                txtTenPhuTung.Text = "";
-                //txtMoTa.Text = "";
-            }
-          
-        }
-        public void NewControl(bool edit)
-        {
+            //if (edit)
+            //{
+            //    txtTenPhuTung.Enabled = true;
+            //    //txtMoTa.Enabled = true;
+            //}
+            //else
+            //{
+            //    txtTenPhuTung.Enabled = false;
+            //    //txtMoTa.Enabled = false;
+            //    txtTenPhuTung.Text = "";
+            //    //txtMoTa.Text = "";
+            //}
             txtTenPhuTung.Enabled = edit;
-            //txtMoTa.Enabled = edit;
-            if (
-                (!edit && xuly == 0) // trường hợp khi click nút hủy
-                || (!edit && xuly == 1) // trường hợp khi click nut thêm mới
-                )
-            {
-                txtTenPhuTung.Text = "";
-                //txtMoTa.Text = "";
-            }
+            cmbLoaiPhuTung.Enabled = edit;
+            cmbThuongHieu.Enabled = edit;
+            txtGiaBan.Enabled = edit;
+            //txtSoLuong.Enabled = edit;
+            //txtGiaNhap.Enabled = edit;
         }
-
+        public void SetAllNull()
+        {
+            txtTenPhuTung.Text = "";
+            txtSoLuong.Text = "";
+            txtGiaNhap.Text = "";
+            txtGiaBan.Text = "";
+        }
+      
         private void btnSua_Click(object sender, EventArgs e)
         {
             xuly = 2;
@@ -255,8 +258,8 @@ namespace PhanMemQLKho
                 "TenPhuTung =N'" + model.TenPhuTung + "', " +
                 "LoaiPhuTung =" + model.MaLoaiPhuTung + ", " +
                 "MaThuongHieu ='" + model.MaThuongHieu + "', " +
-                "SoLuong =" + model.SoLuong + ", " +
-                "Gia =" + model.Gia + "" +
+                //"SoLuong =" + model.SoLuong + ", " +
+                "GiaBan =" + model.GiaBan + "" +
                 " Where MaPhuTung='" + model.MaPhuTung + "'";
             var status = common.thucthidulieu(qry);
             if (status)
@@ -282,8 +285,8 @@ namespace PhanMemQLKho
                     "TenPhuTung, " +
                     "LoaiPhuTung, " +
                     "MaThuongHieu, " +
-                    "SoLuong, " +
-                    "Gia ) values('" + ma + "',N'" + model.TenPhuTung + "'," + model.MaLoaiPhuTung + ",'"+model.MaThuongHieu+"',"+model.SoLuong+","+model.Gia+")";
+                    //"SoLuong, " +
+                    "GiaBan ) values('" + ma + "',N'" + model.TenPhuTung + "'," + model.MaLoaiPhuTung + ",'"+model.MaThuongHieu+"',"+model.GiaBan+")";
                     var status = common.thucthidulieu(qry);
                     if (status)
                     {
@@ -303,14 +306,24 @@ namespace PhanMemQLKho
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if (xuly == 1)
+            if (txtTenPhuTung.Text.Length > 0 &&
+                    cmbLoaiPhuTung.Text.Length > 0 &&
+                    cmbThuongHieu.Text.Length > 0 &&
+                    //txtSoLuong.Text.Length > 0 &&
+                    txtGiaBan.Text.Length > 0)
             {
-
-                ThemMoi();
+                if (xuly == 1)
+                {
+                    ThemMoi();
+                }
+                else if (xuly == 2)
+                {
+                    UpdataDatabase();
+                }
             }
-            else if (xuly == 2)
+            else
             {
-                UpdataDatabase();
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin.");
             }
             xuly = 0;
             LoadData();
@@ -321,7 +334,9 @@ namespace PhanMemQLKho
         {
             txtMaPhuTung.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();
             txtTenPhuTung.Text = dataGRV.CurrentRow.Cells[1].Value.ToString();
-            //txtMoTa.Text = dataGRV.CurrentRow.Cells[2].Value.ToString();
+            txtSoLuong.Text = dataGRV.CurrentRow.Cells[4].Value.ToString();
+            txtGiaNhap.Text = dataGRV.CurrentRow.Cells[5].Value.ToString();
+            txtGiaBan.Text = dataGRV.CurrentRow.Cells[6].Value.ToString();
             SetControl("table-click");
         }
 
@@ -336,12 +351,12 @@ namespace PhanMemQLKho
         {           
             if (radioMaPhuTung.Checked)
             {
-                string timkiem = "select * from PhuTung where MaPhuTung like '%" + txtSearch.Text + "%'";
+                string timkiem = "SELECT TH.TenThuongHieu ,* FROM [PhuTung] PT INNER JOIN [ThuongHieu] TH ON PT.MaThuongHieu = TH.MaThuongHieu where MaPhuTung like '%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
             else if (radioTenPhuTung.Checked)
             {
-                string timkiem = "select * from PhuTung where TenPhuTung like N'%" + txtSearch.Text + "%'";
+                string timkiem = "SELECT TH.TenThuongHieu ,* FROM [PhuTung] PT INNER JOIN [ThuongHieu] TH ON PT.MaThuongHieu = TH.MaThuongHieu where TenPhuTung like N'%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
         }
@@ -362,6 +377,9 @@ namespace PhanMemQLKho
             txtMaPhuTung.Enabled = false;
             LoadData();
             LoadCmb();
+            SetControlValue(false);
+            txtSoLuong.Enabled = false;
+            txtGiaNhap.Enabled = false;
         }
         
     }

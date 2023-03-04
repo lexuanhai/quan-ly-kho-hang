@@ -1,4 +1,5 @@
 ﻿
+using PhanMemQLKho.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -241,6 +242,44 @@ namespace PhanMemQLKho
         private void btnBaoCaoThongKe_Click(object sender, EventArgs e)
         {
             OpenChildForm(new frmBaoCaoThongKe());
+        }
+
+        private void panelSideBar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void MainView_Load(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(LoginInfo.TenUser))
+            {
+                lableTenUser.Text = LoginInfo.TenUser;
+                if (LoginInfo.LoaiQuyen.ToLower().Trim() == "Admin".ToLower().Trim())
+                {
+                    btnQuanTriHeThong.Visible = true;
+                }
+                else
+                {
+                    btnQuanTriHeThong.Visible = false;
+                }
+                
+            }
+            else
+            {
+                lableTenUser.Text = "";
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult dlr;
+            dlr = MessageBox.Show("Bạn chắc chắn muốn thoát.", "Thông Báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dlr == DialogResult.OK)
+            {
+                this.Close();
+                frmDangNhap form = new frmDangNhap();
+                form.Show();
+            }
         }
     }
 }

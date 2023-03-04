@@ -7,7 +7,9 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace PhanMemQLKho
@@ -19,14 +21,19 @@ namespace PhanMemQLKho
             InitializeComponent();
         }
         int xuly = 0; //1 là thêm mới, 2 là sửa
-        public void LoadData(string query = "")
-        {           
+        public void LoadData(string qry = "")
+        {
+            string query = "";
             if (string.IsNullOrEmpty(query))
             {
                 query = "SELECT [MaPhieuXuat] ,KH.[MaKH] ,KH.TenKhachHang ,[MaNhanVien] ,U.TenUser ,[NgayXuat] ,[TinhTrang] ,[GhiChu] FROM [PhieuXuat] PX " +
                     "left join [User] U on PX.MaNhanVien = u.MaUser " +
                     "left join [KhachHang] KH on PX.MaKH = KH.MaKH";
-            }            
+            }
+            else
+            {
+                query = qry;
+            }
             common.LoadData(query, dgvPhieuNhap);
         }
         // Load Nhân viên 
@@ -57,7 +64,7 @@ namespace PhanMemQLKho
             model.MaNhanVien = cmbNhanVien.SelectedValue.ToString();
             model.GhiChu = txtGhiChu.Text;
             model.TinhTrang = cmbTinhTrang.SelectedItem.ToString();
-            model.NgayNhap = dateTimeNgayNhap.Value;
+            model.NgayXuat = dateTimeNgayNhap.Value;
             return model;
         }
         public void SetValue(PhieuXuat model)
@@ -67,7 +74,7 @@ namespace PhanMemQLKho
             cmbKhachHang.SelectedValue = model.MaKH;
             txtGhiChu.Text = model.GhiChu;
             cmbTinhTrang.SelectedItem = model.TinhTrang;
-            dateTimeNgayNhap.Value = model.NgayNhap;
+            dateTimeNgayNhap.Value = model.NgayXuat;
         }
         public void SetControl(string edit)
         {
@@ -101,36 +108,21 @@ namespace PhanMemQLKho
                 btnLuu.Enabled = false;
                 btnXoa.Enabled = false;
                 SetControlValue(false);
+                SetAllNull();
             }
         }
         public void SetControlValue(bool edit)
         {
-            if (edit)
-            {                              
-                txtMa.Enabled = true;
-                txtGhiChu.Enabled = true;
-                //txtSoDienThoai.Enabled = true;
-                //txtEmail.Enabled = true;
-                //cmbGioiTinh.Enabled = true;
-                //dateTimeNgaySinh.Enabled = true;
-                //txtTenDangNhap.Enabled = true;
-                //txtMatKhau.Enabled = true;
-                //txtDiaChi.Enabled = true;
-            }
-            else
-            {
-                txtMa.Text = "";
-                //txtTenDangNhap.Text = "";
-                //txtTenUser.Text = "";
-                //txtSoDienThoai.Text = "";
-                //txtEmail.Text = "";
-                //cmbGioiTinh.Text = "";
-                //dateTimeNgaySinh.Text = "";
-                //txtTenDangNhap.Text = "";
-                //txtMatKhau.Text = "";
-                //txtDiaChi.Text = "";
-            }
-
+            cmbNhanVien.Enabled = edit;
+            cmbKhachHang.Enabled = edit;
+            dateTimeNgayNhap.Enabled = edit;
+            cmbTinhTrang.Enabled = edit;
+            txtGhiChu.Enabled = edit;
+        }
+        public void SetAllNull()
+        {
+            txtMa.Text = "";
+            txtGhiChu.Text = "";
         }
         private void Xoa()
         {
@@ -191,7 +183,7 @@ namespace PhanMemQLKho
             string qry = "Update [PhieuXuat] set " +
                 "MaNhanVien ='" + model.MaNhanVien.Trim() + "', " +
                 "MaKH ='" + model.MaKH.Trim() + "', " +
-                "NgayXuat ='" + model.NgayNhap.ToString("yyyy-MM-dd") + "', " +
+                "NgayXuat ='" + model.NgayXuat.ToString("yyyy-MM-dd") + "', " +
                 "GhiChu =N'" + model.GhiChu + "', " +
                 "TinhTrang =N'" + model.TinhTrang + "' " +
                 " Where MaPhieuXuat='" + model.MaPhieuXuat + "'";
@@ -212,6 +204,7 @@ namespace PhanMemQLKho
             {
                 var model = GetValue();
                 string ma = common.tangMaTuDong("PhieuXuat", "PX");
+                ma = Regex.Replace(ma, @"\s+", "");
                 if (model != null && !string.IsNullOrEmpty(ma))
                 {
 
@@ -225,7 +218,7 @@ namespace PhanMemQLKho
                     " ) values('" + ma.Trim() + "'," +
                     "'" + model.MaNhanVien.Trim()  +"'"+
                     ",'" + model.MaKH.Trim() + "'" +
-                    ",'" + model.NgayNhap.ToString("yyyy-MM-dd") + "'" +
+                    ",'" + model.NgayXuat.ToString("yyyy-MM-dd") + "'" +
                     ",N'" + model.TinhTrang.Trim() + "' " +
                     ",N'" + model.GhiChu.Trim() + "'" +
                             
@@ -275,12 +268,16 @@ namespace PhanMemQLKho
 
             if (radioMa.Checked)
             {
-                string timkiem = "select [MaUser] ,[TenUser] ,[TenDangNhap],[LoaiQuyen],[GioiTinh] ,[NgaySinh] ,[Email]  ,[SoDienThoai] ,[DiaChi] from [User] where MaUser like '%" + txtSearch.Text + "%'";
+                string timkiem = "SELECT [MaPhieuXuat] ,KH.[MaKH] ,KH.TenKhachHang ,[MaNhanVien] ,U.TenUser ,[NgayXuat] ,[TinhTrang] ,[GhiChu] FROM [PhieuXuat] PX " +
+                    "left join [User] U on PX.MaNhanVien = u.MaUser " +
+                    "left join [KhachHang] KH on PX.MaKH = KH.MaKH where PX.MaPhieuXuat like '%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
             else if (radioTen.Checked)
             {
-                string timkiem = "select [MaUser] ,[TenUser] ,[TenDangNhap],[LoaiQuyen],[GioiTinh] ,[NgaySinh] ,[Email]  ,[SoDienThoai] ,[DiaChi] from [User] where TenUser like N'%" + txtSearch.Text + "%'";
+                string timkiem = "SELECT [MaPhieuXuat] ,KH.[MaKH] ,KH.TenKhachHang ,[MaNhanVien] ,U.TenUser ,[NgayXuat] ,[TinhTrang] ,[GhiChu] FROM [PhieuXuat] PX " +
+                    "left join [User] U on PX.MaNhanVien = u.MaUser " +
+                    "left join [KhachHang] KH on PX.MaKH = KH.MaKH where PX.MaKH like N'%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
         }
@@ -289,17 +286,17 @@ namespace PhanMemQLKho
             search();
         }
 
-        private void dataGRV_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            txtMa.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();
-            cmbKhachHang.SelectedValue = dataGRV.CurrentRow.Cells[1].Value.ToString();
-            cmbNhanVien.SelectedValue= dataGRV.CurrentRow.Cells[3].Value.ToString();
+        //private void dataGRV_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    txtMa.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();
+        //    cmbKhachHang.SelectedValue = dataGRV.CurrentRow.Cells[1].Value.ToString();
+        //    cmbNhanVien.SelectedValue= dataGRV.CurrentRow.Cells[3].Value.ToString();
          
-            dateTimeNgayNhap.Value = Convert.ToDateTime(dataGRV.CurrentRow.Cells[5].Value.ToString());
-            cmbTinhTrang.SelectedItem = dataGRV.CurrentRow.Cells[6].Value.ToString().Trim();
-            txtGhiChu.Text = dataGRV.CurrentRow.Cells[7].Value.ToString();         
-            SetControl("table-click");
-        }
+        //    dateTimeNgayNhap.Value = Convert.ToDateTime(dataGRV.CurrentRow.Cells[5].Value.ToString());
+        //    cmbTinhTrang.SelectedItem = dataGRV.CurrentRow.Cells[6].Value.ToString().Trim();
+        //    txtGhiChu.Text = dataGRV.CurrentRow.Cells[7].Value.ToString();         
+        //    SetControl("table-click");
+        //}
 
         private void btnLoadDS_Click(object sender, EventArgs e)
         {
@@ -309,13 +306,13 @@ namespace PhanMemQLKho
 
         private void dgvPhieuNhap_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            txtMa.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();
-            cmbKhachHang.SelectedValue = dataGRV.CurrentRow.Cells[1].Value.ToString();
-            cmbNhanVien.SelectedValue = dataGRV.CurrentRow.Cells[4].Value.ToString();
+            txtMa.Text = dgvPhieuNhap.CurrentRow.Cells[0].Value.ToString();
+            cmbKhachHang.SelectedValue = dgvPhieuNhap.CurrentRow.Cells[1].Value.ToString();
+            cmbNhanVien.SelectedValue = dgvPhieuNhap.CurrentRow.Cells[3].Value.ToString();
 
-            dateTimeNgayNhap.Value = Convert.ToDateTime(dataGRV.CurrentRow.Cells[5].Value.ToString());
-            cmbTinhTrang.SelectedItem = dataGRV.CurrentRow.Cells[6].Value.ToString().Trim();
-            txtGhiChu.Text = dataGRV.CurrentRow.Cells[7].Value.ToString();
+            dateTimeNgayNhap.Value = Convert.ToDateTime(dgvPhieuNhap.CurrentRow.Cells[5].Value.ToString());
+            cmbTinhTrang.SelectedItem = dgvPhieuNhap.CurrentRow.Cells[6].Value.ToString().Trim();
+            txtGhiChu.Text = dgvPhieuNhap.CurrentRow.Cells[7].Value.ToString();
             SetControl("table-click");
         }
 

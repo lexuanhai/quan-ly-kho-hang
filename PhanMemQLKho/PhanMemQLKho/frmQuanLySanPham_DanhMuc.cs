@@ -127,6 +127,7 @@ namespace PhanMemQLKho
             xuly = 0;
             SetControl("load");
             SetControlValue(false);
+            txtMaDanhMuc.Text = "";
             //NewControl(false);           
         }
         private void Xoa()

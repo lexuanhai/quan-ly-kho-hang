@@ -19,12 +19,16 @@ namespace PhanMemQLKho
             InitializeComponent();
         }
         int xuly = 0; //1 là thêm mới, 2 là sửa
-        public void LoadData(string query = "")
+        public void LoadData(string qty = "")
         {
-           
+            string query = "";
             if (string.IsNullOrEmpty(query))
             {
                 query = "SELECT [MaKH] ,[TenKhachHang] ,[GioiTinh] ,[NgaySinh] ,[Email] ,[SoDienThoai] ,[DiaChi] FROM [KhachHang]";
+            }
+            else
+            {
+                query = qty;
             }
             
             common.LoadData(query, dataGRV);
@@ -83,29 +87,27 @@ namespace PhanMemQLKho
                 btnLuu.Enabled = false;
                 btnXoa.Enabled = false;
                 SetControlValue(false);
+                SetAllNull();
             }
+        }
+        public void SetAllNull()
+        {
+            txtMa.Text = "";
+            txtTenUser.Text = "";
+            txtSoDienThoai.Text = "";
+            txtEmail.Text = "";
+            cmbGioiTinh.Text = "";
+            dateTimeNgaySinh.Text = "";
+            txtDiaChi.Text = "";
         }
         public void SetControlValue(bool edit)
         {
-            if (edit)
-            {                              
-                txtTenUser.Enabled = true;
-                txtSoDienThoai.Enabled = true;
-                txtEmail.Enabled = true;
-                cmbGioiTinh.Enabled = true;
-                dateTimeNgaySinh.Enabled = true;
-                txtDiaChi.Enabled = true;
-            }
-            else
-            {
-                txtMa.Text = "";
-                txtTenUser.Text = "";
-                txtSoDienThoai.Text = "";
-                txtEmail.Text = "";
-                cmbGioiTinh.Text = "";
-                dateTimeNgaySinh.Text = "";
-                txtDiaChi.Text = "";
-            }
+            txtTenUser.Enabled = edit;
+            txtSoDienThoai.Enabled = edit;
+            txtEmail.Enabled = edit;
+            cmbGioiTinh.Enabled = edit;
+            dateTimeNgaySinh.Enabled = edit;
+            txtDiaChi.Enabled = edit;           
 
         }
         private void Xoa()
@@ -227,15 +229,27 @@ namespace PhanMemQLKho
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if (xuly == 1)
+            if (txtTenUser.Text.Length > 0 &&
+                cmbGioiTinh.Text.Length > 0 &&
+                dateTimeNgaySinh.Text.Length > 0 &&
+                txtSoDienThoai.Text.Length > 0 &&
+                txtEmail.Text.Length > 0 &&
+                txtDiaChi.Text.Length > 0 )
             {
-
-                ThemMoi();
+                if (xuly == 1)
+                {
+                    ThemMoi();
+                }
+                else if (xuly == 2)
+                {
+                    UpdataDatabase();
+                }
             }
-            else if (xuly == 2)
+            else
             {
-                UpdataDatabase();
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin.");
             }
+           
             xuly = 0;
             LoadData();
             SetControl("load");
@@ -246,6 +260,7 @@ namespace PhanMemQLKho
             xuly = 0;
             SetControl("load");
             SetControlValue(false);
+           
         }
         public void search()
         {

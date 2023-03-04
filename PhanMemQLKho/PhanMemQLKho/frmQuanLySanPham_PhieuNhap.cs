@@ -19,13 +19,17 @@ namespace PhanMemQLKho
             InitializeComponent();
         }
         int xuly = 0; //1 là thêm mới, 2 là sửa
-        public void LoadData(string query = "")
+        public void LoadData(string str = "")
         {
-           
-            if (string.IsNullOrEmpty(query))
+            string query = "";
+            if (string.IsNullOrEmpty(str))
             {
-                query = "SELECT [MaPhieuNhap] ,[MaNhanVien] ,u.TenUser ,[NgayNhap]  ,[TinhTrang] ,[GhiChu] FROM [PhieuNhap] PN" +
+                query = "SELECT [MaPhieuNhap] ,[MaNhanVien] ,u.TenUser , convert(varchar, [NgayNhap], 111)  ,[TinhTrang] ,[GhiChu] FROM [PhieuNhap] PN" +
                     " left join [User] U on PN.MaNhanVien = u.MaUser";
+            }
+            else
+            {
+                query = str;
             }
             
             common.LoadData(query, dgvPhieuNhap);
@@ -90,36 +94,20 @@ namespace PhanMemQLKho
                 btnLuu.Enabled = false;
                 btnXoa.Enabled = false;
                 SetControlValue(false);
+                SetAllNull();
             }
         }
         public void SetControlValue(bool edit)
         {
-            if (edit)
-            {                              
-                txtMa.Enabled = true;
-                txtGhiChu.Enabled = true;
-                //txtSoDienThoai.Enabled = true;
-                //txtEmail.Enabled = true;
-                //cmbGioiTinh.Enabled = true;
-                //dateTimeNgaySinh.Enabled = true;
-                //txtTenDangNhap.Enabled = true;
-                //txtMatKhau.Enabled = true;
-                //txtDiaChi.Enabled = true;
-            }
-            else
-            {
-                txtMa.Text = "";
-                //txtTenDangNhap.Text = "";
-                //txtTenUser.Text = "";
-                //txtSoDienThoai.Text = "";
-                //txtEmail.Text = "";
-                //cmbGioiTinh.Text = "";
-                //dateTimeNgaySinh.Text = "";
-                //txtTenDangNhap.Text = "";
-                //txtMatKhau.Text = "";
-                //txtDiaChi.Text = "";
-            }
-
+            txtGhiChu.Enabled = edit;
+            cmbNhanVien.Enabled = edit;
+            dateTimeNgayNhap.Enabled = edit;
+            cmbTinhTrang.Enabled = edit;
+        }
+        public void SetAllNull()
+        {
+            txtMa.Text = "";
+            txtGhiChu.Text = "";
         }
         private void Xoa()
         {
@@ -235,15 +223,25 @@ namespace PhanMemQLKho
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if (xuly == 1)
+            if (cmbNhanVien.Text.Length > 0 &&
+                dateTimeNgayNhap.Text.Length > 0 &&
+                cmbTinhTrang.Text.Length > 0                
+                )
             {
-
-                ThemMoi();
+                if (xuly == 1)
+                {
+                    ThemMoi();
+                }
+                else if (xuly == 2)
+                {
+                    UpdataDatabase();
+                }
             }
-            else if (xuly == 2)
+            else
             {
-                UpdataDatabase();
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin.");
             }
+            
             xuly = 0;
             LoadData();
             SetControl("load");
@@ -261,12 +259,12 @@ namespace PhanMemQLKho
             if (radioMa.Checked)
             {
                 
-                string timkiem = "SELECT[MaPhieuNhap] ,[MaNhanVien] ,u.TenUser ,[NgayNhap] ,[TinhTrang] ,[GhiChu] FROM[PhieuNhap] PN left join [User] U on PN.MaNhanVien = u.MaUser where MaPhieuNhap like '%" + txtSearch.Text + "%'";
+                string timkiem = "SELECT[MaPhieuNhap] ,[MaNhanVien] ,u.TenUser , convert(varchar, [NgayNhap], 111) ,[TinhTrang] ,[GhiChu] FROM[PhieuNhap] PN left join [User] U on PN.MaNhanVien = u.MaUser where MaPhieuNhap like '%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
             else if (radioTen.Checked)
             {
-                string timkiem = "SELECT[MaPhieuNhap] ,[MaNhanVien] ,u.TenUser ,[NgayNhap] ,[TinhTrang] ,[GhiChu] FROM[PhieuNhap] PN left join [User] U on PN.MaNhanVien = u.MaUser where TenUser like N'%" + txtSearch.Text + "%'";
+                string timkiem = "SELECT[MaPhieuNhap] ,[MaNhanVien] ,u.TenUser , convert(varchar, [NgayNhap], 111) ,[TinhTrang] ,[GhiChu] FROM[PhieuNhap] PN left join [User] U on PN.MaNhanVien = u.MaUser where TenUser like N'%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
         }
@@ -309,7 +307,6 @@ namespace PhanMemQLKho
             dateTimeNgayNhap.Value = Convert.ToDateTime(dgvPhieuNhap.CurrentRow.Cells[3].Value.ToString());
             cmbTinhTrang.SelectedItem = dgvPhieuNhap.CurrentRow.Cells[4].Value.ToString().Trim();
             txtGhiChu.Text = dgvPhieuNhap.CurrentRow.Cells[5].Value.ToString().Trim();
-           
            
             SetControl("table-click");
         }

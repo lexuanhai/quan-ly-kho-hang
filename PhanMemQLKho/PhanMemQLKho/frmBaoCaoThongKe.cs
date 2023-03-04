@@ -74,6 +74,7 @@ namespace PhanMemQLKho
             CountData("SanPham", txtSoLuongSP);
             CountData("KhachHang", txtSoLuongKH);
             CountData("[User]", txtSoLuongNV);
+            CountData("[PhuTung]", txtPhuTung);
             LoadData();
         }
 

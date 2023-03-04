@@ -190,7 +190,7 @@ namespace PhanMemQLKho
                 "GioiTinh =N'" + model.GioiTinh.Trim() + "', " +
                 "LoaiQuyen =N'" + model.LoaiQuyen.Trim() + "', " +
                 "TenDangNhap ='" + model.TenDangNhap.Trim() + "', " +
-                "MatKhau ='" + model.MatKhau.Trim() + "', " +
+                //"MatKhau ='" + model.MatKhau.Trim() + "', " +
                 "DiaChi =N'" + model.DiaChi.Trim() + "'" +
                 " Where MaUser='" + model.MaUser + "'";
             var status = common.thucthidulieu(qry);
@@ -201,6 +201,19 @@ namespace PhanMemQLKho
             else
             {
                 MessageBox.Show("Sửa không thành công.");
+            }
+        }
+        public bool ExistUser(string userName)
+        {
+            string query = "select * from [User] where TenDangNhap ='"+userName+"'";
+            var dt = common.docdulieu(query);
+            if (dt != null && dt.Rows != null && dt.Rows.Count > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -256,8 +269,30 @@ namespace PhanMemQLKho
         {
             if (xuly == 1)
             {
-
-                ThemMoi();
+                if (txtTenUser.Text.Length > 0 &&
+                    cmbGioiTinh.Text.Length > 0 &&
+                    dateTimeNgaySinh.Text.Length > 0 &&
+                    txtTenDangNhap.Text.Length > 0 &&
+                    txtMatKhau.Text.Length > 0 &&
+                    cmbLoaiQuyen.Text.Length > 0 &&
+                    txtSoDienThoai.Text.Length > 0 &&
+                    txtEmail.Text.Length > 0 &&
+                    txtDiaChi.Text.Length > 0)
+                {
+                    if (ExistUser(txtTenDangNhap.Text))
+                    {
+                        MessageBox.Show("Tên đăng nhập đã tồn tại vui lòng chọn tên khác.", "Thông Báo");
+                        return;
+                    }
+                    
+                    ThemMoi();
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng nhập đủ thông tin.", "Thông Báo");
+                    return;
+                }
+              
             }
             else if (xuly == 2)
             {

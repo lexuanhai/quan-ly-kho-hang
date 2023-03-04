@@ -79,26 +79,25 @@ namespace PhanMemQLKho
                 btnLuu.Enabled = false;
                 btnXoa.Enabled = false;
                 SetControlValue(false);
+                SetAllNull();
             }
         }
         public void SetControlValue(bool edit)
         {
-            if (edit)
-            {                              
-                txtTenUser.Enabled = true;
-                txtSoDienThoai.Enabled = true;
-                txtEmail.Enabled = true;
-                txtDiaChi.Enabled = true;
-            }
-            else
-            {
-                txtMa.Text = "";
-                txtTenUser.Text = "";
-                txtSoDienThoai.Text = "";
-                txtEmail.Text = "";
-                txtDiaChi.Text = "";
-            }
 
+            txtTenUser.Enabled = edit;
+            txtSoDienThoai.Enabled = edit;
+            txtEmail.Enabled = edit;
+            txtDiaChi.Enabled = edit;            
+
+        }
+        public void SetAllNull()
+        {
+            txtMa.Text = "";
+            txtTenUser.Text = "";
+            txtSoDienThoai.Text = "";
+            txtEmail.Text = "";
+            txtDiaChi.Text = "";
         }
         private void Xoa()
         {
@@ -213,15 +212,25 @@ namespace PhanMemQLKho
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if (xuly == 1)
+            if (txtTenUser.Text.Length > 0 &&
+                txtSoDienThoai.Text.Length > 0 &&
+                txtEmail.Text.Length > 0 &&
+                txtDiaChi.Text.Length > 0)
             {
-
-                ThemMoi();
+                if (xuly == 1)
+                {
+                    ThemMoi();
+                }
+                else if (xuly == 2)
+                {
+                    UpdataDatabase();
+                }
             }
-            else if (xuly == 2)
+            else
             {
-                UpdataDatabase();
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin.");
             }
+              
             xuly = 0;
             LoadData();
             SetControl("load");

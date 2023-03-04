@@ -32,5 +32,12 @@ namespace PhanMemQLKho
         {
 
         }
+
+        private void thayĐổiMậtKhẩuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //common.OpenChildForm(new frmDoiMatKhau(), new frmQuanTriHeThong_Quyen(), panelShowFormChild);
+            frmDoiMatKhau DoiMKTT = new frmDoiMatKhau();
+            DoiMKTT.Show();
+        }
     }
 }

@@ -35,6 +35,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGRV = new System.Windows.Forms.DataGridView();
+            this.tdMa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdTenDangNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdLoaiQuyen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdGioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdNgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdSoDienThoai = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdDiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtTenUser = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -80,15 +89,6 @@
             this.errEmail = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnLuu = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
-            this.tdMa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdTenDangNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdLoaiQuyen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdGioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdNgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdSoDienThoai = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdDiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGRV)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -169,6 +169,61 @@
             this.dataGRV.TabIndex = 0;
             this.dataGRV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGRV_CellClick);
             // 
+            // tdMa
+            // 
+            this.tdMa.FillWeight = 27.60152F;
+            this.tdMa.HeaderText = "Mã User";
+            this.tdMa.Name = "tdMa";
+            // 
+            // tdTen
+            // 
+            this.tdTen.FillWeight = 27.60152F;
+            this.tdTen.HeaderText = "Tên User";
+            this.tdTen.Name = "tdTen";
+            // 
+            // tdTenDangNhap
+            // 
+            this.tdTenDangNhap.FillWeight = 279.1878F;
+            this.tdTenDangNhap.HeaderText = "Tên đăng nhập";
+            this.tdTenDangNhap.Name = "tdTenDangNhap";
+            this.tdTenDangNhap.Width = 110;
+            // 
+            // tdLoaiQuyen
+            // 
+            this.tdLoaiQuyen.FillWeight = 27.60152F;
+            this.tdLoaiQuyen.HeaderText = "Loại Quyền";
+            this.tdLoaiQuyen.Name = "tdLoaiQuyen";
+            // 
+            // tdGioiTinh
+            // 
+            this.tdGioiTinh.FillWeight = 27.60152F;
+            this.tdGioiTinh.HeaderText = "Giới tính";
+            this.tdGioiTinh.Name = "tdGioiTinh";
+            // 
+            // tdNgaySinh
+            // 
+            this.tdNgaySinh.FillWeight = 27.60152F;
+            this.tdNgaySinh.HeaderText = "Ngày sinh";
+            this.tdNgaySinh.Name = "tdNgaySinh";
+            // 
+            // tdEmail
+            // 
+            this.tdEmail.FillWeight = 27.60152F;
+            this.tdEmail.HeaderText = "Email";
+            this.tdEmail.Name = "tdEmail";
+            // 
+            // tdSoDienThoai
+            // 
+            this.tdSoDienThoai.FillWeight = 27.60152F;
+            this.tdSoDienThoai.HeaderText = "Số điện thoại";
+            this.tdSoDienThoai.Name = "tdSoDienThoai";
+            // 
+            // tdDiaChi
+            // 
+            this.tdDiaChi.FillWeight = 27.60152F;
+            this.tdDiaChi.HeaderText = "Địa chỉ";
+            this.tdDiaChi.Name = "tdDiaChi";
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtTenUser);
@@ -240,6 +295,7 @@
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.Size = new System.Drawing.Size(140, 20);
             this.txtMatKhau.TabIndex = 18;
+            this.txtMatKhau.UseSystemPasswordChar = true;
             // 
             // cmbLoaiQuyen
             // 
@@ -572,61 +628,6 @@
             this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
-            // 
-            // tdMa
-            // 
-            this.tdMa.FillWeight = 27.60152F;
-            this.tdMa.HeaderText = "Mã User";
-            this.tdMa.Name = "tdMa";
-            // 
-            // tdTen
-            // 
-            this.tdTen.FillWeight = 27.60152F;
-            this.tdTen.HeaderText = "Tên User";
-            this.tdTen.Name = "tdTen";
-            // 
-            // tdTenDangNhap
-            // 
-            this.tdTenDangNhap.FillWeight = 279.1878F;
-            this.tdTenDangNhap.HeaderText = "Tên đăng nhập";
-            this.tdTenDangNhap.Name = "tdTenDangNhap";
-            this.tdTenDangNhap.Width = 110;
-            // 
-            // tdLoaiQuyen
-            // 
-            this.tdLoaiQuyen.FillWeight = 27.60152F;
-            this.tdLoaiQuyen.HeaderText = "Loại Quyền";
-            this.tdLoaiQuyen.Name = "tdLoaiQuyen";
-            // 
-            // tdGioiTinh
-            // 
-            this.tdGioiTinh.FillWeight = 27.60152F;
-            this.tdGioiTinh.HeaderText = "Giới tính";
-            this.tdGioiTinh.Name = "tdGioiTinh";
-            // 
-            // tdNgaySinh
-            // 
-            this.tdNgaySinh.FillWeight = 27.60152F;
-            this.tdNgaySinh.HeaderText = "Ngày sinh";
-            this.tdNgaySinh.Name = "tdNgaySinh";
-            // 
-            // tdEmail
-            // 
-            this.tdEmail.FillWeight = 27.60152F;
-            this.tdEmail.HeaderText = "Email";
-            this.tdEmail.Name = "tdEmail";
-            // 
-            // tdSoDienThoai
-            // 
-            this.tdSoDienThoai.FillWeight = 27.60152F;
-            this.tdSoDienThoai.HeaderText = "Số điện thoại";
-            this.tdSoDienThoai.Name = "tdSoDienThoai";
-            // 
-            // tdDiaChi
-            // 
-            this.tdDiaChi.FillWeight = 27.60152F;
-            this.tdDiaChi.HeaderText = "Địa chỉ";
-            this.tdDiaChi.Name = "tdDiaChi";
             // 
             // frmQuanTriHeThong_NguoiDung
             // 

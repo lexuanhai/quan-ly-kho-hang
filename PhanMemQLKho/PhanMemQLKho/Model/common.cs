@@ -128,6 +128,10 @@ namespace PhanMemQLKho.Model
                         }
                     }
                 }
+                else
+                {
+                    datagrv.Rows.Clear();
+                }
             }
         }
         public static List<LoaiPhuTung> GetLoaiPhuTung()
@@ -160,5 +164,12 @@ namespace PhanMemQLKho.Model
         public string MaNCC { get; set; }
         public string MaNSX { get; set; }
         public string MaThuongHieu { get; set; }
+    }
+    public static class LoginInfo
+    {
+        public static string UserID;
+        public static string TenDangNhap;
+        public static string TenUser;
+        public static string LoaiQuyen;
     }
 }
