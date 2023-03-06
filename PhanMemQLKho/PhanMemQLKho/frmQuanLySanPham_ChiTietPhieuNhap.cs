@@ -48,7 +48,7 @@ namespace PhanMemQLKho
         public void CmbPhieuNhap()
         {
             DataTable dt;
-            string query = "SELECT * FROM [PhieuNhap] ";
+            string query = "SELECT * FROM [PhieuNhap] where TrangThai =N'Đang Nhập'";
             dt = common.docdulieu(query);
             if (dt != null && dt.Rows.Count > 0)
             {

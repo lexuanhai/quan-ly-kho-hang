@@ -12,6 +12,7 @@ namespace PhanMemQLKho.Model
         public string MaNhanVien { get; set; }
         public string MaKH { get; set; }
         public string TinhTrang { get; set; }
+        public string TrangThai { get; set; }
         public string GhiChu { get; set; }
         public DateTime NgayXuat { get; set; }
         

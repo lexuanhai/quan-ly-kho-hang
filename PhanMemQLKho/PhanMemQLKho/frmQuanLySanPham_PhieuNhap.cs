@@ -24,7 +24,7 @@ namespace PhanMemQLKho
             string query = "";
             if (string.IsNullOrEmpty(str))
             {
-                query = "SELECT [MaPhieuNhap] ,[MaNhanVien] ,u.TenUser , convert(varchar, [NgayNhap], 111)  ,[TinhTrang] ,[GhiChu] FROM [PhieuNhap] PN" +
+                query = "SELECT [MaPhieuNhap] ,[MaNhanVien] ,u.TenUser , convert(varchar, [NgayNhap], 111)  ,[TinhTrang] ,[GhiChu],TrangThai FROM [PhieuNhap] PN" +
                     " left join [User] U on PN.MaNhanVien = u.MaUser";
             }
             else
@@ -51,6 +51,7 @@ namespace PhanMemQLKho
             model.MaNhanVien = cmbNhanVien.SelectedValue.ToString();
             model.GhiChu = txtGhiChu.Text;
             model.TinhTrang = cmbTinhTrang.SelectedItem.ToString();
+            model.TrangThai = cmbTrangThai.SelectedItem.ToString();
             model.NgayNhap = dateTimeNgayNhap.Value;
             return model;
         }
@@ -60,6 +61,7 @@ namespace PhanMemQLKho
             cmbNhanVien.SelectedValue = model.MaNhanVien;
             txtGhiChu.Text = model.GhiChu;
             cmbTinhTrang.SelectedItem = model.TinhTrang;
+            cmbTrangThai.SelectedItem = model.TrangThai;
             dateTimeNgayNhap.Value = model.NgayNhap;
         }
         public void SetControl(string edit)
@@ -103,6 +105,7 @@ namespace PhanMemQLKho
             cmbNhanVien.Enabled = edit;
             dateTimeNgayNhap.Enabled = edit;
             cmbTinhTrang.Enabled = edit;
+            cmbTrangThai.Enabled = edit;
         }
         public void SetAllNull()
         {
@@ -169,7 +172,8 @@ namespace PhanMemQLKho
                 "MaNhanVien ='" + model.MaNhanVien.Trim() + "', " +
                 "NgayNhap ='" + model.NgayNhap.ToString("yyyy-MM-dd") + "', " +
                 "GhiChu =N'" + model.GhiChu + "', " +
-                "TinhTrang =N'" + model.TinhTrang + "' " +
+                "TinhTrang =N'" + model.TinhTrang + "', " +
+                "TrangThai =N'" + model.TrangThai + "' " +
                 " Where MaPhieuNhap='" + model.MaPhieuNhap + "'";
             var status = common.thucthidulieu(qry);
             if (status)
@@ -196,12 +200,14 @@ namespace PhanMemQLKho
                     "MaNhanVien, " +
                     "NgayNhap, " +
                     "GhiChu, " +
-                    "TinhTrang " +
+                    "TinhTrang, " +
+                     "TrangThai " +
                     " ) values('" + ma.Trim() + "'," +
                     "'" + model.MaNhanVien.Trim()  +"'"+
                     ",'" + model.NgayNhap.ToString("yyyy-MM-dd") + "'" +
                     ",N'" + model.GhiChu.Trim() + "'" +
-                    ",N'" + model.TinhTrang.Trim() + "' " +                    
+                    ",N'" + model.TinhTrang.Trim() + "' " +
+                    ",N'" + model.TrangThai.Trim() + "' " +
                     ")";
                     var status = common.thucthidulieu(qry);
                     if (status)
@@ -259,33 +265,19 @@ namespace PhanMemQLKho
             if (radioMa.Checked)
             {
                 
-                string timkiem = "SELECT[MaPhieuNhap] ,[MaNhanVien] ,u.TenUser , convert(varchar, [NgayNhap], 111) ,[TinhTrang] ,[GhiChu] FROM[PhieuNhap] PN left join [User] U on PN.MaNhanVien = u.MaUser where MaPhieuNhap like '%" + txtSearch.Text + "%'";
+                string timkiem = "SELECT[MaPhieuNhap] ,[MaNhanVien] ,u.TenUser , convert(varchar, [NgayNhap], 111) ,[TinhTrang] ,[GhiChu],TrangThai FROM[PhieuNhap] PN left join [User] U on PN.MaNhanVien = u.MaUser where MaPhieuNhap like '%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
             else if (radioTen.Checked)
             {
-                string timkiem = "SELECT[MaPhieuNhap] ,[MaNhanVien] ,u.TenUser , convert(varchar, [NgayNhap], 111) ,[TinhTrang] ,[GhiChu] FROM[PhieuNhap] PN left join [User] U on PN.MaNhanVien = u.MaUser where TenUser like N'%" + txtSearch.Text + "%'";
+                string timkiem = "SELECT[MaPhieuNhap] ,[MaNhanVien] ,u.TenUser , convert(varchar, [NgayNhap], 111) ,[TinhTrang] ,[GhiChu],TrangThai FROM[PhieuNhap] PN left join [User] U on PN.MaNhanVien = u.MaUser where TenUser like N'%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
         }
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             search();
-        }    
-
-        //private void dataGRV_CellClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    txtMa.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();
-        //    txtTenUser.Text = dataGRV.CurrentRow.Cells[1].Value.ToString();
-        //    txtTenDangNhap.Text = dataGRV.CurrentRow.Cells[2].Value.ToString();
-        //    cmbLoaiQuyen.SelectedItem = dataGRV.CurrentRow.Cells[3].Value.ToString().Trim();
-        //    cmbGioiTinh.SelectedItem = dataGRV.CurrentRow.Cells[4].Value.ToString().Trim();
-        //    dateTimeNgaySinh.Value = Convert.ToDateTime(dataGRV.CurrentRow.Cells[5].Value.ToString());
-        //    txtEmail.Text = dataGRV.CurrentRow.Cells[6].Value.ToString();
-        //    txtSoDienThoai.Text = dataGRV.CurrentRow.Cells[7].Value.ToString();
-        //    txtDiaChi.Text = dataGRV.CurrentRow.Cells[8].Value.ToString();
-        //    SetControl("table-click");
-        //}
+        }           
 
         private void btnLoadDS_Click(object sender, EventArgs e)
         {
@@ -307,7 +299,7 @@ namespace PhanMemQLKho
             dateTimeNgayNhap.Value = Convert.ToDateTime(dgvPhieuNhap.CurrentRow.Cells[3].Value.ToString());
             cmbTinhTrang.SelectedItem = dgvPhieuNhap.CurrentRow.Cells[4].Value.ToString().Trim();
             txtGhiChu.Text = dgvPhieuNhap.CurrentRow.Cells[5].Value.ToString().Trim();
-           
+            cmbTrangThai.SelectedItem = dgvPhieuNhap.CurrentRow.Cells[6].Value.ToString().Trim();
             SetControl("table-click");
         }
     }
