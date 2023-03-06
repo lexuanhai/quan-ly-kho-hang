@@ -22,11 +22,13 @@ namespace PhanMemQLKho.Model
         public string NhienLieu { get; set; }
         public string XuatXu { get; set; }
         public int SoLuong { get; set; }
+        public int SoLuongBan { get; set; }
         public decimal GiaBan { get; set; }
         public decimal GiaNhap { get; set; }
         public string BienSo { get; set; }
         public int PhanTramGiam { get; set; }
         public string TinhTrang { get; set; }
+        public DateTime NgayNhap { get; set; }
 
     }
 }

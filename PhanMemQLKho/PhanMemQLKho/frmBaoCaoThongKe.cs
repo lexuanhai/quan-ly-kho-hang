@@ -81,41 +81,41 @@ namespace PhanMemQLKho
         public void search()
         {
 
-            if (radioMa.Checked)
-            {
-                string timkiem = "SELECT * FROM [SanPham] SP " +
-                    " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
-                    " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
-                    " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
-                    " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where SP.MaSanPham like N'%" + txtSearch.Text + "%'";
-                LoadData(timkiem);
-            }
-            else if (radioTen.Checked)
-            {
-                string timkiem = "SELECT * FROM [SanPham] SP " +
-                    " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
-                    " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
-                    " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
-                    " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where SP.TenSanPham like N'%" + txtSearch.Text + "%'";
-                LoadData(timkiem);
-            }else if (raDanhMuc.Checked)
-            {
-                string timkiem = "SELECT * FROM [SanPham] SP " +
-                    " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
-                    " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
-                    " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
-                    " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where DMSP.TenDanhMuc like N'%" + txtSearch.Text + "%'";
-                LoadData(timkiem);
-            }
-            else if (raThuongHieu.Checked)
-            {
-                string timkiem = "SELECT * FROM [SanPham] SP " +
-                   " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
-                   " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
-                   " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
-                   " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where TH.TenThuongHieu like N'%" + txtSearch.Text + "%'";
-                LoadData(timkiem);
-            }
+            //if (radioMa.Checked)
+            //{
+            //    string timkiem = "SELECT * FROM [SanPham] SP " +
+            //        " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
+            //        " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
+            //        " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
+            //        " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where SP.MaSanPham like N'%" + txtSearch.Text + "%'";
+            //    LoadData(timkiem);
+            //}
+            //else if (radioTen.Checked)
+            //{
+            //    string timkiem = "SELECT * FROM [SanPham] SP " +
+            //        " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
+            //        " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
+            //        " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
+            //        " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where SP.TenSanPham like N'%" + txtSearch.Text + "%'";
+            //    LoadData(timkiem);
+            //}else if (raDanhMuc.Checked)
+            //{
+            //    string timkiem = "SELECT * FROM [SanPham] SP " +
+            //        " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
+            //        " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
+            //        " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
+            //        " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where DMSP.TenDanhMuc like N'%" + txtSearch.Text + "%'";
+            //    LoadData(timkiem);
+            //}
+            //else if (raThuongHieu.Checked)
+            //{
+            //    string timkiem = "SELECT * FROM [SanPham] SP " +
+            //       " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
+            //       " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
+            //       " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
+            //       " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where TH.TenThuongHieu like N'%" + txtSearch.Text + "%'";
+            //    LoadData(timkiem);
+            //}
             //else
             //{
             //    LoadData();

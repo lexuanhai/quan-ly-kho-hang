@@ -278,7 +278,7 @@ namespace PhanMemQLKho
                         else
                         {
                             string qry = "Update [SanPham] set " +               
-                            "SoLuong =" + soluongton + " " +                
+                            "SoLuongBan =" + soluongmua + " " +                
                              " Where MaSanPham='" + model.MaSanPham.Trim() + "'";
                               common.thucthidulieu(qry);
                             txtSoLuongCon.Text = soluongton.ToString();
