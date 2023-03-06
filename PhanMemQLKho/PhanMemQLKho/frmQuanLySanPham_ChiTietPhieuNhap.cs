@@ -273,7 +273,7 @@ namespace PhanMemQLKho
             var status = common.thucthidulieu(qry);
             if (status)
             {
-                UpdateSanPhamPhuTung(model);
+               // UpdateSanPhamPhuTung(model);
                 MessageBox.Show("Sửa thành công.");
             }
             else
@@ -341,16 +341,14 @@ namespace PhanMemQLKho
                     "'" + model.MaPhieuNhap.Trim() + "" +
                     "','" + (!string.IsNullOrEmpty(model.MaSanPham) ? model.MaSanPham.Trim() : "") + "'" +
                     "," + model.SoLuong + "" +
-                    "," + model.DonGia + "" +
-                    //",'" + (!string.IsNullOrEmpty(model.MaPhuTung) ? model.MaPhuTung.Trim() : "") + "'" +
-
+                    "," + model.DonGia + "" +                    
                     " )";
                         status = common.thucthidulieu(qry);
                     }
 
                     if (status)
                     {
-                        UpdateSanPhamPhuTung(model);
+                        //UpdateSanPhamPhuTung(model);
                         MessageBox.Show("Thêm mới thành công.");
                     }
                     else

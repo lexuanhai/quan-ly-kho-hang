@@ -60,6 +60,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGRV = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtGiaBan = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtGiaNhap = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -73,8 +75,6 @@
             this.errGT = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnHuy = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtGiaBan = new System.Windows.Forms.TextBox();
             this.tdMaPhuTung = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tdTenPhuTung = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tdLoaiPhuTung = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -380,10 +380,26 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin ";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(539, 99);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(45, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Giá Bán";
+            // 
+            // txtGiaBan
+            // 
+            this.txtGiaBan.Location = new System.Drawing.Point(603, 94);
+            this.txtGiaBan.Name = "txtGiaBan";
+            this.txtGiaBan.Size = new System.Drawing.Size(134, 20);
+            this.txtGiaBan.TabIndex = 14;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(540, 67);
+            this.label5.Location = new System.Drawing.Point(537, 67);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 13);
             this.label5.TabIndex = 13;
@@ -491,22 +507,6 @@
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(540, 99);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(45, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Giá Bán";
-            // 
-            // txtGiaBan
-            // 
-            this.txtGiaBan.Location = new System.Drawing.Point(603, 94);
-            this.txtGiaBan.Name = "txtGiaBan";
-            this.txtGiaBan.Size = new System.Drawing.Size(134, 20);
-            this.txtGiaBan.TabIndex = 14;
-            // 
             // tdMaPhuTung
             // 
             this.tdMaPhuTung.HeaderText = "Mã Phụ Tùng";
@@ -522,13 +522,13 @@
             // 
             this.tdLoaiPhuTung.HeaderText = "Loại Phụ Tùng";
             this.tdLoaiPhuTung.Name = "tdLoaiPhuTung";
-            this.tdLoaiPhuTung.Width = 150;
+            this.tdLoaiPhuTung.Width = 110;
             // 
             // tdThuongHieu
             // 
             this.tdThuongHieu.HeaderText = "Thương Hiệu";
             this.tdThuongHieu.Name = "tdThuongHieu";
-            this.tdThuongHieu.Width = 150;
+            this.tdThuongHieu.Width = 110;
             // 
             // tdSoLuong
             // 
@@ -539,6 +539,7 @@
             // 
             this.Column1.HeaderText = "Giá Nhập";
             this.Column1.Name = "Column1";
+            this.Column1.Width = 90;
             // 
             // tdGia
             // 
@@ -549,7 +550,6 @@
             // 
             this.tdTinhTrang.HeaderText = "Tình Trạng";
             this.tdTinhTrang.Name = "tdTinhTrang";
-            this.tdTinhTrang.Width = 120;
             // 
             // frmQuanLySanPham_PhuTung
             // 

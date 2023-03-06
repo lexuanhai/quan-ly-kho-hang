@@ -526,9 +526,9 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.dgvPhieuNhap);
-            this.groupBox6.Location = new System.Drawing.Point(88, 385);
+            this.groupBox6.Location = new System.Drawing.Point(24, 385);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(828, 236);
+            this.groupBox6.Size = new System.Drawing.Size(939, 236);
             this.groupBox6.TabIndex = 31;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Danh sách ";
@@ -551,7 +551,7 @@
             this.dgvPhieuNhap.Name = "dgvPhieuNhap";
             this.dgvPhieuNhap.RowHeadersVisible = false;
             this.dgvPhieuNhap.RowHeadersWidth = 51;
-            this.dgvPhieuNhap.Size = new System.Drawing.Size(822, 217);
+            this.dgvPhieuNhap.Size = new System.Drawing.Size(933, 217);
             this.dgvPhieuNhap.TabIndex = 0;
             this.dgvPhieuNhap.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPhieuNhap_CellClick);
             // 
@@ -567,7 +567,7 @@
             this.Column3.HeaderText = "Mã Khách Hàng";
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
-            this.Column3.Width = 140;
+            this.Column3.Width = 120;
             // 
             // Column4
             // 
@@ -598,14 +598,12 @@
             this.dataGridViewTextBoxColumn4.HeaderText = "Ngày Xuất";
             this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.Width = 140;
             // 
             // Column2
             // 
             this.Column2.HeaderText = "Tình Trạng";
             this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
-            this.Column2.Width = 140;
             // 
             // tdGioiTinh
             // 
@@ -613,7 +611,6 @@
             this.tdGioiTinh.HeaderText = "Ghi Chú";
             this.tdGioiTinh.MinimumWidth = 6;
             this.tdGioiTinh.Name = "tdGioiTinh";
-            this.tdGioiTinh.Width = 140;
             // 
             // frmQuanLySanPham_PhieuXuat
             // 

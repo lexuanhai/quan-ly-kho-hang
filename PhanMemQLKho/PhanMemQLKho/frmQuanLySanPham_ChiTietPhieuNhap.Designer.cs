@@ -36,6 +36,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGRV = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmbMaPhuTung = new System.Windows.Forms.ComboBox();
+            this.lbPhuTung = new System.Windows.Forms.Label();
             this.txtTinhTrang = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbMaPhieuNhap = new System.Windows.Forms.ComboBox();
@@ -77,8 +79,6 @@
             this.btnInHoaDon = new System.Windows.Forms.Button();
             this.printDocumentNhap = new System.Drawing.Printing.PrintDocument();
             this.printPreviewNhap = new System.Windows.Forms.PrintPreviewDialog();
-            this.lbPhuTung = new System.Windows.Forms.Label();
-            this.cmbMaPhuTung = new System.Windows.Forms.ComboBox();
             this.tdMa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tdTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -140,9 +140,9 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGRV);
-            this.groupBox2.Location = new System.Drawing.Point(78, 382);
+            this.groupBox2.Location = new System.Drawing.Point(12, 382);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(842, 186);
+            this.groupBox2.Size = new System.Drawing.Size(968, 186);
             this.groupBox2.TabIndex = 28;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Danh sách ";
@@ -167,7 +167,7 @@
             this.dataGRV.Name = "dataGRV";
             this.dataGRV.RowHeadersVisible = false;
             this.dataGRV.RowHeadersWidth = 51;
-            this.dataGRV.Size = new System.Drawing.Size(836, 167);
+            this.dataGRV.Size = new System.Drawing.Size(962, 167);
             this.dataGRV.TabIndex = 0;
             this.dataGRV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGRV_CellClick);
             // 
@@ -197,6 +197,24 @@
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin ";
+            // 
+            // cmbMaPhuTung
+            // 
+            this.cmbMaPhuTung.FormattingEnabled = true;
+            this.cmbMaPhuTung.Location = new System.Drawing.Point(390, 101);
+            this.cmbMaPhuTung.Name = "cmbMaPhuTung";
+            this.cmbMaPhuTung.Size = new System.Drawing.Size(140, 21);
+            this.cmbMaPhuTung.TabIndex = 35;
+            // 
+            // lbPhuTung
+            // 
+            this.lbPhuTung.AutoSize = true;
+            this.lbPhuTung.Location = new System.Drawing.Point(297, 105);
+            this.lbPhuTung.Name = "lbPhuTung";
+            this.lbPhuTung.Size = new System.Drawing.Size(54, 13);
+            this.lbPhuTung.TabIndex = 34;
+            this.lbPhuTung.Text = "Phụ Tùng";
+            this.lbPhuTung.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtTinhTrang
             // 
@@ -545,31 +563,13 @@
             this.printPreviewNhap.Name = "printPreviewNhap";
             this.printPreviewNhap.Visible = false;
             // 
-            // lbPhuTung
-            // 
-            this.lbPhuTung.AutoSize = true;
-            this.lbPhuTung.Location = new System.Drawing.Point(297, 105);
-            this.lbPhuTung.Name = "lbPhuTung";
-            this.lbPhuTung.Size = new System.Drawing.Size(54, 13);
-            this.lbPhuTung.TabIndex = 34;
-            this.lbPhuTung.Text = "Phụ Tùng";
-            this.lbPhuTung.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // cmbMaPhuTung
-            // 
-            this.cmbMaPhuTung.FormattingEnabled = true;
-            this.cmbMaPhuTung.Location = new System.Drawing.Point(390, 101);
-            this.cmbMaPhuTung.Name = "cmbMaPhuTung";
-            this.cmbMaPhuTung.Size = new System.Drawing.Size(140, 21);
-            this.cmbMaPhuTung.TabIndex = 35;
-            // 
             // tdMa
             // 
             this.tdMa.FillWeight = 27.60152F;
-            this.tdMa.HeaderText = "Mã Chi Tiết Phiếu Nhập";
+            this.tdMa.HeaderText = "Mã CTPN";
             this.tdMa.MinimumWidth = 6;
             this.tdMa.Name = "tdMa";
-            this.tdMa.Width = 180;
+            this.tdMa.Width = 80;
             // 
             // tdTen
             // 
@@ -577,14 +577,14 @@
             this.tdTen.HeaderText = "Phiếu Nhập";
             this.tdTen.MinimumWidth = 6;
             this.tdTen.Name = "tdTen";
-            this.tdTen.Width = 125;
+            this.tdTen.Width = 90;
             // 
             // Column1
             // 
             this.Column1.HeaderText = "Ngày Nhập";
             this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
-            this.Column1.Width = 125;
+            this.Column1.Width = 90;
             // 
             // tdTenDangNhap
             // 
@@ -592,7 +592,6 @@
             this.tdTenDangNhap.HeaderText = "Mã Sản Phẩm";
             this.tdTenDangNhap.MinimumWidth = 6;
             this.tdTenDangNhap.Name = "tdTenDangNhap";
-            this.tdTenDangNhap.Width = 125;
             // 
             // tdLoaiQuyen
             // 
@@ -600,7 +599,7 @@
             this.tdLoaiQuyen.HeaderText = "Tên Sản Phẩm";
             this.tdLoaiQuyen.MinimumWidth = 6;
             this.tdLoaiQuyen.Name = "tdLoaiQuyen";
-            this.tdLoaiQuyen.Width = 170;
+            this.tdLoaiQuyen.Width = 150;
             // 
             // Column2
             // 
@@ -618,7 +617,7 @@
             this.tdGioiTinh.HeaderText = "Đơn Giá";
             this.tdGioiTinh.MinimumWidth = 6;
             this.tdGioiTinh.Name = "tdGioiTinh";
-            this.tdGioiTinh.Width = 125;
+            this.tdGioiTinh.Width = 80;
             // 
             // tdNgaySinh
             // 
@@ -626,6 +625,7 @@
             this.tdNgaySinh.HeaderText = "Số Lượng";
             this.tdNgaySinh.MinimumWidth = 6;
             this.tdNgaySinh.Name = "tdNgaySinh";
+            this.tdNgaySinh.Width = 80;
             // 
             // tdEmail
             // 
@@ -633,7 +633,6 @@
             this.tdEmail.HeaderText = "Giá Tiền";
             this.tdEmail.MinimumWidth = 6;
             this.tdEmail.Name = "tdEmail";
-            this.tdEmail.Width = 130;
             // 
             // frmQuanLySanPham_ChiTietPhieuNhap
             // 

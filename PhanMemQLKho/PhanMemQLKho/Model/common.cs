@@ -13,7 +13,7 @@ namespace PhanMemQLKho.Model
 {
     public static class common
     {
-        static string chuoiKetNoi = "Data Source=G07VNXDFVLTTI15;Initial Catalog=WarehouseDatabase;Integrated Security=True"; //ConfigurationManager.ConnectionStrings["strConn"].ConnectionString;
+        static string chuoiKetNoi = "Data Source=DESKTOP-DDVHBI0;Initial Catalog=WarehouseDatabase;Integrated Security=True"; //ConfigurationManager.ConnectionStrings["strConn"].ConnectionString;
         static SqlConnection con = new SqlConnection(chuoiKetNoi);
         public static void moketnoi()
         {

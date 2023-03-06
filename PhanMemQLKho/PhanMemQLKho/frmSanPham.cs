@@ -60,11 +60,17 @@ namespace PhanMemQLKho
                     dataGRV.Rows[n].Cells[10].Value = dr["KieuDang"].ToString();
                     dataGRV.Rows[n].Cells[11].Value = dr["NhienLieu"].ToString();
                     dataGRV.Rows[n].Cells[12].Value = dr["SoCho"].ToString();
-                    dataGRV.Rows[n].Cells[13].Value = dr["GiaNhap"].ToString();
-                    dataGRV.Rows[n].Cells[14].Value = dr["GiaBan"].ToString();
-                    dataGRV.Rows[n].Cells[15].Value = dr["SoLuong"].ToString();
-                    dataGRV.Rows[n].Cells[16].Value = dr["PhanTramGiam"].ToString();
-                    dataGRV.Rows[n].Cells[17].Value = dr["TinhTrang"].ToString();
+
+                    if (dr["NgayNhap"] != null && !string.IsNullOrEmpty(dr["NgayNhap"].ToString()))
+                    {
+                        dataGRV.Rows[n].Cells[13].Value = Convert.ToDateTime(dr["NgayNhap"].ToString()).ToString("dd/MM/yyyy");
+                    }                    
+
+                    dataGRV.Rows[n].Cells[14].Value = dr["GiaNhap"].ToString();
+                    dataGRV.Rows[n].Cells[15].Value = dr["GiaBan"].ToString();
+                    dataGRV.Rows[n].Cells[16].Value = dr["SoLuong"].ToString();
+                    dataGRV.Rows[n].Cells[17].Value = dr["PhanTramGiam"].ToString();
+                    dataGRV.Rows[n].Cells[18].Value = dr["TinhTrang"].ToString();
                 }
             }
         }
@@ -549,12 +555,20 @@ namespace PhanMemQLKho
             txtMauSon.Text = dataGRV.CurrentRow.Cells[9].Value.ToString();
             txtKieuDang.Text = dataGRV.CurrentRow.Cells[10].Value.ToString();
             txtNhienLieu.Text = dataGRV.CurrentRow.Cells[11].Value.ToString();
+
             txtSoCho.Text = dataGRV.CurrentRow.Cells[12].Value.ToString();
-            txtGiaNhap.Text = dataGRV.CurrentRow.Cells[13].Value.ToString();
-            txtGiaBan.Text = dataGRV.CurrentRow.Cells[14].Value.ToString();
-            txtSoLuong.Text = dataGRV.CurrentRow.Cells[15].Value.ToString();
-            txtGiaGiam.Text = dataGRV.CurrentRow.Cells[16].Value.ToString();
-            cmbTinhTrang.SelectedItem = dataGRV.CurrentRow.Cells[17].Value.ToString();
+
+            if (dataGRV.CurrentRow.Cells[13].Value != null &&
+                !string.IsNullOrEmpty(dataGRV.CurrentRow.Cells[13].Value.ToString()))
+            {
+                txtDateNgayNhap.Text = dataGRV.CurrentRow.Cells[13].Value.ToString();
+            }            
+
+            txtGiaNhap.Text = dataGRV.CurrentRow.Cells[14].Value.ToString();
+            txtGiaBan.Text = dataGRV.CurrentRow.Cells[15].Value.ToString();
+            txtSoLuong.Text = dataGRV.CurrentRow.Cells[16].Value.ToString();
+            txtGiaGiam.Text = dataGRV.CurrentRow.Cells[17].Value.ToString();
+            cmbTinhTrang.SelectedItem = dataGRV.CurrentRow.Cells[18].Value.ToString();
             SetControl("table-click");
         }
 
