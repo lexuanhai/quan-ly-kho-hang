@@ -29,7 +29,7 @@ namespace PhanMemQLKho
                 query = "select CTPN.MaChiTietPhieuNhap, PN.MaPhieuNhap,convert(varchar, PN.NgayNhap, 111) ,SP.MaSanPham, SP.TenSanPham,PT.MaPhuTung,PT.TenPhuTung ,CTPN.GiaNhap, CTPN.SoLuong,(CTPN.SoLuong*CTPN.GiaNhap) from [ChiTietPhieuNhap] CTPN " +
                     " left join [PhieuNhap] PN on CTPN.MaPhieuNhap = PN.MaPhieuNhap" +
                     " left join [SanPham] SP on SP.MaSanPham = CTPN.MaSanPham " +
-                    " left join [PhuTung] PT on PT.MaPhuTung = CTPN.MaPhuTung ";
+                    " left join [PhuTung] PT on PT.MaPhuTung = CTPN.MaPhuTung order by PN.MaPhieuNhap desc";
             }
             
             common.LoadData(query, dataGRV);
@@ -48,7 +48,8 @@ namespace PhanMemQLKho
         public void CmbPhieuNhap()
         {
             DataTable dt;
-            string query = "SELECT * FROM [PhieuNhap] where TrangThai =N'Đang Nhập'";
+            string query = "SELECT * FROM [PhieuNhap] order by PhieuNhap.MaPhieuNhap desc";
+            //string query = "SELECT * FROM [PhieuNhap] where TrangThai =N'Đang Nhập'";
             dt = common.docdulieu(query);
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -60,6 +61,17 @@ namespace PhanMemQLKho
             cmbMaPhieuNhap.DisplayMember = "MaPhieuNhap";
             cmbMaPhieuNhap.ValueMember = "MaPhieuNhap";
             cmbMaPhieuNhap.DataSource = dt;
+        }
+        public bool SanPhamExist(string maPN,string maSP)
+        {
+            string query = "select * from PhieuNhap PN " +
+                "inner join ChiTietPhieuNhap CTPN on CTPN.MaPhieuNhap = PN.MaPhieuNhap " +
+                "inner join SanPham SP on CTPN.MaSanPham = SP.MaSanPham " +
+                "where PN.MaPhieuNhap = '" + maPN.Trim() + "' and (SP.MaSanPham = '" + maSP.Trim() + "' OR SP.MaPhuTung ='"+ maSP.Trim() + "')";
+           var dt = common.docdulieu(query);
+            if (dt != null && dt.Rows.Count > 0)            
+                return true;            
+            return false;
         }
         public PhieuNhap GetPhieuNhapId(string ma)
         {
@@ -307,8 +319,15 @@ namespace PhanMemQLKho
             try
             {
                 var model = GetValue();
+                bool isExist = SanPhamExist(model.MaPhieuNhap,!string.IsNullOrEmpty(model.MaSanPham)? model.MaSanPham: model.MaPhuTung);
+                if (isExist)
+                {
+                    MessageBox.Show("Sản phẩm đã tồn tại trong.");
+                    return;
+                }
+
                 string ma = common.tangMaTuDong("ChiTietPhieuNhap", "CTPN");
-                if (model != null && !string.IsNullOrEmpty(ma))
+                if (model != null)
                 {
                     bool status = false;
                     if (txtTinhTrang.Text == "Phụ Tùng")
@@ -320,7 +339,7 @@ namespace PhanMemQLKho
                     "GiaNhap, " +
                     "MaPhuTung " +
                     " ) values('" + ma + "'," +
-                    "'" + model.MaPhieuNhap.Trim() + "" +
+                    "'" + model.MaPhieuNhap.Trim() + "'" +
                    
                     "," + model.SoLuong + "" +
                     "," + model.DonGia + "" +
@@ -371,9 +390,9 @@ namespace PhanMemQLKho
                 txtSoLuong.Text.Length > 0 
                 )
             {
+                
                 if (xuly == 1)
                 {
-
                     ThemMoi();
                 }
                 else if (xuly == 2)
@@ -651,6 +670,29 @@ namespace PhanMemQLKho
                     y += 10;
                     e.Graphics.DrawString("Tổng tiền ", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(20, y));
                     e.Graphics.DrawString(totalPrice.ToString("#,###"), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(550, y));
+                    y += 80;
+                    e.Graphics.DrawString("Ngày.... tháng....năm.... ", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(500, y));
+
+                    y += 40;
+                    e.Graphics.DrawString("         NGƯỜI LẬP PHIẾU ", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(-50, y));
+                    //y += 30;
+                    e.Graphics.DrawString("             (Ký, họ tên) ", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(-50, y + 30));
+
+                    //y += 40;
+                    e.Graphics.DrawString("         NGƯỜI GIAO HÀNG ", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(200, y));
+                    //y += 30;
+                    e.Graphics.DrawString("             (Ký, họ tên) ", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(200, y + 30));
+
+
+                    //y += 40;
+                    e.Graphics.DrawString("         THỦ KHO ", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(450, y));
+                    //y += 30;
+                    e.Graphics.DrawString("          (Ký, họ tên) ", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(450, y + 30));
+
+                    //y += 40;
+                    e.Graphics.DrawString("         GIÁM ĐỐC ", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(600, y));
+                    //y += 30;
+                    e.Graphics.DrawString("           (Ký, họ tên) ", new Font("Courier New", 10, FontStyle.Bold), Brushes.Black, new Point(600, y + 30));
                 }
 
             }

@@ -26,7 +26,7 @@ namespace PhanMemQLKho
             string query = "";
             if (string.IsNullOrEmpty(query))
             {
-                query = "SELECT [MaPhieuXuat] ,KH.[MaKH] ,KH.TenKhachHang ,[MaNhanVien] ,U.TenUser ,[NgayXuat] ,[TinhTrang] ,[GhiChu] FROM [PhieuXuat] PX " +
+                query = "SELECT [MaPhieuXuat] ,KH.[MaKH] ,KH.TenKhachHang ,[MaNhanVien] ,U.TenUser ,[NgayXuat] ,[LoaiHang],[TrangThai] ,[GhiChu] FROM [PhieuXuat] PX " +
                     "left join [User] U on PX.MaNhanVien = u.MaUser " +
                     "left join [KhachHang] KH on PX.MaKH = KH.MaKH";
             }
@@ -63,7 +63,8 @@ namespace PhanMemQLKho
             model.MaKH = cmbKhachHang.SelectedValue.ToString();
             model.MaNhanVien = cmbNhanVien.SelectedValue.ToString();
             model.GhiChu = txtGhiChu.Text;
-            model.TinhTrang = cmbTinhTrang.SelectedItem.ToString();
+            model.LoaiHang = cmbLoaiHang.SelectedItem.ToString();
+            model.TrangThai = cmbTrangThai.SelectedItem.ToString();
             model.NgayXuat = dateTimeNgayNhap.Value;
             return model;
         }
@@ -73,7 +74,8 @@ namespace PhanMemQLKho
             cmbNhanVien.SelectedValue = model.MaNhanVien;
             cmbKhachHang.SelectedValue = model.MaKH;
             txtGhiChu.Text = model.GhiChu;
-            cmbTinhTrang.SelectedItem = model.TinhTrang;
+            cmbLoaiHang.SelectedItem = model.LoaiHang;
+            cmbTrangThai.SelectedItem = model.TrangThai;
             dateTimeNgayNhap.Value = model.NgayXuat;
         }
         public void SetControl(string edit)
@@ -116,7 +118,7 @@ namespace PhanMemQLKho
             cmbNhanVien.Enabled = edit;
             cmbKhachHang.Enabled = edit;
             dateTimeNgayNhap.Enabled = edit;
-            cmbTinhTrang.Enabled = edit;
+            cmbLoaiHang.Enabled = edit;
             txtGhiChu.Enabled = edit;
         }
         public void SetAllNull()
@@ -177,6 +179,14 @@ namespace PhanMemQLKho
         {
             Xoa();
         }
+        public void UpdateSoLuong(string maSP, int soluongxuat,int soluongcon)
+        {
+            string qry = "Update [SanPham] set " +
+                "SoLuongBan =" + soluongxuat + ", " +
+                "SoLuongCon =" + soluongcon + " " +
+                " Where MaSanPham='" + maSP.Trim() + "'";
+            common.thucthidulieu(qry);
+        }
         public void UpdataDatabase()
         {
             var model = GetValue();
@@ -185,8 +195,45 @@ namespace PhanMemQLKho
                 "MaKH ='" + model.MaKH.Trim() + "', " +
                 "NgayXuat ='" + model.NgayXuat.ToString("yyyy-MM-dd") + "', " +
                 "GhiChu =N'" + model.GhiChu + "', " +
-                "TinhTrang =N'" + model.TinhTrang + "' " +
+                "LoaiHang =N'" + model.LoaiHang + "', " +
+                "TrangThai =N'" + model.TrangThai + "' " +
                 " Where MaPhieuXuat='" + model.MaPhieuXuat + "'";
+
+            if (cmbTrangThai.SelectedItem == "Đã Hoàn Thành")
+            {
+                // lấy thông tin các sản phẩm trong bảng chi tiết phiếu xuất
+                string qrystr = "select SP.MaSanPham,SP.SoLuong AS 'SoLuongNhap',SP.SoLuongBan,CTPX.SoLuong AS 'SoLuongXuat' from PhieuXuat PX " +
+                    "inner join ChiTietPhieuXuat CTPX on CTPX.MaPhieuXuat = PX.MaPhieuXuat " +
+                    "inner join SanPham SP on CTPX.MaSanPham = SP.MaSanPham " +
+                    "where PX.MaPhieuXuat ='"+ model.MaPhieuXuat.Trim() + "'";
+                var data = common.docdulieu(qrystr);
+
+                if (data != null && data.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in data.Rows)
+                    {
+                        string masp = dr["MaSanPham"].ToString();
+                        int soluong = 0, soluongxuat = 0, soluongbanServer =0,soluongcon = 0;
+                        if (dr["SoLuongNhap"] != null && !string.IsNullOrEmpty(dr["SoLuongNhap"].ToString()))
+                        {
+                            soluong = Convert.ToInt32(dr["SoLuongNhap"].ToString());
+                        }
+                        if (dr["SoLuongXuat"] != null && !string.IsNullOrEmpty(dr["SoLuongXuat"].ToString()))
+                        {
+                            soluongxuat = Convert.ToInt32(dr["SoLuongXuat"].ToString());
+                        }
+                        if (dr["SoLuongBan"] != null && !string.IsNullOrEmpty(dr["SoLuongBan"].ToString()))
+                        {
+                            soluongbanServer = Convert.ToInt32(dr["SoLuongBan"].ToString());
+                        }
+                        soluongxuat = soluongxuat + soluongbanServer;
+                        soluongcon = soluong - soluongxuat;
+                        UpdateSoLuong(masp, soluongxuat, soluongcon);
+                    }
+                }
+            }
+
+
             var status = common.thucthidulieu(qry);
             if (status)
             {
@@ -213,13 +260,15 @@ namespace PhanMemQLKho
                     "MaNhanVien, " +
                     "MaKH, " +
                     "NgayXuat, " +
-                     "TinhTrang, " +
+                     "LoaiHang, " +
+                     "TrangThai, " +
                     "GhiChu " +                   
                     " ) values('" + ma.Trim() + "'," +
                     "'" + model.MaNhanVien.Trim()  +"'"+
                     ",'" + model.MaKH.Trim() + "'" +
                     ",'" + model.NgayXuat.ToString("yyyy-MM-dd") + "'" +
-                    ",N'" + model.TinhTrang.Trim() + "' " +
+                    ",N'" + model.LoaiHang.Trim() + "' " +
+                     ",N'" + model.TrangThai.Trim() + "' " +
                     ",N'" + model.GhiChu.Trim() + "'" +
                             
                     ")";
@@ -268,14 +317,14 @@ namespace PhanMemQLKho
 
             if (radioMa.Checked)
             {
-                string timkiem = "SELECT [MaPhieuXuat] ,KH.[MaKH] ,KH.TenKhachHang ,[MaNhanVien] ,U.TenUser ,[NgayXuat] ,[TinhTrang] ,[GhiChu] FROM [PhieuXuat] PX " +
+                string timkiem = "SELECT [MaPhieuXuat] ,KH.[MaKH] ,KH.TenKhachHang ,[MaNhanVien] ,U.TenUser ,[NgayXuat] ,[LoaiHang],[TrangThai] ,[GhiChu] FROM [PhieuXuat] PX " +
                     "left join [User] U on PX.MaNhanVien = u.MaUser " +
                     "left join [KhachHang] KH on PX.MaKH = KH.MaKH where PX.MaPhieuXuat like '%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
             else if (radioTen.Checked)
             {
-                string timkiem = "SELECT [MaPhieuXuat] ,KH.[MaKH] ,KH.TenKhachHang ,[MaNhanVien] ,U.TenUser ,[NgayXuat] ,[TinhTrang] ,[GhiChu] FROM [PhieuXuat] PX " +
+                string timkiem = "SELECT [MaPhieuXuat] ,KH.[MaKH] ,KH.TenKhachHang ,[MaNhanVien] ,U.TenUser ,[NgayXuat] ,[LoaiHang],[TrangThai] ,[GhiChu] FROM [PhieuXuat] PX " +
                     "left join [User] U on PX.MaNhanVien = u.MaUser " +
                     "left join [KhachHang] KH on PX.MaKH = KH.MaKH where PX.MaKH like N'%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
@@ -311,8 +360,9 @@ namespace PhanMemQLKho
             cmbNhanVien.SelectedValue = dgvPhieuNhap.CurrentRow.Cells[3].Value.ToString();
 
             dateTimeNgayNhap.Value = Convert.ToDateTime(dgvPhieuNhap.CurrentRow.Cells[5].Value.ToString());
-            cmbTinhTrang.SelectedItem = dgvPhieuNhap.CurrentRow.Cells[6].Value.ToString().Trim();
-            txtGhiChu.Text = dgvPhieuNhap.CurrentRow.Cells[7].Value.ToString();
+            cmbLoaiHang.SelectedItem = dgvPhieuNhap.CurrentRow.Cells[6].Value.ToString().Trim();
+            cmbTrangThai.SelectedItem = dgvPhieuNhap.CurrentRow.Cells[7].Value.ToString().Trim();
+            txtGhiChu.Text = dgvPhieuNhap.CurrentRow.Cells[8].Value.ToString();
             SetControl("table-click");
         }
 

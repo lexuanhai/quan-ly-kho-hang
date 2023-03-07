@@ -47,35 +47,35 @@
             this.sub_phu_tung});
             this.menuStripHeThong.Location = new System.Drawing.Point(0, 0);
             this.menuStripHeThong.Name = "menuStripHeThong";
-            this.menuStripHeThong.Size = new System.Drawing.Size(1067, 30);
+            this.menuStripHeThong.Size = new System.Drawing.Size(1334, 38);
             this.menuStripHeThong.TabIndex = 0;
             this.menuStripHeThong.Text = "menuStrip1";
             // 
             // sub_san_pham
             // 
             this.sub_san_pham.Name = "sub_san_pham";
-            this.sub_san_pham.Size = new System.Drawing.Size(88, 26);
+            this.sub_san_pham.Size = new System.Drawing.Size(88, 34);
             this.sub_san_pham.Text = "Sản Phẩm";
             this.sub_san_pham.Click += new System.EventHandler(this.sub_san_pham_Click);
             // 
             // sub_danh_muc
             // 
             this.sub_danh_muc.Name = "sub_danh_muc";
-            this.sub_danh_muc.Size = new System.Drawing.Size(90, 26);
+            this.sub_danh_muc.Size = new System.Drawing.Size(90, 34);
             this.sub_danh_muc.Text = "Danh Mục";
             this.sub_danh_muc.Click += new System.EventHandler(this.sub_danh_muc_Click);
             // 
             // sub_nhan_hieu
             // 
             this.sub_nhan_hieu.Name = "sub_nhan_hieu";
-            this.sub_nhan_hieu.Size = new System.Drawing.Size(93, 26);
+            this.sub_nhan_hieu.Size = new System.Drawing.Size(93, 34);
             this.sub_nhan_hieu.Text = "Nhãn Hiệu";
             this.sub_nhan_hieu.Click += new System.EventHandler(this.sub_nhan_hieu_Click);
             // 
             // sub_phu_tung
             // 
             this.sub_phu_tung.Name = "sub_phu_tung";
-            this.sub_phu_tung.Size = new System.Drawing.Size(84, 26);
+            this.sub_phu_tung.Size = new System.Drawing.Size(84, 34);
             this.sub_phu_tung.Text = "Phụ Tùng";
             this.sub_phu_tung.Click += new System.EventHandler(this.sub_phu_tung_Click);
             // 
@@ -83,10 +83,10 @@
             // 
             this.panelShowFormChild.AutoScroll = true;
             this.panelShowFormChild.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelShowFormChild.Location = new System.Drawing.Point(0, 30);
+            this.panelShowFormChild.Location = new System.Drawing.Point(0, 48);
             this.panelShowFormChild.Margin = new System.Windows.Forms.Padding(4);
             this.panelShowFormChild.Name = "panelShowFormChild";
-            this.panelShowFormChild.Size = new System.Drawing.Size(1067, 524);
+            this.panelShowFormChild.Size = new System.Drawing.Size(1334, 645);
             this.panelShowFormChild.TabIndex = 1;
             // 
             // frmQuanLySanPham

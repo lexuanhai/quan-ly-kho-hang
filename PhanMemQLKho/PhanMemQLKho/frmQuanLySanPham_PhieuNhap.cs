@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Media3D;
 
 namespace PhanMemQLKho
 {
@@ -50,7 +51,7 @@ namespace PhanMemQLKho
             model.MaPhieuNhap = txtMa.Text;
             model.MaNhanVien = cmbNhanVien.SelectedValue.ToString();
             model.GhiChu = txtGhiChu.Text;
-            model.TinhTrang = cmbTinhTrang.SelectedItem.ToString();
+            model.TinhTrang = cmbLoaiHang.SelectedItem.ToString();
             model.TrangThai = cmbTrangThai.SelectedItem.ToString();
             model.NgayNhap = dateTimeNgayNhap.Value;
             return model;
@@ -60,7 +61,7 @@ namespace PhanMemQLKho
             txtMa.Text = model.MaPhieuNhap;
             cmbNhanVien.SelectedValue = model.MaNhanVien;
             txtGhiChu.Text = model.GhiChu;
-            cmbTinhTrang.SelectedItem = model.TinhTrang;
+            cmbLoaiHang.SelectedItem = model.TinhTrang;
             cmbTrangThai.SelectedItem = model.TrangThai;
             dateTimeNgayNhap.Value = model.NgayNhap;
         }
@@ -104,7 +105,7 @@ namespace PhanMemQLKho
             txtGhiChu.Enabled = edit;
             cmbNhanVien.Enabled = edit;
             dateTimeNgayNhap.Enabled = edit;
-            cmbTinhTrang.Enabled = edit;
+            cmbLoaiHang.Enabled = edit;
             cmbTrangThai.Enabled = edit;
         }
         public void SetAllNull()
@@ -165,6 +166,7 @@ namespace PhanMemQLKho
         {
             Xoa();
         }
+        
         public void UpdataDatabase()
         {
             var model = GetValue();
@@ -175,6 +177,38 @@ namespace PhanMemQLKho
                 "TinhTrang =N'" + model.TinhTrang + "', " +
                 "TrangThai =N'" + model.TrangThai + "' " +
                 " Where MaPhieuNhap='" + model.MaPhieuNhap + "'";
+            if (cmbTrangThai.SelectedItem == "Đã Hoàn Thành")
+            {
+                // lấy thông tin các sản phẩm trong bảng chi tiết phiếu nhập
+              string  qrystr = "select SP.MaSanPham,SP.SoLuong,CTPN.SoLuong AS 'SoLuongNhap',CTPN.GiaNhap from PhieuNhap PN " +
+                    "inner join ChiTietPhieuNhap CTPN on CTPN.MaPhieuNhap = PN.MaPhieuNhap " +
+                    "inner join SanPham SP on CTPN.MaSanPham = SP.MaSanPham " +
+                    "where PN.MaPhieuNhap = '"+ model.MaPhieuNhap.Trim() + "'";
+                var data = common.docdulieu(qrystr);
+              
+                if (data != null && data.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in data.Rows)
+                    {                       
+                        string masp = dr["MaSanPham"].ToString();
+                        int soluong = 0,soluongnhap = 0,gianhap=0;
+                        if (dr["SoLuong"] != null && !string.IsNullOrEmpty(dr["SoLuong"].ToString()))
+                        {
+                            soluong = Convert.ToInt32(dr["SoLuong"].ToString());
+                        }
+                        if (dr["SoLuongNhap"] != null && !string.IsNullOrEmpty(dr["SoLuongNhap"].ToString()))
+                        {
+                            soluongnhap = Convert.ToInt32(dr["SoLuongNhap"].ToString());
+                        }
+                        if (dr["GiaNhap"] != null && !string.IsNullOrEmpty(dr["GiaNhap"].ToString()))
+                        {
+                            gianhap = Convert.ToInt32(dr["GiaNhap"].ToString());
+                        }
+                        soluong = soluong + soluongnhap;
+                        UpdateSoLuong(masp, soluong, gianhap);
+                    }
+                }
+            }
             var status = common.thucthidulieu(qry);
             if (status)
             {
@@ -184,6 +218,14 @@ namespace PhanMemQLKho
             {
                 MessageBox.Show("Sửa không thành công.");
             }
+        }
+        public void UpdateSoLuong(string maSP,int soluong,int gianhap)
+        {
+            string qry = "Update [SanPham] set " +
+                "SoLuong =" + soluong + ", "+
+                "GiaNhap =" + gianhap + " " +
+                " Where MaSanPham='" + maSP.Trim() + "'";
+            common.thucthidulieu(qry);
         }
 
         private void ThemMoi()
@@ -231,7 +273,7 @@ namespace PhanMemQLKho
         {
             if (cmbNhanVien.Text.Length > 0 &&
                 dateTimeNgayNhap.Text.Length > 0 &&
-                cmbTinhTrang.Text.Length > 0                
+                cmbLoaiHang.Text.Length > 0                
                 )
             {
                 if (xuly == 1)
@@ -297,7 +339,7 @@ namespace PhanMemQLKho
             txtMa.Text = dgvPhieuNhap.CurrentRow.Cells[0].Value.ToString();
             cmbNhanVien.SelectedValue = dgvPhieuNhap.CurrentRow.Cells[1].Value.ToString();
             dateTimeNgayNhap.Value = Convert.ToDateTime(dgvPhieuNhap.CurrentRow.Cells[3].Value.ToString());
-            cmbTinhTrang.SelectedItem = dgvPhieuNhap.CurrentRow.Cells[4].Value.ToString().Trim();
+            cmbLoaiHang.SelectedItem = dgvPhieuNhap.CurrentRow.Cells[4].Value.ToString().Trim();
             txtGhiChu.Text = dgvPhieuNhap.CurrentRow.Cells[5].Value.ToString().Trim();
             cmbTrangThai.SelectedItem = dgvPhieuNhap.CurrentRow.Cells[6].Value.ToString().Trim();
             SetControl("table-click");

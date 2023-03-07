@@ -38,15 +38,16 @@ namespace PhanMemQLKho
         {
 
             DataTable dt;
-            string query = "SELECT * FROM [SanPham] SP " +
-                    " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
-                    " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
-                    " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
-                    " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu";
+            string query = "SELECT DISTINCT SP.MaSanPham,SP.TenSanPham,DMSP.TenDanhMuc,convert(varchar, PN.NgayNhap, 111) AS 'NgayNhap',convert(varchar, PX.NgayXuat, 111) AS 'NgayXuat',SP.SoLuong,SP.SoLuongBan,SP.SoLuongCon FROM [SanPham] SP " +
+                "INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc " +
+                "Left join ChiTietPhieuNhap CTPN ON CTPN.MaSanPham = SP.MaSanPham " +
+                "LEFT JOIN PhieuNhap PN ON PN.MaPhieuNhap = CTPN.MaPhieuNhap " +
+                "Left join ChiTietPhieuXuat CTPX ON CTPX.MaSanPham = SP.MaSanPham " +
+                "LEFT JOIN PhieuXuat PX ON PX.MaPhieuXuat = CTPX.MaPhieuXuat ";
             
             if (!string.IsNullOrEmpty(qry))
             {
-                query = qry;
+                query += qry;
             }
 
             dt = common.docdulieu(query);
@@ -60,11 +61,11 @@ namespace PhanMemQLKho
                     dataGRV.Rows[n].Cells[0].Value = dr["MaSanPham"].ToString();
                     dataGRV.Rows[n].Cells[1].Value = dr["TenSanPham"].ToString();
                     dataGRV.Rows[n].Cells[2].Value = dr["TenDanhMuc"].ToString();
-                    dataGRV.Rows[n].Cells[3].Value = dr["TenThuongHieu"].ToString();
-                    dataGRV.Rows[n].Cells[4].Value = dr["TenNCC"].ToString();
-                    dataGRV.Rows[n].Cells[5].Value = dr["TenNSX"].ToString();   
-                    dataGRV.Rows[n].Cells[6].Value = dr["SoLuong"].ToString();
-                    dataGRV.Rows[n].Cells[7].Value = dr["TinhTrang"].ToString();
+                    dataGRV.Rows[n].Cells[3].Value = dr["NgayNhap"].ToString();
+                    dataGRV.Rows[n].Cells[4].Value = dr["NgayXuat"].ToString();
+                    dataGRV.Rows[n].Cells[5].Value = dr["SoLuong"].ToString();   
+                    dataGRV.Rows[n].Cells[6].Value = dr["SoLuongBan"].ToString();
+                    dataGRV.Rows[n].Cells[7].Value = dr["SoLuongCon"].ToString();
                 }
             }
         }
@@ -78,54 +79,22 @@ namespace PhanMemQLKho
             LoadData();
         }
 
-        public void search()
+        private void btnTimKiem_Click(object sender, EventArgs e)
         {
-
-            //if (radioMa.Checked)
-            //{
-            //    string timkiem = "SELECT * FROM [SanPham] SP " +
-            //        " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
-            //        " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
-            //        " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
-            //        " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where SP.MaSanPham like N'%" + txtSearch.Text + "%'";
-            //    LoadData(timkiem);
-            //}
-            //else if (radioTen.Checked)
-            //{
-            //    string timkiem = "SELECT * FROM [SanPham] SP " +
-            //        " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
-            //        " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
-            //        " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
-            //        " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where SP.TenSanPham like N'%" + txtSearch.Text + "%'";
-            //    LoadData(timkiem);
-            //}else if (raDanhMuc.Checked)
-            //{
-            //    string timkiem = "SELECT * FROM [SanPham] SP " +
-            //        " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
-            //        " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
-            //        " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
-            //        " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where DMSP.TenDanhMuc like N'%" + txtSearch.Text + "%'";
-            //    LoadData(timkiem);
-            //}
-            //else if (raThuongHieu.Checked)
-            //{
-            //    string timkiem = "SELECT * FROM [SanPham] SP " +
-            //       " INNER JOIN NhaCC NCC ON NCC.MaNCC = SP.MaNCC" +
-            //       " INNER JOIN NhaSanXuat NSX ON NSX.MaSX = SP.MaNSX " +
-            //       " INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc" +
-            //       " INNER JOIN ThuongHieu TH ON TH.MaThuongHieu = SP.MaThuongHieu where TH.TenThuongHieu like N'%" + txtSearch.Text + "%'";
-            //    LoadData(timkiem);
-            //}
-            //else
-            //{
-            //    LoadData();
-            //}
-            
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            search();
+            var datestart = dateTimeBatDau.Value.AddDays(-1);
+            var dateend = dateTimeKetThuc.Value.AddDays(1);
+            string datestartStr = datestart.ToString("yyyy/MM/dd");
+            string dateendStr = dateend.ToString("yyyy/MM/dd");
+            if (radioNgayNhap.Checked)
+            {
+                string query = " where PN.NgayNhap >='" + datestartStr + "' and PN.NgayNhap <='" + dateendStr + "'";
+                LoadData(query);
+            }
+            if (radioNgayXuat.Checked)
+            {
+                string query = " where PX.NgayXuat >='" + datestartStr + "' and PX.NgayXuat <='" + dateendStr + "'";
+                LoadData(query);
+            }
         }
     }
 }

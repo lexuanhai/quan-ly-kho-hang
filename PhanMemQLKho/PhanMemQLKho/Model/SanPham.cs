@@ -29,6 +29,7 @@ namespace PhanMemQLKho.Model
         public int PhanTramGiam { get; set; }
         public string TinhTrang { get; set; }
         public DateTime NgayNhap { get; set; }
+        public int SoLuongCon { get; set; }
 
     }
 }
