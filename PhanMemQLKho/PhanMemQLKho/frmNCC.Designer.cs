@@ -35,11 +35,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGRV = new System.Windows.Forms.DataGridView();
-            this.tdMa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdSoDienThoai = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdDiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtTenUser = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -75,6 +70,11 @@
             this.errEmail = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnLuu = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
+            this.tdMa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdSoDienThoai = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdDiaChi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGRV)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -126,9 +126,9 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGRV);
-            this.groupBox2.Location = new System.Drawing.Point(125, 364);
+            this.groupBox2.Location = new System.Drawing.Point(68, 364);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(747, 230);
+            this.groupBox2.Size = new System.Drawing.Size(847, 230);
             this.groupBox2.TabIndex = 28;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Danh sách ";
@@ -147,44 +147,9 @@
             this.dataGRV.Location = new System.Drawing.Point(3, 16);
             this.dataGRV.Name = "dataGRV";
             this.dataGRV.RowHeadersVisible = false;
-            this.dataGRV.Size = new System.Drawing.Size(741, 211);
+            this.dataGRV.Size = new System.Drawing.Size(841, 211);
             this.dataGRV.TabIndex = 0;
             this.dataGRV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGRV_CellClick);
-            // 
-            // tdMa
-            // 
-            this.tdMa.FillWeight = 27.60152F;
-            this.tdMa.HeaderText = "Mã NCC";
-            this.tdMa.Name = "tdMa";
-            this.tdMa.Width = 120;
-            // 
-            // tdTen
-            // 
-            this.tdTen.FillWeight = 27.60152F;
-            this.tdTen.HeaderText = "Tên Nhà Cung Cấp";
-            this.tdTen.Name = "tdTen";
-            this.tdTen.Width = 150;
-            // 
-            // tdSoDienThoai
-            // 
-            this.tdSoDienThoai.FillWeight = 27.60152F;
-            this.tdSoDienThoai.HeaderText = "Số điện thoại";
-            this.tdSoDienThoai.Name = "tdSoDienThoai";
-            this.tdSoDienThoai.Width = 150;
-            // 
-            // tdEmail
-            // 
-            this.tdEmail.FillWeight = 27.60152F;
-            this.tdEmail.HeaderText = "Email";
-            this.tdEmail.Name = "tdEmail";
-            this.tdEmail.Width = 150;
-            // 
-            // tdDiaChi
-            // 
-            this.tdDiaChi.FillWeight = 27.60152F;
-            this.tdDiaChi.HeaderText = "Địa chỉ";
-            this.tdDiaChi.Name = "tdDiaChi";
-            this.tdDiaChi.Width = 150;
             // 
             // groupBox1
             // 
@@ -369,12 +334,12 @@
             // radioTen
             // 
             this.radioTen.AutoSize = true;
-            this.radioTen.Location = new System.Drawing.Point(116, 26);
+            this.radioTen.Location = new System.Drawing.Point(103, 26);
             this.radioTen.Name = "radioTen";
-            this.radioTen.Size = new System.Drawing.Size(104, 17);
+            this.radioTen.Size = new System.Drawing.Size(69, 17);
             this.radioTen.TabIndex = 3;
             this.radioTen.TabStop = true;
-            this.radioTen.Text = "Tên khách hàng";
+            this.radioTen.Text = "Tên NCC";
             this.radioTen.UseVisualStyleBackColor = true;
             // 
             // radioMa
@@ -382,10 +347,10 @@
             this.radioMa.AutoSize = true;
             this.radioMa.Location = new System.Drawing.Point(16, 26);
             this.radioMa.Name = "radioMa";
-            this.radioMa.Size = new System.Drawing.Size(101, 17);
+            this.radioMa.Size = new System.Drawing.Size(65, 17);
             this.radioMa.TabIndex = 2;
             this.radioMa.TabStop = true;
-            this.radioMa.Text = "Mã Khách hàng";
+            this.radioMa.Text = "Mã NCC";
             this.radioMa.UseVisualStyleBackColor = true;
             // 
             // radTenDG
@@ -488,6 +453,40 @@
             this.btnXoa.UseVisualStyleBackColor = true;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
+            // tdMa
+            // 
+            this.tdMa.FillWeight = 27.60152F;
+            this.tdMa.HeaderText = "Mã NCC";
+            this.tdMa.Name = "tdMa";
+            // 
+            // tdTen
+            // 
+            this.tdTen.FillWeight = 27.60152F;
+            this.tdTen.HeaderText = "Tên Nhà Cung Cấp";
+            this.tdTen.Name = "tdTen";
+            this.tdTen.Width = 150;
+            // 
+            // tdSoDienThoai
+            // 
+            this.tdSoDienThoai.FillWeight = 27.60152F;
+            this.tdSoDienThoai.HeaderText = "Số điện thoại";
+            this.tdSoDienThoai.Name = "tdSoDienThoai";
+            this.tdSoDienThoai.Width = 150;
+            // 
+            // tdEmail
+            // 
+            this.tdEmail.FillWeight = 27.60152F;
+            this.tdEmail.HeaderText = "Email";
+            this.tdEmail.Name = "tdEmail";
+            this.tdEmail.Width = 150;
+            // 
+            // tdDiaChi
+            // 
+            this.tdDiaChi.FillWeight = 27.60152F;
+            this.tdDiaChi.HeaderText = "Địa chỉ";
+            this.tdDiaChi.Name = "tdDiaChi";
+            this.tdDiaChi.Width = 250;
+            // 
             // frmNCC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -504,7 +503,7 @@
             this.Controls.Add(this.btnXoa);
             this.Name = "frmNCC";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Quản Lý Khách Hàng";
+            this.Text = "Quản Lý Nhà Cung Cấp";
             this.Load += new System.EventHandler(this.frmNCC_Load);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGRV)).EndInit();

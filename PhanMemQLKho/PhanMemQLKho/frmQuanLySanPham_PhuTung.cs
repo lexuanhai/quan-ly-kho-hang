@@ -30,6 +30,21 @@ namespace PhanMemQLKho
             cmbThuongHieu.ValueMember = "MaThuongHieu";
             cmbThuongHieu.DataSource = dt;
         }
+        public string GetMaThuongHieu(string ten)
+        {
+            DataTable dt;
+            string ma = "";
+            string query = "SELECT MaThuongHieu FROM ThuongHieu where TenThuongHieu Like'%" + ten + "%'";
+            dt = common.docdulieu(query);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    ma = dr["MaThuongHieu"].ToString();                   
+                }
+            }
+            return ma;
+        }
         // Load Loại Phụ Tùng
         public void CmbLoaiPhuTung()
         {
@@ -86,17 +101,21 @@ namespace PhanMemQLKho
                     }
                     
                     dataGRV.Rows[n].Cells[3].Value = dr["TenThuongHieu"].ToString();
-                    dataGRV.Rows[n].Cells[4].Value = dr["SoLuong"].ToString();
-                    dataGRV.Rows[n].Cells[5].Value = dr["GiaNhap"].ToString();
-                    dataGRV.Rows[n].Cells[6].Value = dr["GiaBan"].ToString();
-                    int soluong = dr["SoLuong"] != null && !string.IsNullOrEmpty(dr["SoLuong"].ToString()) ? Convert.ToInt32(dr["SoLuong"]):0;                    
+                    dataGRV.Rows[n].Cells[4].Value = dr["SoLuongNhap"].ToString();
+                    dataGRV.Rows[n].Cells[5].Value = dr["SoLuongBan"].ToString();
+                    dataGRV.Rows[n].Cells[6].Value = dr["SoLuongCon"].ToString();
+
+                    dataGRV.Rows[n].Cells[7].Value = dr["GiaNhap"].ToString();
+                    dataGRV.Rows[n].Cells[8].Value = dr["GiaBan"].ToString();
+
+                    int soluong = dr["SoLuongCon"] != null && !string.IsNullOrEmpty(dr["SoLuongCon"].ToString()) ? Convert.ToInt32(dr["SoLuongCon"]):0;                    
                     if (soluong > 0)
                     {
-                        dataGRV.Rows[n].Cells[7].Value = "Còn Hàng";
+                        dataGRV.Rows[n].Cells[9].Value = "Còn Hàng";
                     }
                     else
                     {
-                        dataGRV.Rows[n].Cells[7].Value = "Hết Hàng";
+                        dataGRV.Rows[n].Cells[9].Value = "Hết Hàng";
                     }
                 }
             }
@@ -122,7 +141,7 @@ namespace PhanMemQLKho
             cmbThuongHieu.SelectedValue = model.MaThuongHieu;
             //txtGia.Text = model.Gia != null ? model.Gia.ToString() : "";
             txtGiaBan.Text = model.GiaBan != null ? model.GiaBan.ToString() : "";
-            txtSoLuong.Text = model.SoLuong != null ? model.SoLuong.ToString() : "";
+            txtSoLuongNhap.Text = model.SoLuong != null ? model.SoLuong.ToString() : "";
             //txtMoTa.Text = model.MoTa;
         }
         public void SetControl(string edit)
@@ -194,7 +213,7 @@ namespace PhanMemQLKho
         public void SetAllNull()
         {
             txtTenPhuTung.Text = "";
-            txtSoLuong.Text = "";
+            txtSoLuongNhap.Text = "";
             txtGiaNhap.Text = "";
             txtGiaBan.Text = "";
         }
@@ -334,9 +353,14 @@ namespace PhanMemQLKho
         {
             txtMaPhuTung.Text = dataGRV.CurrentRow.Cells[0].Value.ToString();
             txtTenPhuTung.Text = dataGRV.CurrentRow.Cells[1].Value.ToString();
-            txtSoLuong.Text = dataGRV.CurrentRow.Cells[4].Value.ToString();
-            txtGiaNhap.Text = dataGRV.CurrentRow.Cells[5].Value.ToString();
-            txtGiaBan.Text = dataGRV.CurrentRow.Cells[6].Value.ToString();
+            string thuonghieu = GetMaThuongHieu(dataGRV.CurrentRow.Cells[3].Value.ToString());
+            cmbThuongHieu.SelectedValue = thuonghieu;
+            cmbLoaiPhuTung.SelectedValue = common.GetLoaiPhuTung().Where(p => p.TenLoaiPhuTung.Contains(dataGRV.CurrentRow.Cells[2].Value.ToString())).FirstOrDefault().MaLoaiPhuTung;
+            txtSoLuongNhap.Text = dataGRV.CurrentRow.Cells[4].Value.ToString();
+            txtSoLuongBan.Text = dataGRV.CurrentRow.Cells[5].Value.ToString();
+            txtSoLuongCon.Text = dataGRV.CurrentRow.Cells[6].Value.ToString();
+            txtGiaNhap.Text = dataGRV.CurrentRow.Cells[7].Value.ToString();
+            txtGiaBan.Text = dataGRV.CurrentRow.Cells[8].Value.ToString();
             SetControl("table-click");
         }
 
@@ -378,7 +402,7 @@ namespace PhanMemQLKho
             LoadData();
             LoadCmb();
             SetControlValue(false);
-            txtSoLuong.Enabled = false;
+            txtSoLuongNhap.Enabled = false;
             txtGiaNhap.Enabled = false;
         }
         

@@ -420,19 +420,19 @@
             // 
             this.tdMaThuongHieu.HeaderText = "Mã thương hiệu";
             this.tdMaThuongHieu.Name = "tdMaThuongHieu";
-            this.tdMaThuongHieu.Width = 150;
+            this.tdMaThuongHieu.Width = 120;
             // 
             // tdThuongHieu
             // 
             this.tdThuongHieu.HeaderText = "Tên thương hiệu";
             this.tdThuongHieu.Name = "tdThuongHieu";
-            this.tdThuongHieu.Width = 250;
+            this.tdThuongHieu.Width = 110;
             // 
             // tdGhiChu
             // 
             this.tdGhiChu.HeaderText = "Mô tả";
             this.tdGhiChu.Name = "tdGhiChu";
-            this.tdGhiChu.Width = 300;
+            this.tdGhiChu.Width = 480;
             // 
             // frmQuanLySanPham_ThuongHieu
             // 

@@ -253,7 +253,7 @@
             this.panelSideBar.Location = new System.Drawing.Point(195, 0);
             this.panelSideBar.Margin = new System.Windows.Forms.Padding(1);
             this.panelSideBar.Name = "panelSideBar";
-            this.panelSideBar.Size = new System.Drawing.Size(989, 49);
+            this.panelSideBar.Size = new System.Drawing.Size(1039, 49);
             this.panelSideBar.TabIndex = 1;
             this.panelSideBar.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSideBar_Paint);
             this.panelSideBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelSideBar_MouseDown);
@@ -275,7 +275,7 @@
             this.panelShadow.Location = new System.Drawing.Point(195, 49);
             this.panelShadow.Margin = new System.Windows.Forms.Padding(2);
             this.panelShadow.Name = "panelShadow";
-            this.panelShadow.Size = new System.Drawing.Size(989, 7);
+            this.panelShadow.Size = new System.Drawing.Size(1039, 7);
             this.panelShadow.TabIndex = 2;
             // 
             // panelDesktop
@@ -288,7 +288,7 @@
             this.panelDesktop.Location = new System.Drawing.Point(195, 56);
             this.panelDesktop.Margin = new System.Windows.Forms.Padding(2);
             this.panelDesktop.Name = "panelDesktop";
-            this.panelDesktop.Size = new System.Drawing.Size(989, 605);
+            this.panelDesktop.Size = new System.Drawing.Size(1039, 605);
             this.panelDesktop.TabIndex = 3;
             // 
             // lblReleaseDateData
@@ -319,7 +319,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(65)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.ClientSize = new System.Drawing.Size(1234, 661);
             this.Controls.Add(this.panelDesktop);
             this.Controls.Add(this.panelShadow);
             this.Controls.Add(this.panelSideBar);

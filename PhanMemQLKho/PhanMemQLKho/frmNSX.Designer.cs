@@ -458,21 +458,20 @@
             this.tdMa.FillWeight = 27.60152F;
             this.tdMa.HeaderText = "Mã NSX";
             this.tdMa.Name = "tdMa";
-            this.tdMa.Width = 120;
             // 
             // tdTen
             // 
             this.tdTen.FillWeight = 27.60152F;
             this.tdTen.HeaderText = "Tên nhà sản xuất";
             this.tdTen.Name = "tdTen";
-            this.tdTen.Width = 150;
+            this.tdTen.Width = 200;
             // 
             // tdSoDienThoai
             // 
             this.tdSoDienThoai.FillWeight = 27.60152F;
             this.tdSoDienThoai.HeaderText = "Số điện thoại";
             this.tdSoDienThoai.Name = "tdSoDienThoai";
-            this.tdSoDienThoai.Width = 150;
+            this.tdSoDienThoai.Width = 120;
             // 
             // tdEmail
             // 

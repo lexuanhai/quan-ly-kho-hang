@@ -60,9 +60,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGRV = new System.Windows.Forms.DataGridView();
-            this.tdMaDanhMuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdTenDanhMuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdGhiChu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblNhapGioiTinh = new System.Windows.Forms.Label();
             this.lblNhapDiaChi = new System.Windows.Forms.Label();
@@ -70,6 +67,9 @@
             this.errGT = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnHuy = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
+            this.tdMaDanhMuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdTenDanhMuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdGhiChu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.errTenDG)).BeginInit();
@@ -344,24 +344,6 @@
             this.dataGRV.TabIndex = 0;
             this.dataGRV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGRV_CellClick);
             // 
-            // tdMaDanhMuc
-            // 
-            this.tdMaDanhMuc.HeaderText = "Mã Danh Mục";
-            this.tdMaDanhMuc.Name = "tdMaDanhMuc";
-            this.tdMaDanhMuc.Width = 150;
-            // 
-            // tdTenDanhMuc
-            // 
-            this.tdTenDanhMuc.HeaderText = "Tên Danh Mục";
-            this.tdTenDanhMuc.Name = "tdTenDanhMuc";
-            this.tdTenDanhMuc.Width = 250;
-            // 
-            // tdGhiChu
-            // 
-            this.tdGhiChu.HeaderText = "Ghi Chú";
-            this.tdGhiChu.Name = "tdGhiChu";
-            this.tdGhiChu.Width = 300;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.lblNhapGioiTinh);
@@ -433,6 +415,24 @@
             this.btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
+            // 
+            // tdMaDanhMuc
+            // 
+            this.tdMaDanhMuc.HeaderText = "Mã Danh Mục";
+            this.tdMaDanhMuc.Name = "tdMaDanhMuc";
+            this.tdMaDanhMuc.Width = 110;
+            // 
+            // tdTenDanhMuc
+            // 
+            this.tdTenDanhMuc.HeaderText = "Tên Danh Mục";
+            this.tdTenDanhMuc.Name = "tdTenDanhMuc";
+            this.tdTenDanhMuc.Width = 120;
+            // 
+            // tdGhiChu
+            // 
+            this.tdGhiChu.HeaderText = "Ghi Chú";
+            this.tdGhiChu.Name = "tdGhiChu";
+            this.tdGhiChu.Width = 480;
             // 
             // frmQuanLySanPham_DanhMuc
             // 
