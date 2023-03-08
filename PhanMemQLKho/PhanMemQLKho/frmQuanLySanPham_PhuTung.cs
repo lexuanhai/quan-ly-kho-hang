@@ -101,7 +101,7 @@ namespace PhanMemQLKho
                     }
                     
                     dataGRV.Rows[n].Cells[3].Value = dr["TenThuongHieu"].ToString();
-                    dataGRV.Rows[n].Cells[4].Value = dr["SoLuongNhap"].ToString();
+                    dataGRV.Rows[n].Cells[4].Value = dr["SoLuong"].ToString();
                     dataGRV.Rows[n].Cells[5].Value = dr["SoLuongBan"].ToString();
                     dataGRV.Rows[n].Cells[6].Value = dr["SoLuongCon"].ToString();
 

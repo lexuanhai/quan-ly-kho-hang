@@ -65,9 +65,8 @@ namespace PhanMemQLKho
         public bool SanPhamExist(string maPN,string maSP)
         {
             string query = "select * from PhieuNhap PN " +
-                "inner join ChiTietPhieuNhap CTPN on CTPN.MaPhieuNhap = PN.MaPhieuNhap " +
-                "inner join SanPham SP on CTPN.MaSanPham = SP.MaSanPham " +
-                "where PN.MaPhieuNhap = '" + maPN.Trim() + "' and (SP.MaSanPham = '" + maSP.Trim() + "' OR SP.MaPhuTung ='"+ maSP.Trim() + "')";
+                "inner join ChiTietPhieuNhap CTPN on CTPN.MaPhieuNhap = PN.MaPhieuNhap " +               
+                "where PN.MaPhieuNhap = '" + maPN.Trim() + "' and (CTPN.MaSanPham = '" + maSP.Trim() + "' OR CTPN.MaPhuTung ='" + maSP.Trim() + "')";
            var dt = common.docdulieu(query);
             if (dt != null && dt.Rows.Count > 0)            
                 return true;            

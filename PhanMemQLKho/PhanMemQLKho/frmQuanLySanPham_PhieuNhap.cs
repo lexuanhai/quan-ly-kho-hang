@@ -179,35 +179,71 @@ namespace PhanMemQLKho
                 " Where MaPhieuNhap='" + model.MaPhieuNhap + "'";
             if (cmbTrangThai.SelectedItem == "Đã Hoàn Thành")
             {
-                // lấy thông tin các sản phẩm trong bảng chi tiết phiếu nhập
-              string  qrystr = "select SP.MaSanPham,SP.SoLuong,CTPN.SoLuong AS 'SoLuongNhap',CTPN.GiaNhap from PhieuNhap PN " +
-                    "inner join ChiTietPhieuNhap CTPN on CTPN.MaPhieuNhap = PN.MaPhieuNhap " +
-                    "inner join SanPham SP on CTPN.MaSanPham = SP.MaSanPham " +
-                    "where PN.MaPhieuNhap = '"+ model.MaPhieuNhap.Trim() + "'";
-                var data = common.docdulieu(qrystr);
-              
-                if (data != null && data.Rows.Count > 0)
+                if (cmbLoaiHang.SelectedItem == "Phụ Tùng")
                 {
-                    foreach (DataRow dr in data.Rows)
-                    {                       
-                        string masp = dr["MaSanPham"].ToString();
-                        int soluong = 0,soluongnhap = 0,gianhap=0;
-                        if (dr["SoLuong"] != null && !string.IsNullOrEmpty(dr["SoLuong"].ToString()))
+                    // lấy thông tin các sản phẩm trong bảng chi tiết phiếu nhập
+                    string qrystr = "select PT.MaPhuTung,PT.SoLuong,CTPN.SoLuong AS 'SoLuongNhap',CTPN.GiaNhap from PhieuNhap PN " +
+                        " inner join ChiTietPhieuNhap CTPN on CTPN.MaPhieuNhap = PN.MaPhieuNhap" +
+                        " inner join PhuTung PT on CTPN.MaPhuTung = PT.MaPhuTung " +
+                        " where PN.MaPhieuNhap = '" + model.MaPhieuNhap.Trim() + "'";
+                    var data = common.docdulieu(qrystr);
+
+                    if (data != null && data.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in data.Rows)
                         {
-                            soluong = Convert.ToInt32(dr["SoLuong"].ToString());
+                            string masp = dr["MaPhuTung"].ToString();
+                            int soluong = 0, soluongnhap = 0, gianhap = 0;
+                            if (dr["SoLuong"] != null && !string.IsNullOrEmpty(dr["SoLuong"].ToString()))
+                            {
+                                soluong = Convert.ToInt32(dr["SoLuong"].ToString());
+                            }
+                            if (dr["SoLuongNhap"] != null && !string.IsNullOrEmpty(dr["SoLuongNhap"].ToString()))
+                            {
+                                soluongnhap = Convert.ToInt32(dr["SoLuongNhap"].ToString());
+                            }
+                            if (dr["GiaNhap"] != null && !string.IsNullOrEmpty(dr["GiaNhap"].ToString()))
+                            {
+                                gianhap = Convert.ToInt32(dr["GiaNhap"].ToString());
+                            }
+                            soluong = soluong + soluongnhap;
+                            UpdateSoLuongPhuTung(masp, soluong, gianhap);
                         }
-                        if (dr["SoLuongNhap"] != null && !string.IsNullOrEmpty(dr["SoLuongNhap"].ToString()))
-                        {
-                            soluongnhap = Convert.ToInt32(dr["SoLuongNhap"].ToString());
-                        }
-                        if (dr["GiaNhap"] != null && !string.IsNullOrEmpty(dr["GiaNhap"].ToString()))
-                        {
-                            gianhap = Convert.ToInt32(dr["GiaNhap"].ToString());
-                        }
-                        soluong = soluong + soluongnhap;
-                        UpdateSoLuong(masp, soluong, gianhap);
                     }
                 }
+                else
+                {
+                    // lấy thông tin các sản phẩm trong bảng chi tiết phiếu nhập
+                    string qrystr = "select SP.MaSanPham,SP.SoLuong,CTPN.SoLuong AS 'SoLuongNhap',CTPN.GiaNhap from PhieuNhap PN " +
+                          "inner join ChiTietPhieuNhap CTPN on CTPN.MaPhieuNhap = PN.MaPhieuNhap " +
+                          "inner join SanPham SP on CTPN.MaSanPham = SP.MaSanPham " +
+                          "where PN.MaPhieuNhap = '" + model.MaPhieuNhap.Trim() + "'";
+                    var data = common.docdulieu(qrystr);
+
+                    if (data != null && data.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in data.Rows)
+                        {
+                            string masp = dr["MaSanPham"].ToString();
+                            int soluong = 0, soluongnhap = 0, gianhap = 0;
+                            if (dr["SoLuong"] != null && !string.IsNullOrEmpty(dr["SoLuong"].ToString()))
+                            {
+                                soluong = Convert.ToInt32(dr["SoLuong"].ToString());
+                            }
+                            if (dr["SoLuongNhap"] != null && !string.IsNullOrEmpty(dr["SoLuongNhap"].ToString()))
+                            {
+                                soluongnhap = Convert.ToInt32(dr["SoLuongNhap"].ToString());
+                            }
+                            if (dr["GiaNhap"] != null && !string.IsNullOrEmpty(dr["GiaNhap"].ToString()))
+                            {
+                                gianhap = Convert.ToInt32(dr["GiaNhap"].ToString());
+                            }
+                            soluong = soluong + soluongnhap;
+                            UpdateSoLuong(masp, soluong, gianhap);
+                        }
+                    }
+                }
+               
             }
             var status = common.thucthidulieu(qry);
             if (status)
@@ -225,6 +261,14 @@ namespace PhanMemQLKho
                 "SoLuong =" + soluong + ", "+
                 "GiaNhap =" + gianhap + " " +
                 " Where MaSanPham='" + maSP.Trim() + "'";
+            common.thucthidulieu(qry);
+        }
+        public void UpdateSoLuongPhuTung(string maSP, int soluong, int gianhap)
+        {
+            string qry = "Update [PhuTung] set " +
+                "SoLuong =" + soluong + ", " +
+                "GiaNhap =" + gianhap + " " +
+                " Where MaPhuTung='" + maSP.Trim() + "'";
             common.thucthidulieu(qry);
         }
 

@@ -45,7 +45,7 @@ namespace PhanMemQLKho
         public void CmbSanPham()
         {
             DataTable dt;
-            string query = "SELECT * FROM [SanPham] ";
+            string query = "SELECT * FROM [SanPham]";
             dt = common.docdulieu(query);
             cmbSanPham.DisplayMember = "TenSanPham";
             cmbSanPham.ValueMember = "MaSanPham";
@@ -74,8 +74,7 @@ namespace PhanMemQLKho
         {
             string query = "select * from PhieuXuat PX " +
                 "inner join ChiTietPhieuXuat CTPX on CTPX.MaPhieuXuat = PX.MaPhieuXuat " +
-                "inner join SanPham SP on CTPX.MaSanPham = SP.MaSanPham " +
-                "where PX.MaPhieuXuat = '" + maPX.Trim() + "' and SP.MaSanPham = '" + maSP.Trim() + "'";
+                "where PX.MaPhieuXuat = '" + maPX.Trim() + "' and (CTPX.MaSanPham = '" + maSP.Trim() + "' OR CTPX.MaPhuTung ='"+ maSP.Trim() + "')";
             var dt = common.docdulieu(query);
             if (dt != null && dt.Rows.Count > 0)
                 return true;
@@ -91,9 +90,9 @@ namespace PhanMemQLKho
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    model.GiaBan = dr["GiaBan"] != null ? Convert.ToDecimal(dr["GiaBan"]): 0;
-                    model.SoLuong = dr["SoLuong"] != null ? Convert.ToInt32(dr["SoLuong"]) : 0;
-                    model.SoLuongBan = dr["SoLuongBan"] != null ? Convert.ToInt32(dr["SoLuongBan"]) : 0;
+                    model.GiaBan = dr["GiaBan"] != null && !string.IsNullOrEmpty(dr["GiaBan"].ToString()) ? Convert.ToDecimal(dr["GiaBan"]): 0;
+                    model.SoLuong = dr["SoLuong"] != null && !string.IsNullOrEmpty(dr["SoLuong"].ToString()) ? Convert.ToInt32(dr["SoLuong"]) : 0;
+                    model.SoLuongBan = dr["SoLuongBan"] != null && !string.IsNullOrEmpty(dr["SoLuongBan"].ToString()) ? Convert.ToInt32(dr["SoLuongBan"]) : 0;
                     model.SoLuongCon = dr["SoLuongCon"] != null && !string.IsNullOrEmpty(dr["SoLuongCon"].ToString()) ? Convert.ToInt32(dr["SoLuongCon"]) : 0;
                 }
             }
