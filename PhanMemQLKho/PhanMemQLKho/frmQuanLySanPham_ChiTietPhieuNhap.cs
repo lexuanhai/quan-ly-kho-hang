@@ -593,7 +593,7 @@ namespace PhanMemQLKho
                     y += 40;
                     e.Graphics.DrawString("Tên nhân viên  : " + phieu.NhanVien.TenUser, new Font("Courier New", 13, FontStyle.Regular), Brushes.Black, new Point(x, y));
                     y += 40;
-                    e.Graphics.DrawString("Tình trạng     : " + phieu.PhieuNhap.TinhTrang, new Font("Courier New", 13, FontStyle.Regular), Brushes.Black, new Point(x, y));
+                    e.Graphics.DrawString("Loại hàng     : " + phieu.PhieuNhap.TinhTrang, new Font("Courier New", 13, FontStyle.Regular), Brushes.Black, new Point(x, y));
                     y += 40;
                     e.Graphics.DrawString("Danh sách sản phẩm : ", new Font("Courier New", 14, FontStyle.Bold), Brushes.Black, new Point(x, y));
 

@@ -35,14 +35,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGRV = new System.Windows.Forms.DataGridView();
-            this.tdMa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdTenDangNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdLoaiQuyen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdGioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdNgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tdEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtSoLuongCon = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -85,6 +77,14 @@
             this.btnInHoaDon = new System.Windows.Forms.Button();
             this.printPreviewXuat = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocumentXuat = new System.Drawing.Printing.PrintDocument();
+            this.tdMa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdTenDangNhap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdLoaiQuyen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdGioiTinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdNgaySinh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tdEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGRV)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -165,68 +165,6 @@
             this.dataGRV.TabIndex = 0;
             this.dataGRV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGRV_CellClick);
             // 
-            // tdMa
-            // 
-            this.tdMa.FillWeight = 27.60152F;
-            this.tdMa.HeaderText = "Mã Chi Tiết Phiếu Nhập";
-            this.tdMa.MinimumWidth = 6;
-            this.tdMa.Name = "tdMa";
-            this.tdMa.Width = 180;
-            // 
-            // tdTen
-            // 
-            this.tdTen.FillWeight = 27.60152F;
-            this.tdTen.HeaderText = "Phiếu Nhập";
-            this.tdTen.MinimumWidth = 6;
-            this.tdTen.Name = "tdTen";
-            this.tdTen.Width = 125;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Ngày Nhập";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 125;
-            // 
-            // tdTenDangNhap
-            // 
-            this.tdTenDangNhap.FillWeight = 279.1878F;
-            this.tdTenDangNhap.HeaderText = "Mã Sản Phẩm";
-            this.tdTenDangNhap.MinimumWidth = 6;
-            this.tdTenDangNhap.Name = "tdTenDangNhap";
-            this.tdTenDangNhap.Width = 125;
-            // 
-            // tdLoaiQuyen
-            // 
-            this.tdLoaiQuyen.FillWeight = 27.60152F;
-            this.tdLoaiQuyen.HeaderText = "Tên Sản Phẩm";
-            this.tdLoaiQuyen.MinimumWidth = 6;
-            this.tdLoaiQuyen.Name = "tdLoaiQuyen";
-            this.tdLoaiQuyen.Width = 170;
-            // 
-            // tdGioiTinh
-            // 
-            this.tdGioiTinh.FillWeight = 27.60152F;
-            this.tdGioiTinh.HeaderText = "Đơn Giá";
-            this.tdGioiTinh.MinimumWidth = 6;
-            this.tdGioiTinh.Name = "tdGioiTinh";
-            this.tdGioiTinh.Width = 125;
-            // 
-            // tdNgaySinh
-            // 
-            this.tdNgaySinh.FillWeight = 27.60152F;
-            this.tdNgaySinh.HeaderText = "Số Lượng";
-            this.tdNgaySinh.MinimumWidth = 6;
-            this.tdNgaySinh.Name = "tdNgaySinh";
-            // 
-            // tdEmail
-            // 
-            this.tdEmail.FillWeight = 27.60152F;
-            this.tdEmail.HeaderText = "Giá Tiền";
-            this.tdEmail.MinimumWidth = 6;
-            this.tdEmail.Name = "tdEmail";
-            this.tdEmail.Width = 130;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtSoLuongCon);
@@ -290,9 +228,9 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(12, 99);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 13);
+            this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 30;
-            this.label4.Text = "Tên Nhân Viên";
+            this.label4.Text = "Loại Hàng";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbSanPham
@@ -600,6 +538,64 @@
             // 
             this.printDocumentXuat.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocumentXuat_PrintPage);
             // 
+            // tdMa
+            // 
+            this.tdMa.FillWeight = 27.60152F;
+            this.tdMa.HeaderText = "Mã CTPX";
+            this.tdMa.MinimumWidth = 6;
+            this.tdMa.Name = "tdMa";
+            // 
+            // tdTen
+            // 
+            this.tdTen.FillWeight = 27.60152F;
+            this.tdTen.HeaderText = "Phiếu Xuất";
+            this.tdTen.MinimumWidth = 6;
+            this.tdTen.Name = "tdTen";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Ngày Xuất";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            // 
+            // tdTenDangNhap
+            // 
+            this.tdTenDangNhap.FillWeight = 279.1878F;
+            this.tdTenDangNhap.HeaderText = "Mã Sản Phẩm";
+            this.tdTenDangNhap.MinimumWidth = 6;
+            this.tdTenDangNhap.Name = "tdTenDangNhap";
+            // 
+            // tdLoaiQuyen
+            // 
+            this.tdLoaiQuyen.FillWeight = 27.60152F;
+            this.tdLoaiQuyen.HeaderText = "Tên Sản Phẩm";
+            this.tdLoaiQuyen.MinimumWidth = 6;
+            this.tdLoaiQuyen.Name = "tdLoaiQuyen";
+            this.tdLoaiQuyen.Width = 180;
+            // 
+            // tdGioiTinh
+            // 
+            this.tdGioiTinh.FillWeight = 27.60152F;
+            this.tdGioiTinh.HeaderText = "Đơn Giá";
+            this.tdGioiTinh.MinimumWidth = 6;
+            this.tdGioiTinh.Name = "tdGioiTinh";
+            this.tdGioiTinh.Width = 125;
+            // 
+            // tdNgaySinh
+            // 
+            this.tdNgaySinh.FillWeight = 27.60152F;
+            this.tdNgaySinh.HeaderText = "Số Lượng";
+            this.tdNgaySinh.MinimumWidth = 6;
+            this.tdNgaySinh.Name = "tdNgaySinh";
+            // 
+            // tdEmail
+            // 
+            this.tdEmail.FillWeight = 27.60152F;
+            this.tdEmail.HeaderText = "Giá Tiền";
+            this.tdEmail.MinimumWidth = 6;
+            this.tdEmail.Name = "tdEmail";
+            this.tdEmail.Width = 130;
+            // 
             // frmQuanLySanPham_ChiTietPhieuXuat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -685,6 +681,11 @@
         private System.Windows.Forms.ComboBox cmbSanPham;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbMaPhieuXuat;
+        private System.Windows.Forms.TextBox txtSoLuongCon;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnInHoaDon;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewXuat;
+        private System.Drawing.Printing.PrintDocument printDocumentXuat;
         private System.Windows.Forms.DataGridViewTextBoxColumn tdMa;
         private System.Windows.Forms.DataGridViewTextBoxColumn tdTen;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
@@ -693,10 +694,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tdGioiTinh;
         private System.Windows.Forms.DataGridViewTextBoxColumn tdNgaySinh;
         private System.Windows.Forms.DataGridViewTextBoxColumn tdEmail;
-        private System.Windows.Forms.TextBox txtSoLuongCon;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnInHoaDon;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewXuat;
-        private System.Drawing.Printing.PrintDocument printDocumentXuat;
     }
 }

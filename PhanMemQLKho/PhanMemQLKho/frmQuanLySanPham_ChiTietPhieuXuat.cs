@@ -98,19 +98,18 @@ namespace PhanMemQLKho
             }
             return model;
         }
-        public NguoiDung GetPhieuNhapId(string ma)
+        public PhieuXuat GetPhieuNhapId(string ma)
         {
             DataTable dt;
-            string query = "SELECT [MaPhieuXuat] ,[MaNhanVien] ,U.TenUser ,[NgayXuat] ,[TinhTrang] ,[GhiChu] FROM [PhieuXuat] PX " +
-                    "inner join [User] U on PX.MaNhanVien = u.MaUser "+
+            string query = "SELECT [LoaiHang]  FROM [PhieuXuat] PX " +
                     "where  MaPhieuXuat ='"+ ma + "'";
             dt = common.docdulieu(query);
-            var model = new NguoiDung();
+            var model = new PhieuXuat();
             if (dt != null && dt.Rows.Count > 0)
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    model.TenUser= dr["TenUser"].ToString();                    
+                    model.LoaiHang= dr["LoaiHang"].ToString();                    
                 }
             }
             return model;
@@ -630,9 +629,9 @@ namespace PhanMemQLKho
             string maPhieu = cmbMaPhieuXuat.SelectedValue != null ? cmbMaPhieuXuat.SelectedValue.ToString() : "";
             if (!string.IsNullOrEmpty(maPhieu))
             {
-                var nhanVien = GetPhieuNhapId(maPhieu);
+                var phieuXuat = GetPhieuNhapId(maPhieu);
 
-                txtNhanVien.Text = nhanVien.TenUser;
+                txtNhanVien.Text = phieuXuat.LoaiHang;
             }
         }
     }
