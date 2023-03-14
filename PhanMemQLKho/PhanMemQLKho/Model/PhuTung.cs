@@ -15,6 +15,8 @@ namespace PhanMemQLKho.Model
         public int MaLoaiPhuTung { get; set; }
         public string MaThuongHieu { get; set; }
         public int SoLuong { get; set; }
+        public int SoLuongCon { get; set; }
+        public int SoLuongBan { get; set; }
         public decimal Gia { get; set; }
         public decimal GiaBan { get; set; }
     }

@@ -26,7 +26,7 @@ namespace PhanMemQLKho
             string query = "";
             if (string.IsNullOrEmpty(query))
             {
-                query = "SELECT [MaPhieuXuat] ,KH.[MaKH] ,KH.TenKhachHang ,[MaNhanVien] ,U.TenUser ,[NgayXuat] ,[LoaiHang],[TrangThai] ,[GhiChu] FROM [PhieuXuat] PX " +
+                query = "SELECT [MaPhieuXuat] ,KH.[MaKH] ,KH.TenKhachHang ,[MaNhanVien] ,U.TenUser ,convert(varchar, [NgayXuat], 111) ,[LoaiHang],[TrangThai] ,[GhiChu] FROM [PhieuXuat] PX " +
                     "left join [User] U on PX.MaNhanVien = u.MaUser " +
                     "left join [KhachHang] KH on PX.MaKH = KH.MaKH";
             }
@@ -179,6 +179,14 @@ namespace PhanMemQLKho
         {
             Xoa();
         }
+        public void UpdateSoLuongPhuTung(string maSP, int soluongxuat, int soluongcon)
+        {
+            string qry = "Update [PhuTung] set " +
+                "SoLuongBan =" + soluongxuat + ", " +
+                "SoLuongCon =" + soluongcon + " " +
+                " Where MaPhuTung='" + maSP.Trim() + "'";
+            common.thucthidulieu(qry);
+        }
         public void UpdateSoLuong(string maSP, int soluongxuat,int soluongcon)
         {
             string qry = "Update [SanPham] set " +
@@ -201,36 +209,74 @@ namespace PhanMemQLKho
 
             if (cmbTrangThai.SelectedItem == "Đã Hoàn Thành")
             {
-                // lấy thông tin các sản phẩm trong bảng chi tiết phiếu xuất
-                string qrystr = "select SP.MaSanPham,SP.SoLuong AS 'SoLuongNhap',SP.SoLuongBan,CTPX.SoLuong AS 'SoLuongXuat' from PhieuXuat PX " +
-                    "inner join ChiTietPhieuXuat CTPX on CTPX.MaPhieuXuat = PX.MaPhieuXuat " +
-                    "inner join SanPham SP on CTPX.MaSanPham = SP.MaSanPham " +
-                    "where PX.MaPhieuXuat ='"+ model.MaPhieuXuat.Trim() + "'";
-                var data = common.docdulieu(qrystr);
-
-                if (data != null && data.Rows.Count > 0)
+                //  cập nhật thông tin phụ tùng
+                if (cmbLoaiHang.SelectedItem == "Sửa Chữa")
                 {
-                    foreach (DataRow dr in data.Rows)
+                    // lấy thông tin các sản phẩm trong bảng chi tiết phiếu xuất
+                    string qrystr = "select SP.MaSanPham,SP.TenSanPham,PT.MaPhuTung,PT.TenPhuTung,PT.SoLuong AS 'SoLuongNhap',PT.SoLuongBan,CTPX.SoLuong AS 'SoLuongXuat' from PhieuXuat PX" +
+                        " inner join ChiTietPhieuXuat CTPX on CTPX.MaPhieuXuat = PX.MaPhieuXuat" +
+                        " inner join PhuTung PT on PT.MaPhuTung = CTPX.MaPhuTung" +
+                        " inner join SanPham SP on SP.MaSanPham = CTPX.MaSanPham " +
+                        "where PX.MaPhieuXuat ='" + model.MaPhieuXuat.Trim() + "'";
+                    var data = common.docdulieu(qrystr);
+                    if (data != null && data.Rows.Count > 0)
                     {
-                        string masp = dr["MaSanPham"].ToString();
-                        int soluong = 0, soluongxuat = 0, soluongbanServer =0,soluongcon = 0;
-                        if (dr["SoLuongNhap"] != null && !string.IsNullOrEmpty(dr["SoLuongNhap"].ToString()))
+                        foreach (DataRow dr in data.Rows)
                         {
-                            soluong = Convert.ToInt32(dr["SoLuongNhap"].ToString());
+                            string masp = dr["MaPhuTung"].ToString();
+                            int soluong = 0, soluongxuat = 0, soluongbanServer = 0, soluongcon = 0;
+                            if (dr["SoLuongNhap"] != null && !string.IsNullOrEmpty(dr["SoLuongNhap"].ToString()))
+                            {
+                                soluong = Convert.ToInt32(dr["SoLuongNhap"].ToString());
+                            }
+                            if (dr["SoLuongXuat"] != null && !string.IsNullOrEmpty(dr["SoLuongXuat"].ToString()))
+                            {
+                                soluongxuat = Convert.ToInt32(dr["SoLuongXuat"].ToString());
+                            }
+                            if (dr["SoLuongBan"] != null && !string.IsNullOrEmpty(dr["SoLuongBan"].ToString()))
+                            {
+                                soluongbanServer = Convert.ToInt32(dr["SoLuongBan"].ToString());
+                            }
+                            soluongxuat = soluongxuat + soluongbanServer;
+                            soluongcon = soluong - soluongxuat;
+                            UpdateSoLuongPhuTung(masp, soluongxuat, soluongcon);
                         }
-                        if (dr["SoLuongXuat"] != null && !string.IsNullOrEmpty(dr["SoLuongXuat"].ToString()))
-                        {
-                            soluongxuat = Convert.ToInt32(dr["SoLuongXuat"].ToString());
-                        }
-                        if (dr["SoLuongBan"] != null && !string.IsNullOrEmpty(dr["SoLuongBan"].ToString()))
-                        {
-                            soluongbanServer = Convert.ToInt32(dr["SoLuongBan"].ToString());
-                        }
-                        soluongxuat = soluongxuat + soluongbanServer;
-                        soluongcon = soluong - soluongxuat;
-                        UpdateSoLuong(masp, soluongxuat, soluongcon);
                     }
                 }
+                else
+                {
+                    // lấy thông tin các sản phẩm trong bảng chi tiết phiếu xuất
+                    string qrystr = "select SP.MaSanPham,SP.SoLuong AS 'SoLuongNhap',SP.SoLuongBan,CTPX.SoLuong AS 'SoLuongXuat' from PhieuXuat PX " +
+                    "inner join ChiTietPhieuXuat CTPX on CTPX.MaPhieuXuat = PX.MaPhieuXuat " +
+                    "inner join SanPham SP on CTPX.MaSanPham = SP.MaSanPham " +
+                    "where PX.MaPhieuXuat ='" + model.MaPhieuXuat.Trim() + "'";
+                    var data = common.docdulieu(qrystr);
+
+                    if (data != null && data.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in data.Rows)
+                        {
+                            string masp = dr["MaSanPham"].ToString();
+                            int soluong = 0, soluongxuat = 0, soluongbanServer = 0, soluongcon = 0;
+                            if (dr["SoLuongNhap"] != null && !string.IsNullOrEmpty(dr["SoLuongNhap"].ToString()))
+                            {
+                                soluong = Convert.ToInt32(dr["SoLuongNhap"].ToString());
+                            }
+                            if (dr["SoLuongXuat"] != null && !string.IsNullOrEmpty(dr["SoLuongXuat"].ToString()))
+                            {
+                                soluongxuat = Convert.ToInt32(dr["SoLuongXuat"].ToString());
+                            }
+                            if (dr["SoLuongBan"] != null && !string.IsNullOrEmpty(dr["SoLuongBan"].ToString()))
+                            {
+                                soluongbanServer = Convert.ToInt32(dr["SoLuongBan"].ToString());
+                            }
+                            soluongxuat = soluongxuat + soluongbanServer;
+                            soluongcon = soluong - soluongxuat;
+                            UpdateSoLuong(masp, soluongxuat, soluongcon);
+                        }
+                    }
+                }
+                  
             }
 
 
@@ -292,15 +338,26 @@ namespace PhanMemQLKho
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            if (xuly == 1)
+            if (cmbKhachHang.Text.Length > 0 &&
+                cmbNhanVien.Text.Length > 0 &&
+                cmbLoaiHang.Text.Length > 0 &&
+                cmbTrangThai.Text.Length > 0)
             {
-
-                ThemMoi();
+                if (xuly == 1)
+                {
+                    ThemMoi();
+                }
+                else if (xuly == 2)
+                {
+                    UpdataDatabase();
+                }
             }
-            else if (xuly == 2)
+            else
             {
-                UpdataDatabase();
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin.");
+                return;
             }
+            
             xuly = 0;
             LoadData();
             SetControl("load");

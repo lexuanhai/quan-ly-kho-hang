@@ -38,7 +38,7 @@ namespace PhanMemQLKho
         {
 
             DataTable dt;
-            string query = "SELECT DISTINCT SP.MaSanPham,SP.TenSanPham,DMSP.TenDanhMuc,convert(varchar, PN.NgayNhap, 111) AS 'NgayNhap',convert(varchar, PX.NgayXuat, 111) AS 'NgayXuat',SP.SoLuong,SP.SoLuongBan,SP.SoLuongCon FROM [SanPham] SP " +
+            string query = "SELECT DISTINCT SP.MaSanPham,SP.TenSanPham,DMSP.TenDanhMuc,convert(varchar, PN.NgayNhap, 111) AS 'NgayNhap',convert(varchar, PX.NgayXuat, 111) AS 'NgayXuat',SP.SoLuong,SP.SoLuongBan,SP.SoLuongCon,PN.TrangThai AS'LoaiHangNhap',PX.TrangThai AS'LoaiHangXuat',SP.TinhTrang AS'LoaiHangSP' FROM [SanPham] SP " +
                 "INNER JOIN DanhMucSanPham DMSP ON DMSP.MaDanhMuc = SP.MaDanhMuc " +
                 "Left join ChiTietPhieuNhap CTPN ON CTPN.MaSanPham = SP.MaSanPham " +
                 "LEFT JOIN PhieuNhap PN ON PN.MaPhieuNhap = CTPN.MaPhieuNhap " +
@@ -66,6 +66,15 @@ namespace PhanMemQLKho
                     dataGRV.Rows[n].Cells[5].Value = dr["SoLuong"].ToString();   
                     dataGRV.Rows[n].Cells[6].Value = dr["SoLuongBan"].ToString();
                     dataGRV.Rows[n].Cells[7].Value = dr["SoLuongCon"].ToString();
+                    dataGRV.Rows[n].Cells[8].Value = dr["LoaiHangSP"].ToString();
+                    //if (radioNgayNhap.Checked)
+                    //{
+                    //    dataGRV.Rows[n].Cells[8].Value = dr["LoaiHang"].ToString();
+                    //}
+                    //if (radioNgayXuat.Checked)
+                    //{
+                    //    dataGRV.Rows[n].Cells[8].Value = dr["TrangThaiXuat"].ToString();
+                    //}
                 }
             }
         }

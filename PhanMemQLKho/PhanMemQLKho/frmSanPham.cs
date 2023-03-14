@@ -60,21 +60,13 @@ namespace PhanMemQLKho
                     dataGRV.Rows[n].Cells[10].Value = dr["KieuDang"].ToString();
                     dataGRV.Rows[n].Cells[11].Value = dr["NhienLieu"].ToString();
                     dataGRV.Rows[n].Cells[12].Value = dr["SoCho"].ToString();
-
-                    //if (dr["NgayNhap"] != null && !string.IsNullOrEmpty(dr["NgayNhap"].ToString()))
-                    //{
-                    //    dataGRV.Rows[n].Cells[13].Value = Convert.ToDateTime(dr["NgayNhap"].ToString()).ToString("dd/MM/yyyy");
-                    //}
-                    //if (dr["NgayNhap"] != null && !string.IsNullOrEmpty(dr["NgayNhap"].ToString()))
-                    //{
-                    //    dataGRV.Rows[n].Cells[13].Value = Convert.ToDateTime(dr["NgayNhap"].ToString()).ToString("dd/MM/yyyy");
-                    //}
-
                     dataGRV.Rows[n].Cells[13].Value = dr["GiaNhap"].ToString();
                     dataGRV.Rows[n].Cells[14].Value = dr["GiaBan"].ToString();
                     dataGRV.Rows[n].Cells[15].Value = dr["SoLuong"].ToString();
-                    dataGRV.Rows[n].Cells[16].Value = dr["PhanTramGiam"].ToString();
-                    dataGRV.Rows[n].Cells[17].Value = dr["TinhTrang"].ToString();
+                    dataGRV.Rows[n].Cells[16].Value = dr["SoLuongBan"].ToString();
+                    dataGRV.Rows[n].Cells[17].Value = dr["SoLuongCon"].ToString();
+                    dataGRV.Rows[n].Cells[18].Value = dr["PhanTramGiam"].ToString();
+                    dataGRV.Rows[n].Cells[19].Value = dr["TinhTrang"].ToString();
                 }
             }
         }
@@ -210,7 +202,7 @@ namespace PhanMemQLKho
             txtKieuDang.Text = model.KieuDang;
             txtNhienLieu.Text = model.NhienLieu;
             txtBienSoXe.Text = model.BienSo;
-            txtSoLuong.Text = model.SoLuong.ToString();
+            txtSoLuongNhap.Text = model.SoLuong.ToString();
             txtGiaBan.Text = model.GiaBan.ToString();
             txtGiaNhap.Text = model.GiaNhap.ToString();
             txtGiaGiam.Text = model.PhanTramGiam.ToString();
@@ -428,12 +420,38 @@ namespace PhanMemQLKho
         {
             if (xuly == 1)
             {
-                if (cmbTinhTrang.SelectedText == "Cũ" && txtBienSoXe.Text.Length <= 0)
+                if ((cmbTinhTrang.SelectedItem == "Cũ" || cmbTinhTrang.SelectedItem == "Sửa Chữa") && txtBienSoXe.Text.Length <= 0)
                 {
                     MessageBox.Show("Vui lòng nhập biển số xe.", "Thông Báo");
                     return;
                 }
-                if (txtTenXe.Text.Length > 0 &&
+                if (cmbTinhTrang.SelectedItem == "Sửa Chữa")
+                {
+                    if (txtTenXe.Text.Length <= 0 &&
+                    cmbDanhMuc.Text.Length <= 0 &&
+                    cmbThuongHieu.Text.Length <= 0 &&
+                    cmbNSX.Text.Length <= 0 &&
+                    cmbNCC.Text.Length <= 0 &&
+                    txtNamSX.Text.Length <= 0 &&
+                    txtHopSo.Text.Length <= 0 &&
+                    txtMauSon.Text.Length <= 0 &&
+                    txtKieuDang.Text.Length <= 0 &&
+                    txtNhienLieu.Text.Length <= 0 &&
+                    txtSoCho.Text.Length <= 0 &&
+                    cmbTinhTrang.Text.Length <= 0)
+                    {
+                        MessageBox.Show("Vui lòng nhập đủ thông tin.", "Thông Báo");
+                        return;
+                    }
+                    else
+                    {
+                        ThemMoi();
+                    }
+                   
+                }
+                else
+                {
+                    if (txtTenXe.Text.Length > 0 &&
                     cmbDanhMuc.Text.Length > 0 &&
                     cmbThuongHieu.Text.Length > 0 &&
                     cmbNSX.Text.Length > 0 &&
@@ -445,16 +463,19 @@ namespace PhanMemQLKho
                     txtNhienLieu.Text.Length > 0 &&
                     txtSoCho.Text.Length > 0 &&
                     txtGiaBan.Text.Length > 0 &&
-                    cmbTinhTrang.Text.Length > 0 )
-                {
-                    
-                    ThemMoi();
+                    cmbTinhTrang.Text.Length > 0)
+                    {
+
+                        ThemMoi();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng nhập đủ thông tin.", "Thông Báo");
+                        return;
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Vui lòng nhập đủ thông tin.", "Thông Báo");
-                    return;
-                }
+
+                
 
             }
             else if (xuly == 2)
@@ -479,7 +500,7 @@ namespace PhanMemQLKho
             txtSoCho.Text = "";
             txtGiaNhap.Text = "";
             txtGiaBan.Text = "";
-            txtSoLuong.Text = "";
+            txtSoLuongNhap.Text = "";
             txtGiaGiam.Text = "";
            
         }
@@ -570,9 +591,13 @@ namespace PhanMemQLKho
 
             txtGiaNhap.Text = dataGRV.CurrentRow.Cells[13].Value.ToString();
             txtGiaBan.Text = dataGRV.CurrentRow.Cells[14].Value.ToString();
-            txtSoLuong.Text = dataGRV.CurrentRow.Cells[15].Value.ToString();
-            txtGiaGiam.Text = dataGRV.CurrentRow.Cells[16].Value.ToString();
-            cmbTinhTrang.SelectedItem = dataGRV.CurrentRow.Cells[17].Value.ToString();
+            txtSoLuongNhap.Text = dataGRV.CurrentRow.Cells[15].Value.ToString();
+            txtSoLuongBan.Text = dataGRV.CurrentRow.Cells[16].Value.ToString();
+            txtSoLuongCon.Text = dataGRV.CurrentRow.Cells[17].Value.ToString();
+            txtGiaGiam.Text = dataGRV.CurrentRow.Cells[18].Value.ToString();
+           
+            cmbTinhTrang.SelectedItem = dataGRV.CurrentRow.Cells[19].Value.ToString();
+
             SetControl("table-click");
         }
 
@@ -588,7 +613,7 @@ namespace PhanMemQLKho
             txtMa.Enabled = false;
             LoadData();
             SetControl("load");
-            txtSoLuong.Enabled = false;
+            txtSoLuongNhap.Enabled = false;
             txtGiaNhap.Enabled = false;
         }
     }

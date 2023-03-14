@@ -20,6 +20,7 @@ namespace PhanMemQLKho
             InitializeComponent();
         }
         int xuly = 0; //1 là thêm mới, 2 là sửa
+        bool isSuaChua;
         public void LoadData(string query = "")
         {
            
@@ -31,11 +32,12 @@ namespace PhanMemQLKho
                 //    "inner join [User] NV on NV.MaUser = PX.MaNhanVien " +
                 //    "inner join [KhachHang] KH on KH.MaKH = PX.MaKH " +
                 //    "where PX.TrangThai = N'Chưa Hoàn Thành'";
-                query = "select CTPX.MaChiTietPhieuXuat, PX.MaPhieuXuat, convert(varchar, PX.NgayXuat, 111) AS 'NgayXuat' , SP.MaSanPham, SP.TenSanPham, CTPX.GiaXuat, CTPX.SoLuong, (CTPX.SoLuong*CTPX.GiaXuat) from [ChiTietPhieuXuat] CTPX " +
+                query = "select CTPX.MaChiTietPhieuXuat, PX.MaPhieuXuat, convert(varchar, PX.NgayXuat, 111) AS 'NgayXuat' , SP.MaSanPham, SP.TenSanPham,PT.MaPhuTung,PT.TenPhuTung ,CTPX.GiaXuat, CTPX.SoLuong, (CTPX.SoLuong*CTPX.GiaXuat) from [ChiTietPhieuXuat] CTPX " +
                     "inner join [PhieuXuat] PX on PX.MaPhieuXuat = CTPX.MaPhieuXuat " +
                     "inner join [SanPham] SP on SP.MaSanPham = CTPX.MaSanPham " +
                     "inner join [User] NV on NV.MaUser = PX.MaNhanVien " +
-                    "inner join [KhachHang] KH on KH.MaKH = PX.MaKH ";
+                    "inner join [KhachHang] KH on KH.MaKH = PX.MaKH " +
+                    "left join [PhuTung] PT on PT.MaPhuTung = CTPX.MaPhuTung";
 
             }
             
@@ -51,6 +53,15 @@ namespace PhanMemQLKho
             cmbSanPham.ValueMember = "MaSanPham";
             cmbSanPham.DataSource = dt;
         }
+        public void CmbPhuTung()
+        {
+            DataTable dt;
+            string query = "SELECT * FROM [PhuTung]";
+            dt = common.docdulieu(query);
+            cmbPhuTung.DisplayMember = "TenPhuTung";
+            cmbPhuTung.ValueMember = "MaPhuTung";
+            cmbPhuTung.DataSource = dt;
+        }
         // Load phiếu nhập
         public void CmbPhieuXuat()
         {
@@ -63,6 +74,11 @@ namespace PhanMemQLKho
                 foreach (DataRow dr in dt.Rows)
                 {
                     dr["MaPhieuXuat"] = dr["MaPhieuXuat"].ToString().Trim();
+                    string loaihang = dr["LoaiHang"].ToString().Trim();
+                    if (loaihang == "Sửa Chữa")
+                    {
+                        isSuaChua = true;
+                    }
                 }
             }
 
@@ -75,6 +91,16 @@ namespace PhanMemQLKho
             string query = "select * from PhieuXuat PX " +
                 "inner join ChiTietPhieuXuat CTPX on CTPX.MaPhieuXuat = PX.MaPhieuXuat " +
                 "where PX.MaPhieuXuat = '" + maPX.Trim() + "' and (CTPX.MaSanPham = '" + maSP.Trim() + "' OR CTPX.MaPhuTung ='"+ maSP.Trim() + "')";
+            var dt = common.docdulieu(query);
+            if (dt != null && dt.Rows.Count > 0)
+                return true;
+            return false;
+        }
+        public bool PhuTungExist(string maPX, string maSP)
+        {
+            string query = "select * from PhieuXuat PX " +
+                "inner join ChiTietPhieuXuat CTPX on CTPX.MaPhieuXuat = PX.MaPhieuXuat " +
+                "where PX.MaPhieuXuat = '" + maPX.Trim() + "' and  CTPX.MaPhuTung ='" + maSP.Trim() + "'";
             var dt = common.docdulieu(query);
             if (dt != null && dt.Rows.Count > 0)
                 return true;
@@ -114,10 +140,59 @@ namespace PhanMemQLKho
             }
             return model;
         }
+        public void ShowSuaChua()
+        {
+            if (isSuaChua)
+            {
+                cmbPhuTung.Enabled = true;
+                txtDonGiaPhuTung.Enabled = true;
+
+                cmbSanPham.Enabled = false;
+                txtDonGia.Enabled = false;
+            }
+            else
+            {
+                cmbPhuTung.Enabled = false;
+                txtDonGiaPhuTung.Enabled = false;
+
+                cmbSanPham.Enabled = true;
+                txtDonGia.Enabled = true;
+            }
+        }
+        public PhuTung GetPhuTungId(string ma)
+        {
+            DataTable dt;
+            string query = "SELECT * FROM [PhuTung] PT " +
+                    "where  MaPhuTung ='" + ma + "'";
+            dt = common.docdulieu(query);
+            var model = new PhuTung();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (dr["SoLuongBan"] != null && !string.IsNullOrEmpty(dr["SoLuongBan"].ToString()))
+                    {
+                        model.SoLuongBan = Convert.ToInt32(dr["SoLuongBan"].ToString());
+                        model.SoLuongCon = Convert.ToInt32(dr["SoLuongCon"].ToString());
+                    }
+                    if (dr["SoLuongCon"] != null && !string.IsNullOrEmpty(dr["SoLuongCon"].ToString()))
+                    {                       
+                        model.SoLuongCon = Convert.ToInt32(dr["SoLuongCon"].ToString());
+                    }
+                    if (dr["SoLuong"] != null && !string.IsNullOrEmpty(dr["SoLuong"].ToString()))
+                    {
+                        model.SoLuong = Convert.ToInt32(dr["SoLuong"].ToString());
+                    }
+                    model.GiaBan = dr["GiaBan"] != null && !string.IsNullOrEmpty(dr["GiaBan"].ToString()) ? Convert.ToDecimal(dr["GiaBan"]) : 0;
+                }
+            }
+            return model;
+        }
         public void LoadCmb()
         {
             CmbSanPham();
             CmbPhieuXuat();
+            CmbPhuTung();
         }
 
         public ChiTietPhieuXuat GetValue()
@@ -126,9 +201,15 @@ namespace PhanMemQLKho
             model.MaChiTietPhieuXuat = txtMa.Text;
             model.MaPhieuXuat = cmbMaPhieuXuat.SelectedValue.ToString();
             model.MaSanPham = cmbSanPham.SelectedValue.ToString();
+            model.MaPhuTung = cmbPhuTung.SelectedValue.ToString();
             model.SoLuong = !string.IsNullOrEmpty(txtSoLuong.Text) ? Convert.ToInt32(txtSoLuong.Text) : 0;
-            model.DonGia = !string.IsNullOrEmpty(txtDonGia.Text) ? Convert.ToInt32(txtDonGia.Text) : 0;  
-            
+           
+            model.DonGia = !string.IsNullOrEmpty(txtDonGia.Text) ? Convert.ToInt32(txtDonGia.Text) : 0;
+            if (model.DonGia == 0)
+            {
+                model.DonGia = !string.IsNullOrEmpty(txtDonGiaPhuTung.Text) ? Convert.ToInt32(txtDonGiaPhuTung.Text) : 0;
+            }
+
             return model;
         }
         public void SetValue(ChiTietPhieuNhap model)
@@ -171,36 +252,37 @@ namespace PhanMemQLKho
                 btnLuu.Enabled = false;
                 btnXoa.Enabled = false;
                 SetControlValue(false);
+
             }
         }
         public void SetControlValue(bool edit)
         {
-            if (edit)
-            {                              
+            //txtDonGia.Enabled = edit;
+            //cmbMaPhieuXuat.Enabled = edit;
+            cmbMaPhieuXuat.Enabled = edit;
+            if (isSuaChua)
+            {
+                cmbSanPham.Enabled = true;
                 txtDonGia.Enabled = true;
-                //txtTenUser.Enabled = true;
-                //txtSoDienThoai.Enabled = true;
-                //txtEmail.Enabled = true;
-                //cmbTinhTrang.Enabled = true;
-                //dateTimeNgayNhap.Enabled = true;
-                //txtDonGia.Enabled = true;
-                //txtSoLuong.Enabled = true;
-                //txtDiaChi.Enabled = true;
+                txtSoLuongCon.Text = "";
+                txtDonGia.Text = "";
+                txtDonGia.Enabled = false;
+
+                cmbPhuTung.Enabled = true;
+                txtDonGiaPhuTung.Enabled = true;
+            }else if (txtLoaiHang.Text =="Phụ Tùng")
+            {
+                cmbSanPham.Enabled = false;
+                txtDonGia.Enabled = false;
+                txtSoLuongCon.Enabled = false;
             }
             else
             {
-                txtMa.Text = "";
-                //txtDonGia.Text = "";
-                //txtTenUser.Text = "";
-                //txtSoDienThoai.Text = "";
-                //txtEmail.Text = "";
-                //cmbTinhTrang.Text = "";
-                //dateTimeNgayNhap.Text = "";
-                //txtDonGia.Text = "";
-                //txtSoLuong.Text = "";
-                //txtDiaChi.Text = "";
+                cmbSanPham.Enabled = true;
+                txtDonGia.Enabled = true;
+                cmbPhuTung.Enabled = false;
+                txtDonGiaPhuTung.Enabled = false;
             }
-
         }
         private void Xoa()
         {
@@ -248,7 +330,7 @@ namespace PhanMemQLKho
         private void btnSua_Click(object sender, EventArgs e)
         {
             xuly = 2;
-            SetControlValue(true);
+            //SetControlValue(true);
             btnLuu.Enabled = true;
         }
 
@@ -285,43 +367,70 @@ namespace PhanMemQLKho
 
                 if (!string.IsNullOrEmpty(model.MaSanPham))
                 {
-                    bool isExist = SanPhamExist(model.MaPhieuXuat, model.MaSanPham);
-                    if (isExist)
+                    bool isExist = SanPhamExist(model.MaPhieuXuat, model.MaSanPham);                    
+                    if (txtLoaiHang.Text =="Sửa Chữa")
                     {
-                        MessageBox.Show("Sản phẩm đã tồn tại trong.");
-                        return;
-                    }
-                    int soluongcon = !string.IsNullOrEmpty(txtSoLuongCon.Text) ? Convert.ToInt32(txtSoLuongCon.Text) : 0;
-                    if (soluongcon == 0)
-                    {
-                        MessageBox.Show("Sản phẩm đã hết hàng vui lòng chọn sản phẩm khác.");
-                        return;
-                    }
-
-                    int soluongmua = !string.IsNullOrEmpty(txtSoLuong.Text) ? Convert.ToInt32(txtSoLuong.Text) : 0;
-                    if (soluongmua > 0)
-                    {
-                        var sanPham = GetSanPhamId(model.MaSanPham);
-                        int soluongton = sanPham.SoLuong - soluongmua;
-                        if (soluongton < 0)
+                        isExist = PhuTungExist(model.MaPhieuXuat, model.MaPhuTung);
+                        if (isExist)
                         {
-                            MessageBox.Show(" Vui lòng chọn lại số lượng.");
+                            MessageBox.Show("Phụ tùng đã tồn tại trong.");
                             return;
                         }
-                        //else
-                        //{
-                        //    string qry = "Update [SanPham] set " +               
-                        //    "SoLuongBan =" + soluongmua + " " +                
-                        //     " Where MaSanPham='" + model.MaSanPham.Trim() + "'";
-                        //      common.thucthidulieu(qry);
-                        //    txtSoLuongCon.Text = soluongton.ToString();
-                        //}
+                        int soluongcon = !string.IsNullOrEmpty(txtSoLuongConPT.Text) ? Convert.ToInt32(txtSoLuongConPT.Text) : 0;
+                        if (soluongcon == 0)
+                        {
+                            MessageBox.Show("Phụ tùng đã hết hàng vui lòng chọn Phụ tùng khác khác.");
+                            return;
+                        }
+
+                        int soluongmua = !string.IsNullOrEmpty(txtSoLuong.Text) ? Convert.ToInt32(txtSoLuong.Text) : 0;
+                        if (soluongmua > 0)
+                        {                            
+                            int soluongton = soluongcon - soluongmua;
+                            if (soluongton < 0)
+                            {
+                                MessageBox.Show(" Vui lòng chọn lại số lượng.");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show(" vui lòng chọn số lượng lớn hơn 0.");
+                            return;
+                        }
                     }
                     else
                     {
-                        MessageBox.Show(" vui lòng chọn số lượng lớn hơn 0.");
-                        return;
+                        if (isExist)
+                        {
+                            MessageBox.Show("Sản phẩm đã tồn tại trong.");
+                            return;
+                        }
+                        int soluongcon = !string.IsNullOrEmpty(txtSoLuongCon.Text) ? Convert.ToInt32(txtSoLuongCon.Text) : 0;
+                        if (soluongcon == 0)
+                        {
+                            MessageBox.Show("Sản phẩm đã hết hàng vui lòng chọn sản phẩm khác.");
+                            return;
+                        }
+
+                        int soluongmua = !string.IsNullOrEmpty(txtSoLuong.Text) ? Convert.ToInt32(txtSoLuong.Text) : 0;
+                        if (soluongmua > 0)
+                        {
+                            var sanPham = GetSanPhamId(model.MaSanPham);
+                            int soluongton = sanPham.SoLuong - soluongmua;
+                            if (soluongton < 0)
+                            {
+                                MessageBox.Show(" Vui lòng chọn lại số lượng.");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show(" vui lòng chọn số lượng lớn hơn 0.");
+                            return;
+                        }
                     }
+                   
                 }
 
                 string ma = common.tangMaTuDong("ChiTietPhieuXuat", "CTPX");
@@ -334,12 +443,33 @@ namespace PhanMemQLKho
                     "SoLuong, " +
                     "GiaXuat " +                   
                     " ) values('" + ma.Trim() + "'," +
-                    "'" + model.MaPhieuXuat.Trim() + "" +
-                    "','" + model.MaSanPham.Trim() + "'" +
+                    "'" + model.MaPhieuXuat.Trim() + "'" +
+                    ",'" + model.MaSanPham.Trim() + "'" +
                     "," + model.SoLuong + "" +
                     "," + model.DonGia + "" +
                     
                     ")";
+
+                    if (txtLoaiHang.Text == "Sửa Chữa")
+                    {
+                        qry = "Insert into [ChiTietPhieuXuat](" +
+                    "MaChiTietPhieuXuat, " +
+                    "MaPhieuXuat, " +
+                    "MaSanPham, " +
+                    "MaPhuTung, " +
+                    "SoLuong, " +
+                    "GiaXuat " +
+                    " ) values('" + ma.Trim() + "'," +
+                    "'" + model.MaPhieuXuat.Trim() + "'" +
+                    ",'" + model.MaSanPham.Trim() + "'" +
+                    ",'" + model.MaPhuTung.Trim() + "'" +
+                    "," + model.SoLuong + "" +
+                    "," + model.DonGia + "" +
+
+                    ")";
+                    }
+
+
                     var status = common.thucthidulieu(qry);
                     if (status)
                     {
@@ -378,24 +508,29 @@ namespace PhanMemQLKho
         {
             xuly = 0;
             SetControl("load");
-            SetControlValue(false);
+            //SetControlValue(false);
         }
         public void search()
         {
 
             if (radioMa.Checked)
             {
-                string timkiem = "select CTPN.MaChiTietPhieuNhap, PN.MaPhieuNhap,convert(varchar, PN.NgayNhap, 111) ,SP.MaSanPham, SP.TenSanPham, CTPN.GiaNhap, CTPN.SoLuong,(CTPN.SoLuong*CTPN.GiaNhap) from [ChiTietPhieuNhap] CTPN" +
-                    " left join [PhieuNhap] PN on CTPN.MaPhieuNhap = PN.MaPhieuNhap" +
-                    " left join [SanPham] SP on SP.MaSanPham = CTPN.MaSanPham" +
-                    " where CTPN.MaChiTietPhieuNhap like '%" + txtSearch.Text + "%'";
+                string timkiem = "select CTPX.MaChiTietPhieuXuat, PX.MaPhieuXuat,convert(varchar, PX.NgayXuat, 111) ," +
+                    "SP.MaSanPham, SP.TenSanPham,PT.MaPhuTung,PT.TenPhuTung ,CTPX.GiaXuat, CTPX.SoLuong,(CTPX.SoLuong*CTPX.GiaXuat) from [ChiTietPhieuXuat] CTPX " +
+                    "left join [PhieuXuat] PX on CTPX.MaPhieuXuat = PX.MaPhieuXuat " +
+                    "left join [SanPham] SP on SP.MaSanPham = CTPX.MaSanPham " +
+                    "left join [PhuTung] PT on PT.MaPhuTung = CTPX.MaPhuTung " +
+                    "where CTPX.MaChiTietPhieuXuat like '%"+ txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
             else if (radioTen.Checked)
             {
-                string timkiem = "select CTPN.MaChiTietPhieuNhap, PN.MaPhieuNhap,convert(varchar, PN.NgayNhap, 111) ,SP.MaSanPham, SP.TenSanPham, CTPN.GiaNhap, CTPN.SoLuong,(CTPN.SoLuong*CTPN.GiaNhap) from [ChiTietPhieuNhap] CTPN " +
-                    "left join [PhieuNhap] PN on CTPN.MaPhieuNhap = PN.MaPhieuNhap " +
-                    "left join [SanPham] SP on SP.MaSanPham = CTPN.MaSanPham where PN.MaPhieuNhap like N'%" + txtSearch.Text + "%'";
+                string timkiem = "select CTPX.MaChiTietPhieuXuat, PX.MaPhieuXuat,convert(varchar, PX.NgayXuat, 111) ," +
+                     "SP.MaSanPham, SP.TenSanPham, PT.MaPhuTung,PT.TenPhuTung, CTPX.GiaXuat, CTPX.SoLuong,(CTPX.SoLuong*CTPX.GiaXuat) from [ChiTietPhieuXuat] CTPX " +
+                     "left join [PhieuXuat] PX on CTPX.MaPhieuXuat = PX.MaPhieuXuat " +
+                     "left join [SanPham] SP on SP.MaSanPham = CTPX.MaSanPham " +
+                     "left join [PhuTung] PT on PT.MaPhuTung = CTPX.MaPhuTung " +
+                     "where CTPX.MaPhieuXuat like '%" + txtSearch.Text + "%'";
                 LoadData(timkiem);
             }
         }
@@ -425,10 +560,14 @@ namespace PhanMemQLKho
             LoadCmb();
             txtMa.Enabled = false;
             txtSoLuongCon.Enabled = false;
-            txtNhanVien.Enabled = false;
+            txtLoaiHang.Enabled = false;
             //txtTinhTrang.Enabled = false;
             LoadData();
             SetControl("load");
+            //cmbPhuTung.Enabled = false;
+            //cmbSanPham.Enabled = false;
+            //ShowSuaChua();
+
         }
 
         //private void cmbPhieuNhap_SelectedValueChanged(object sender, EventArgs e)
@@ -449,6 +588,7 @@ namespace PhanMemQLKho
             {
                 var sanpham = GetSanPhamId(maPhieu);
                 txtDonGia.Text = sanpham.GiaBan.ToString();                
+
                 txtSoLuongCon.Text = (sanpham.SoLuong - sanpham.SoLuongBan).ToString();
             }
         }
@@ -479,6 +619,29 @@ namespace PhanMemQLKho
                    "inner join [User] NV on NV.MaUser = PX.MaNhanVien " +
                    "inner join [KhachHang] KH on KH.MaKH = PX.MaKH " +
                    "where PX.MaPhieuXuat = '"+ maphieuxuat + "'";
+                if (txtLoaiHang.Text == "Sửa Chữa")
+                {
+                     query = "select CTPX.MaChiTietPhieuXuat, " +
+                    "PX.MaPhieuXuat, " +
+                    "convert(varchar, PX.NgayXuat, 111) AS 'NgayXuat' ," +
+                    " SP.MaSanPham, " +
+                    "SP.TenSanPham, " +
+                    "PT.MaPhuTung, " +
+                    "PT.TenPhuTung, " +
+                    "CTPX.GiaXuat, " +
+                    "CTPX.SoLuong, " +
+                    "(CTPX.SoLuong*CTPX.GiaXuat) , " +
+                    "KH.TenKhachHang, " +
+                    "PX.LoaiHang," +
+                    "KH.SoDienThoai, " +
+                    "KH.DiaChi from [ChiTietPhieuXuat] CTPX " +
+                   "inner join [PhieuXuat] PX on PX.MaPhieuXuat = CTPX.MaPhieuXuat " +
+                   "inner join [SanPham] SP on SP.MaSanPham = CTPX.MaSanPham " +
+                   "inner join [PhuTung] PT on PT.MaPhuTung = CTPX.MaPhuTung " +
+                   "inner join [User] NV on NV.MaUser = PX.MaNhanVien " +
+                   "inner join [KhachHang] KH on KH.MaKH = PX.MaKH " +
+                   "where PX.MaPhieuXuat = '" + maphieuxuat + "'";
+                }
                 DataTable dt;             
                 dt = common.docdulieu(query);               
                 if (dt != null && dt.Rows.Count > 0)
@@ -511,6 +674,16 @@ namespace PhanMemQLKho
 
                         ReportPX.SanPhams.Add(sanpham);
 
+                        if (txtLoaiHang.Text == "Sửa Chữa")
+                        {
+                            var phutung = new PhuTung();
+                            phutung.MaPhuTung = dr["MaPhuTung"].ToString();
+                            phutung.TenPhuTung = dr["TenPhuTung"].ToString();
+                            phutung.GiaBan = Convert.ToDecimal(dr["GiaXuat"].ToString());
+                            phutung.SoLuong = Convert.ToInt32(dr["SoLuong"].ToString());
+                            ReportPX.PhuTungs.Add(phutung);
+                        }
+
                     }
                     return ReportPX;
                 }
@@ -538,8 +711,14 @@ namespace PhanMemQLKho
                     e.Graphics.DrawString("Mã phiếu       : " + phieu.PhieuXuat.MaPhieuXuat, new Font("Courier New", 13, FontStyle.Regular), Brushes.Black, new Point(x, y));
                     y += 40;
                     e.Graphics.DrawString("Ngày tạo       : " + phieu.PhieuXuat.NgayXuat.ToString("dd/MM/yyyy"), new Font("Courier New", 13, FontStyle.Regular), Brushes.Black, new Point(x, y));
-                    y += 40;                   
-                    e.Graphics.DrawString("Loại hàng  : " + phieu.PhieuXuat.LoaiHang, new Font("Courier New", 13, FontStyle.Regular), Brushes.Black, new Point(x, y));
+                    if (phieu.PhieuXuat.LoaiHang =="Sửa Chữa")
+                    {
+                        y += 40;
+                        e.Graphics.DrawString("Tên Xe         : " + phieu.SanPhams[0].TenSanPham, new Font("Courier New", 13, FontStyle.Regular), Brushes.Black, new Point(x, y));
+                    }
+                    
+                    y += 40;
+                    e.Graphics.DrawString("Loại hàng      : " + phieu.PhieuXuat.LoaiHang, new Font("Courier New", 13, FontStyle.Regular), Brushes.Black, new Point(x, y));
                     y += 40;
                     e.Graphics.DrawString("Thông tin khách hàng : ", new Font("Courier New", 14, FontStyle.Bold), Brushes.Black, new Point(x, y));
                     y += 40;
@@ -551,38 +730,76 @@ namespace PhanMemQLKho
                     y += 50;
 
                     e.Graphics.DrawString("STT", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(x, y));
-                    x += 50;
-                    e.Graphics.DrawString("Tên sản phẩm", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(x, y));
-                    x += 270;
+                    if (phieu.PhieuXuat.LoaiHang == "Sửa Chữa")
+                    {
+                        x += 50;
+                        e.Graphics.DrawString("Tên Phụ Tùng", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(x, y));
+                    }
+                    else
+                    {
+                        x += 50;
+                        e.Graphics.DrawString("Tên sản phẩm", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(x, y));
+                    }
+                    
+                    x += 430;
                     e.Graphics.DrawString("Giá ", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(x, y));
-                    x += 150;
+                    x += 90;
                     e.Graphics.DrawString("Số lượng", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(x, y));
-                    x += 180;
+                    x += 120;
                     e.Graphics.DrawString("Thành tiền", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(x, y));
 
                     decimal totalPrice = 0;
-                    if (phieu.SanPhams != null && phieu.SanPhams.Count > 0)
+                    if (phieu.PhieuXuat.LoaiHang == "Sửa Chữa")
                     {
-                        int i = 0;
-                        foreach (var item in phieu.SanPhams)
+                        if (phieu.PhuTungs != null && phieu.PhuTungs.Count > 0)
                         {
-                            i++;
-                            y += 30;
-                            int ix = 20;
-                            decimal total = item.GiaBan * item.SoLuong;
-                            totalPrice += total;
-                            e.Graphics.DrawString(i.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
-                            ix += 50;
-                            e.Graphics.DrawString(item.TenSanPham, new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
-                            ix += 270;
-                            e.Graphics.DrawString(item.GiaBan.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
-                            ix += 150;
-                            e.Graphics.DrawString(item.SoLuong.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
-                            ix += 180;
-                            e.Graphics.DrawString(total.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
+                            int i = 0;
+                            foreach (var item in phieu.PhuTungs)
+                            {
+                                i++;
+                                y += 30;
+                                int ix = 20;
+                                decimal total = item.GiaBan * item.SoLuong;
+                                totalPrice += total;
+                                e.Graphics.DrawString(i.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
+                                ix += 50;
+                                e.Graphics.DrawString(item.TenPhuTung, new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
+                                ix += 430;
+                                e.Graphics.DrawString(item.GiaBan.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
+                                ix += 90;
+                                e.Graphics.DrawString(item.SoLuong.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
+                                ix += 120;
+                                e.Graphics.DrawString(total.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
 
+                            }
                         }
                     }
+                    else
+                    {
+                        if (phieu.SanPhams != null && phieu.SanPhams.Count > 0)
+                        {
+                            int i = 0;
+                            foreach (var item in phieu.SanPhams)
+                            {
+                                i++;
+                                y += 30;
+                                int ix = 20;
+                                decimal total = item.GiaBan * item.SoLuong;
+                                totalPrice += total;
+                                e.Graphics.DrawString(i.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
+                                ix += 50;
+                                e.Graphics.DrawString(item.TenSanPham, new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
+                                ix += 430;
+                                e.Graphics.DrawString(item.GiaBan.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
+                                ix += 90;
+                                e.Graphics.DrawString(item.SoLuong.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
+                                ix += 120;
+                                e.Graphics.DrawString(total.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
+
+                            }
+                        }
+                    }
+                    
                     y += 40;
                     Pen blackpen = new Pen(Color.Black, 1);
                     Point p1 = new Point(10, y);
@@ -591,7 +808,7 @@ namespace PhanMemQLKho
                     y += 10;
                     e.Graphics.DrawString("Tổng tiền ", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(20, y));
 
-                    e.Graphics.DrawString(totalPrice.ToString("#,###"), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(670, y));
+                    e.Graphics.DrawString(totalPrice.ToString("#,###"), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(710, y));
                     y += 80;
                     e.Graphics.DrawString("Ngày.... tháng....năm.... ", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(500, y));
 
@@ -631,7 +848,27 @@ namespace PhanMemQLKho
             {
                 var phieuXuat = GetPhieuNhapId(maPhieu);
 
-                txtNhanVien.Text = phieuXuat.LoaiHang;
+                txtLoaiHang.Text = phieuXuat.LoaiHang;
+                if (phieuXuat.LoaiHang == "Sửa Chữa")
+                {
+                    isSuaChua = true;                   
+                }
+                else
+                {
+                    isSuaChua = false;
+                }
+                SetControlValue(true);
+            }
+        }
+
+        private void cmbPhuTung_SelectedValueChanged(object sender, EventArgs e)
+        {
+            string maPT = cmbPhuTung.SelectedValue != null ? cmbPhuTung.SelectedValue.ToString() : "";
+            if (!string.IsNullOrEmpty(maPT))
+            {
+                var phuTung = GetPhuTungId(maPT);
+                txtSoLuongConPT.Text = (phuTung.SoLuong - phuTung.SoLuongCon).ToString();
+                txtDonGiaPhuTung.Text = phuTung.GiaBan.ToString();
             }
         }
     }

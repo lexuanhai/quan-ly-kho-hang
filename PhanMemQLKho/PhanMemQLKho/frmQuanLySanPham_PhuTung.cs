@@ -108,8 +108,10 @@ namespace PhanMemQLKho
                     dataGRV.Rows[n].Cells[7].Value = dr["GiaNhap"].ToString();
                     dataGRV.Rows[n].Cells[8].Value = dr["GiaBan"].ToString();
 
-                    int soluong = dr["SoLuongCon"] != null && !string.IsNullOrEmpty(dr["SoLuongCon"].ToString()) ? Convert.ToInt32(dr["SoLuongCon"]):0;                    
-                    if (soluong > 0)
+                    int soluongNhap = dr["SoLuong"] != null && !string.IsNullOrEmpty(dr["SoLuong"].ToString()) ? Convert.ToInt32(dr["SoLuong"]):0;
+                    int soluongBan = dr["SoLuongBan"] != null && !string.IsNullOrEmpty(dr["SoLuongBan"].ToString()) ? Convert.ToInt32(dr["SoLuongBan"]) : 0;
+                    int soluongCon = soluongNhap - soluongBan;
+                    if (soluongCon > 0)
                     {
                         dataGRV.Rows[n].Cells[9].Value = "Còn Hàng";
                     }

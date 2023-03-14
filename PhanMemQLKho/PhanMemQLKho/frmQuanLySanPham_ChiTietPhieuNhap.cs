@@ -21,6 +21,7 @@ namespace PhanMemQLKho
             InitializeComponent();
         }
         int xuly = 0; //1 là thêm mới, 2 là sửa
+        bool isSuaChua = false;
         public void LoadData(string query = "")
         {
            
@@ -488,8 +489,12 @@ namespace PhanMemQLKho
 
                 txtNhanVien.Text = phieu.TenNhanVien;
                 txtTinhTrang.Text = phieu.TinhTrang;
+                if (phieu.TinhTrang == "Sửa Chữa")
+                {
+                    isSuaChua = true;
+                }
             }
-        }
+        }        
         public ReportPhieuNhap GetChiTietPhieu(string maphieunhap)
         {
             if (!string.IsNullOrEmpty(maphieunhap))
@@ -602,11 +607,11 @@ namespace PhanMemQLKho
                     e.Graphics.DrawString("STT", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(x, y));
                     x += 50;
                     e.Graphics.DrawString("Tên sản phẩm", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(x, y));
-                    x += 250;
+                    x += 430;
                     e.Graphics.DrawString("Giá ", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(x, y));
-                    x += 100;
+                    x += 90;
                     e.Graphics.DrawString("Số lượng", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(x, y));
-                    x += 130;
+                    x += 120;
                     e.Graphics.DrawString("Thành tiền", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(x, y));
                     //x += 140;
                     //e.Graphics.DrawString("Ghi chú", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(x, y));
@@ -628,11 +633,11 @@ namespace PhanMemQLKho
                             e.Graphics.DrawString(i.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
                             ix += 50;
                             e.Graphics.DrawString(item.TenSanPham, new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
-                            ix += 250;
+                            ix += 430;
                             e.Graphics.DrawString(item.GiaNhap.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
-                            ix += 100;
+                            ix += 90;
                             e.Graphics.DrawString(item.SoLuong.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
-                            ix += 130;
+                            ix += 120;
                             e.Graphics.DrawString(total.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
                             //ix += 140;
                             //e.Graphics.DrawString(item.Note, new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
@@ -651,11 +656,11 @@ namespace PhanMemQLKho
                             e.Graphics.DrawString(i.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
                             ix += 50;
                             e.Graphics.DrawString(item.TenPhuTung, new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
-                            ix += 250;
+                            ix += 430;
                             e.Graphics.DrawString(item.Gia.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
-                            ix += 100;
+                            ix += 90;
                             e.Graphics.DrawString(item.SoLuong.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
-                            ix += 130;
+                            ix += 120;
                             e.Graphics.DrawString(total.ToString(), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
                             //ix += 140;
                             //e.Graphics.DrawString(item.Note, new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(ix, y));
@@ -668,7 +673,7 @@ namespace PhanMemQLKho
                     e.Graphics.DrawLine(blackpen, p1, p2);
                     y += 10;
                     e.Graphics.DrawString("Tổng tiền ", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(20, y));
-                    e.Graphics.DrawString(totalPrice.ToString("#,###"), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(550, y));
+                    e.Graphics.DrawString(totalPrice.ToString("#,###"), new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(710, y));
                     y += 80;
                     e.Graphics.DrawString("Ngày.... tháng....năm.... ", new Font("Courier New", 13, FontStyle.Bold), Brushes.Black, new Point(500, y));
 

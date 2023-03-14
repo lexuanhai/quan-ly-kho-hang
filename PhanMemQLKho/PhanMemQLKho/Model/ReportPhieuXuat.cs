@@ -13,5 +13,6 @@ namespace PhanMemQLKho.Model
       
         public KhachHang KhachHang { get; set; }
         public List<SanPham> SanPhams { get; set; } = new List<SanPham>();
+        public List<PhuTung> PhuTungs { get; set; } = new List<PhuTung>();
     }
 }
